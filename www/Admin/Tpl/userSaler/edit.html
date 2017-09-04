@@ -1,0 +1,347 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/merchant_edit.css">
+	<div class="sm">
+		<div class="current">当前位置：商户&ensp;&gt;&ensp;商户编辑</div>
+		<form action="{:U('userSaler/edit')}" method="post" class="ajax-form" >
+		<input type="hidden" name="id" value="{$user.id}">
+		<input type="hidden" name="verify" value="{$verify}">
+		
+		<div class="base_bar">
+		<!--
+			<div class="group">
+				<label>上级商户：</label>
+				<input type="text" name="pword" id="pword" value="{$user.parent.name} - {$user.parent.mobile}" disabled="true"/>
+			</div>
+			-->
+			<div class="group">
+
+				<label>上级商户：</label>
+<!--
+				<input type="text" name="pword" id="pword"  <if condition="$user[parent][id]">value="{$user.parent.name} - {$user.parent.mobile}" disabled="true"</if>/>
+				<if condition="!$user[parent][id]">
+				<button type="button" id="search">查找</button>
+				<select name="pid" id="pid" style="display:none">
+					<option value="{$user[pid]}">{$user.parent.name} - {$user.parent.mobile}</option>
+				</select>
+				<else />
+				<input type="hidden" name="pid" value="{$user[pid]}">
+				</if>				
+-->
+				<input type="text" name="pword" id="pword"  value="{$user.parent.name} - {$user.parent.mobile}" />
+				<button type="button" id="search">查找</button>
+				<select name="pid" id="pid" >
+					<option value="{$user[pid]}">{$user.parent.name} - {$user.parent.mobile}</option>
+				</select>
+
+			</div>
+			<div class="group">
+
+				<label>级别：</label>
+				<select name="lfid">
+					<foreach name="levels" item="item">
+					<option value="{$item.id}" <if condition="$user['lfid'] eq $item['id']">selected="selected"</if>>{$item.name}</option>
+					</foreach>
+				</select>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>用户名：</label>
+				<input type="text" name="mobile" value="{$user.mobile}"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>密码：</label>
+				<input type="password" name="password"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>确认密码：</label>
+				<input type="password" name="re-password"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>姓名：</label>
+				<input type="text" name="name" value="{$user.name}"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>身份证：</label>
+				<input type="text" name="card_no"  value="{$user.card_no}"/>
+			</div>
+			<!--
+			<div class="group addressSelect">
+				<label><span class="danger">*</span>所在区域：</label>
+				<select class="select small province" <if condition="$user[province_id]">data-default="{$user[province_id]}"</if> name="province_id">
+					<option>请选择</option>
+				</select>
+				<select class="select small city" <if condition="$user[city_id]">data-default="{$user[city_id]}"</if> name="city_id">
+					<option>请选择</option>
+				</select>
+				<select class="select small area" <if condition="$user[area_id]">data-default="{$user[area_id]}"</if> name="area_id">
+					<option>请选择</option>
+				</select>
+			</div>
+			-->
+			<div class="group">
+				<label><span class="danger">*</span>银行卡：</label>
+				<input type="text" name="bank_no"  value="{$user.bank_no}"/><input name="re-bank_no" type="hidden" value="none" />
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>所属银行：</label>
+				<input type="text" name="bank"  value="{$user.bank}"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>开户行所在地：</label>
+				<input type="text" name="bank_name"  value="{$user.bank_name}"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>支行：</label>
+				<input type="text" name="bank_address"  value="{$user.bank_address}"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>联行号：</label>
+				<input type="text" name="bank_type"  value="{$user.bank_type}"/>
+			</div>
+			<div class="group">
+				<label>状态：</label>
+					<select name="status" id="status">
+						<if condition="$user['status'] eq 2">
+							<option value="2">资料未完善</option>
+							<option value="0">待审核</option>
+						<elseif condition="$user['status'] eq 0" />
+							<option value="0">未审核</option>
+							<option value="+1">审核通过</option>
+							<option value="+2">审核不通过</option>
+						<else />
+							<option value="-1" <if condition="$user['status'] eq -1">selected="selected"</if>>冻结</option>
+							<option value="1" <if condition="$user['status'] eq 1">selected="selected"</if>>正常</option>
+						</if>
+					</select>&nbsp;&nbsp;&nbsp;已审核 <font color="#FF0000">{$user.check_num}</font> 次
+			</div>
+			<div class="group" style="display:none" id="status_data">
+				<label>拒绝项目：</label>
+				<!--<input name="status_data[info]" type="checkbox" style="width:30px;" value="1" /><label class="tip" style="width:60px;">用户资料</label>-->
+				<input name="status_data[img]" type="checkbox" style="width:30px;" value="1" /><label class="tip" style="width:60px;">用户相片</label>
+				<!--<input name="status_data[video]" type="checkbox" style="width:30px;" value="1" /><label class="tip" style="width:60px;">用户视频</label>-->
+				<!--<input name="status_data[risk_pact]" type="checkbox" style="width:30px;" value="1" /><label class="tip" style="width:75px;">风险承诺书</label>-->
+				<!--<if condition="$user['verify_ag'] eq 2">
+				<input name="status_data[video_ag]" type="checkbox" style="width:30px;" value="1" /><label class="tip" style="width:90px;">二次认证视频</label>
+				</if>-->
+			</div>
+			<div class="group">
+				<label>状态修改备注：</label>
+				<div class="text_ph">
+					<input name="audit_memo" type="text" id="audit_memo" value="{$user.audit_memo}" />
+					<div>当信息不全时，实名认证为"未实名"，并且此填信息不全的原因</div>
+				</div>
+			</div>
+			<if condition="$user.changename neq null">
+			<div class="group">
+				<label>修改人姓名：</label>
+				<input type="text" disabled="disabled" value="{$user.changename}"/>
+			</div>
+				<div class="group">
+					<label>修改时间：</label>
+					<input type="text" disabled="disabled" value="{$user.changetime|vtime="Y-m-d H:i:s",###}"/>
+				</div>
+			</if>
+			<if condition="$user.realname neq null">
+				<div class="group">
+					<label>审核人姓名：</label>
+					<input type="text" disabled="disabled" value="{$user.realname}"/>
+				</div>
+				<div class="group">
+					<label>修改时间：</label>
+					<input type="text" disabled="disabled" value="{$user.checktime|vtime="Y-m-d H:i:s",###}"/>
+				</div>
+			</if>
+
+		</div>
+		<div class="title_bar">
+			<span>证件照片视频</span>
+			<!--<button class="button" type="button">上传图片</button>-->
+		</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>身份证正面与银行卡正面照：</label>
+				<div class="file-btn file-btn-success fileinput-button">
+					<input type="file" class="button" name="images[card_front]" id="imageUp_1">
+				</div>
+				<div class="image_group">
+					<if condition="$user['profile']['card_front']">
+						<li>
+						<input type="hidden" value="{$user.profile.card_front}" name="images[card_front]">
+						<a class="fancybox" rel="group" href="{$user.profile.card_front}"><img src="{$user.profile.card_front}" height="80" border="0"></a>
+						<a class="close" onclick="close_img(this)" href="javascript:">x</a>
+						</li>
+					</if>			
+				</div>
+			</div>
+			<div class="group">
+				<label>身份证及银行卡反面照：</label>
+				<div class="file-btn file-btn-success fileinput-button">
+					<input class="file" type="file" name="images[card_back]" id="imageUp_2"/>
+				</div>
+				<div class="image_group">
+					<if condition="$user['profile']['card_back']">
+						<li>
+						<input type="hidden" value="{$user.profile.card_back}" name="images[card_back]">
+						<a class="fancybox" rel="group" href="{$user.profile.card_back}"><img src="{$user.profile.card_back}" height="80" border="0"></a>
+						<a class="close" onclick="close_img(this)" href="javascript:">x</a>
+						</li>	
+					</if>
+				</div>
+			</div>
+			<div class="group">
+				<label>本人持卡半身照：</label>
+				<div class="file-btn file-btn-success fileinput-button">
+					<input class="file" type="file" name="images[card_hand]" id="imageUp_3"/>
+				</div>
+				<div class="image_group">
+					<if condition="$user['profile']['card_hand']">
+						<li>
+						<input type="hidden" value="{$user.profile.card_hand}" name="images[card_hand]">
+						<a class="fancybox" rel="group" href="{$user.profile.card_hand}"><img src="{$user.profile.card_hand}" height="80" border="0"></a>
+						<a class="close" onclick="close_img(this)" href="javascript:">x</a>
+						</li>
+					</if>
+				</div>
+			</div>
+			<!--<div class="group">
+				<label>风险承诺书：</label>
+				<div class="file-btn file-btn-success fileinput-button">
+					<input class="file" type="file" name="images[risk_pact]" id="imageUp_4"/>
+				</div>
+				<div class="image_group">
+					<if condition="$user['profile']['risk_pact']">
+						<li>
+						<input type="hidden" value="{$user.profile.risk_pact}" name="images[risk_pact]">
+						<a class="fancybox" rel="group" href="{$user.profile.risk_pact}"><img src="{$user.profile.risk_pact}" height="80" border="0"></a>
+						<a class="close" onclick="close_img(this)" href="javascript:">x</a>
+						</li>	
+					</if>
+				</div>
+			</div>-->
+			<div class="group">
+				<label>上传视频：</label>
+				<input name="images[video]" type="text" class="text" value="{$user.profile.video}" readonly="readonly"  />
+				<div class="file-btn file-btn-success fileinput-button">
+					<input class="file" type="file" name="images[video]" id="videoUp_1"/>
+				</div>
+				<if condition="!$user.profile.video && is_file(ROOT_PATH.$user['profile']['video'])">	
+					<a href="{$user.profile.video}" target="_blank" title="无法直接下载的,请点 右键-另存为" style="color:#3366cc;text-decoration:none;">下载视频</a>
+				</if>
+			</div>
+		</div>
+		<if condition="!$user.profile.video && is_file(ROOT_PATH.$user['profile']['video'].'.flv')">						
+			<div class="video_bar" style="text-align:center">
+				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" height="600" width="500"> 
+					<param name="movie" value="__RES__/vcastr22.swf?vcastr_file={$user.profile.video}.flv"> 
+					<param name="quality" value="high"> 
+					<param name="allowFullScreen" value="true" />
+					<param name="wmode" value="opaque">
+					<embed src="__RES__/vcastr22.swf?vcastr_file={$user.profile.video}.flv" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="500" height="600" wmode="opaque">
+					</embed> 
+				</object> 
+			</div>
+		</if>
+		<if condition="$user.profile.video_ag && is_file(ROOT_PATH.$user['profile']['video_ag'].'.flv')">						
+			<div class="base_bar">
+				<div class="group">
+					<label>二次认证视频：</label>
+					<if condition="!$user.profile.video_ag && is_file(ROOT_PATH.$user['profile']['video_ag'])">	
+						<a href="{$user.profile.video_ag}" target="_blank" title="无法直接下载的,请点 右键-另存为" style="color:#3366cc;text-decoration:none;">下载视频</a>
+					</if>
+				</div>
+				<div class="group">
+					<div class="video_bar" style="text-align:center">
+						<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" height="600" width="500"> 
+							<param name="movie" value="__RES__/vcastr22.swf?vcastr_file={$user.profile.video_ag}.flv"> 
+							<param name="quality" value="high"> 
+							<param name="allowFullScreen" value="true" />
+							<param name="wmode" value="opaque">
+							<embed src="__RES__/vcastr22.swf?vcastr_file={$user.profile.video_ag}.flv" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="500" height="600" wmode="opaque">
+							</embed> 
+						</object> 
+					</div>
+				</div>
+			</div>
+		</if>
+		<div class="button_bar">
+			<div>
+				<button class="dufault" type="button" onclick="javascript:history.go(-1);">取消</button>
+				<button class="primary" type="submit" name="submit" value="1">确认</button>
+			</div>
+		</div>
+		</form>
+	</div>
+
+	<link rel="stylesheet" href="__RES__/js/plugins/fancybox/jquery.fancybox.css">
+	<script type="text/javascript" src="__RES__/js/plugins/fancybox/jquery.fancybox.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox({
+			autoCenter: false,
+			autoScale: true,
+			maxWidth  : parseInt(document.body.clientWidth) * 0.95,
+			maxHeight : parseInt(document.body.clientHeight) * 0.95,
+			helpers : {
+				overlay : false
+			}
+		});
+	});
+	</script>
+	<script type="text/javascript">
+	$(function(){
+		$("#status").change(function(){
+			if ($("#status").val() == '+2') $("#status_data").show();
+			else $("#status_data").hide();
+		});
+		$("#search").click(function(){
+			var pword = $("#pword").val();
+			if (pword != '')
+			{
+				var url = "/admin.php?m=userSaler&a=search&pword="+encodeURI(pword);
+				$.ajax({
+				url:url,
+				type:'get',
+				dataType:'json',
+				success:function(response)
+				{
+					if(response.result.code == '10000')
+					{
+						$("#pid").empty();
+						var pids = response.data;
+						
+						if (pids)
+						{						
+							for(var k in pids)
+							{
+								$("#pid").append("<option value='"+pids[k].id+"'>"+pids[k].name+"-"+pids[k].mobile+"</option>");
+							}
+							$("#pid").show();
+						}
+					}
+					else
+					{
+						alert("未找到对应商户");
+					}
+				}	
+				});
+			}
+		});
+
+	});
+	</script>
+	<script type="text/javascript">
+	$(function(){
+		imageUp("imageUp_1");
+		imageUp("imageUp_2");
+		imageUp("imageUp_3");
+		// imageUp("imageUp_4");
+		videoUp("videoUp_1");
+	});
+		var file_url  = "__RES__", 					//引用js路径
+		up_url  = "{:U('upload/upload')}",			//图片处理路径		
+		dir_url = "{:substr(C('URL_UPLOADER_TMP'),1)}",	//图片保存路径
+		del_url = "{:U('upload/imgdel')}";			//删除处理路径
+	</script>
+	<script type="text/javascript" src="__RES__/js/uploadify/jquery.uploadify.min.js?ver={:rand(0,9999)}"></script>
+	<script type="text/javascript" src="__RES__/js/uploadfile.js?ver={:rand(0,9999)}"></script>
+	<link rel="stylesheet" href="__RES__/js/uploadify/uploadify.css">	
+	<include file="common:footer" />

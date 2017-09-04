@@ -1,0 +1,59 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<div class="sm">
+		<div class="current">
+			当前位置：供应商结算
+
+		</div>
+		<br>
+		<div class="search_bar">
+			<form action="{:U('accountUserProviderIncome/index')}" id="" name="" method="get">
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" name="starttime" placeholder="开始时间" value="{$_params.starttime}"/>
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" name="endtime" placeholder="结束时间" value="{$_params.endtime}"/>
+
+				<label>商户：</label>
+				<select class="select rm" name="keytype">
+					<option value="">请选择</option>
+					<option value="up_username" <if condition="$_params['keytype'] eq 'up_username'">selected="selected"</if>>帐号</option>
+					<option value="up_shop_name" <if condition="$_params['keytype'] eq 'up_username'">selected="selected"</if>>店铺名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar"></div>
+
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>					
+						<th>供应商</th>
+						<th>账号</th>						
+						<th>银行帐号</th>
+						<th>银行名</th>
+						<th>结算金额</th>
+						<th>结算时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td>{$item.up_shop_name}</td>
+						<td>{$item.up_username}</td>						
+						<td>{$item.up_bank_no}</td>
+						<td>{$item.up_bank}</td>
+						<td>{$item.money}</td>
+						<td>{$item.addtime|date="Y-m-d H:i:s",###}</td>
+
+					</tr>
+					</foreach>
+				
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />

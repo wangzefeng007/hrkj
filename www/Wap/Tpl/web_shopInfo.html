@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>店铺简介</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/shop.css">
+<script type="text/javascript" src="__WAP__/plugins/zepto/zepto.min.js"></script>
+</head>
+<body>
+	<header>
+		<div class="button"><a class="back" href="javascript:window.history.back();"><img src="__WAP__/images/btn_back.png" /></a></div>
+		<div class="title">微店介绍</div>
+		<div class="button"></div>
+	</header>
+	<div class="sign_bar"><img src="{$shopInfo.background|default='__WAP__/images/shop_pic.jpg'}"></div>
+	<div class="info_bar">
+		<div class="logo"><img src="{$shopInfo.logo|default='__WAP__/images/shop_logo.png'}"></div>
+		<div class="info">
+			<div class="name">{:htmlspecialchars($shopInfo['name'])}</div>
+			<div class="phone">
+				<img src="__WAP__/images/icon_phone.png" />
+				{$shopInfo.mobile}
+			</div>
+		</div>
+	</div>
+	<div class="des_bar">
+		<div>好评率：{好评率} %</div>
+		<div>所在地：{所在地}</div>
+		<div>店主：{$shopInfo.us_name}</div>
+		<div>开店时间：{$shopInfo.addtime|date='Y-m-d', ###}</div>
+		<div>店铺介绍：{$shopInfo.desc}</div>
+	</div>
+</body>
+<script type="text/javascript">
+$(function(){
+	// 调整店标高度
+	var $logo = $(".info_bar .logo img");
+	var w = $logo.width();
+	$logo.height(w-8);
+});
+</script>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+@media screen and (max-width: 380px) {
+	html{
+		font-size: 10px;
+	}
+}
+@media screen and (min-width: 380px) and (max-width:500px) {
+	html{
+		font-size: 12px;
+	}
+}
+@media screen and (min-width: 500px) and (max-width:650px) {
+	html{
+		font-size: 13px;
+	}
+}
+@media screen and (min-width: 650px) {
+	html{
+		font-size: 14px;
+	}
+}
+*{margin:0;padding:0;}
+body {
+	margin: 0px;
+	padding: 0px;
+	
+	font-size: 1.2rem;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体"; color:#00000; background-color:#fff;
+}
+
+ul{ list-style:none;}
+li{ list-style:none;}
+a{ text-decoration:none; color:#000;}
+input{ border:0px; cursor:pointer;}
+button{ border:0px; cursor:pointer; background:none;}
+img{ width:100%;}

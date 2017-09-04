@@ -1,0 +1,110 @@
+@CHARSET "UTF-8";
+
+body{
+	margin: 0px;
+	padding: 0px;
+	background: white;
+	font-family: "微软雅黑";
+}
+.clear_float{
+	clear: both;
+}
+
+.nav_bar{
+	display: block;
+	width: 100%;
+	height: 60px;
+	background: #3697a0;
+}
+.nav_bar .logo{
+	display: block;
+	float: left;
+	height: 100%;
+}
+.nav_bar .logo img{
+	display: block;
+	width: 140px;
+	height: 40px;
+	margin: 10px 0px 0px 30px;
+}
+.nav_bar .title{
+	display: block;
+	float: left;
+	height: 100%;
+	width: 680px;
+	line-height: 60px;
+	font-size: 20px;
+	color: white;
+	padding-left: 20px;
+}
+.nav_bar .btn_group{
+	display: block;
+	float: left;
+	height: 100%;
+	line-height: 60px;
+	font-size: 14px;
+}
+.nav_bar .btn_group ul{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+.nav_bar .btn_group ul li{
+	float: left;
+	color: 176e76;
+	font-weight: normal;
+	display: block;
+	height: 100%;
+}
+.nav_bar .btn_group ul li a{
+	display: block;
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	width: 50px;
+	height: 100%;
+	text-align: center;
+}
+.nav_bar .control{
+	display: block;
+	float: right;
+	height: 100%;
+	margin-right: 30px;
+}
+.nav_bar .control span{
+	display: block;
+	float: right;
+	height: 40px;
+	line-height: 60px;
+	color: white;
+	font-size: 15px;
+}
+.nav_bar .control .btn_exit{
+	display: block;
+	float: right;
+	width: 80px;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 60px;
+	text-align: center;
+}
+.nav_bar .control .btn_view{
+	display: block;
+	float: right;
+	height: 30px;
+	width: 100px;
+	background: white;
+	color: black;
+	text-decoration: none;
+	margin-top: 15px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 15px;
+}
+
+.content_bar{
+	display: block;
+	width: 100%;
+	background: white;
+}

@@ -1,0 +1,46 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="{:U('save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<div class="current">当前位置：内容设置</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>编号：</label>
+				<input type="text" name="skey" value="{$rs.skey}" <if condition="($rs['id'])">readonly="readonly"</if> />
+			</div>
+			<div class="group">
+				<label>标题：</label>
+				<input type="text" name="stitle" value="{$rs.stitle}" <if condition="($rs['id'])">readonly="readonly"</if> />
+			</div>
+			<div class="group">
+				<label>正文：</label>
+				<div style="float:left;width:70%;">
+					<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.config.js"></script>
+					<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.all.min.js"> </script>
+					<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+					 <script id="editor" name="svalue" type="text/plain" style="height:300px;"></script>
+					 <script type="text/javascript">
+					 var ue = UE.getEditor('editor');
+					 ue.ready(function(){
+						ue.setContent('{$rs.svalue|htmlspecialchars_decode}');
+					 });
+					 </script>
+					 <div style="clear:both"></div>
+				</div>
+			</div>
+			<!--<div class="group">
+				<label>状态：</label>
+				<input type="radio" class="radio" name="status" value="1" checked="checked" /><label class="tip">打开</label>
+				<input type="radio" class="radio" name="status" value="0" <if condition="$rs[status] eq 0">checked="checked"</if> /><label class="tip">关闭</label>
+			</div>-->
+		</div>
+		<div class="order_bar"></div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

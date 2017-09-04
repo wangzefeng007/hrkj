@@ -1,0 +1,50 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/store_detail.css">
+	<div class="sm">
+		<div class="current">当前位置：收款结算－结算明细</div>
+		<div class="info_bar">
+			<div class="info_area">
+				<div>结算单号：{$cash.sn}</div>
+				<div>&emsp;&emsp;商户：{$cash.name} - {$cash.mobile}</div>
+				<div>支付方式：{$cash.pt_name}</div>
+				<div>银行账号：{$cash.bank_no}</div>
+				<div>银行名称：{$cash.bank}</div>
+				<div>结算方式：{$cash.ct_name}</div>
+				<div>申请时间：{$cash.addtime|vtime="Y-m-d H:i:s",###}</div>
+				<div>结算时间：{$cash.dispostime|vtime="Y-m-d H:i:s",###}</div>
+			</div>
+			<div class="info_area">
+				<div>结算金额：{$cash.money}</div>
+				<div>结算费率：{$cash.fee_rate}</div>
+				<div>&emsp;结算费：{$cash.fee_static}</div>
+				<div>费率金额：{$cash[money]*$cash[fee_rate]}</div>
+				<div>实得金额：{:round($cash[money] - $cash[money]*$cash[fee_rate]-$cash[fee_static],2)}</div>
+			</div>
+		</div>
+		<div class="order_bar">
+			<table cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr class="small_title odd">
+						<td>分润商户</td>
+						<td>费率等级</td>
+						<td>费率</td>
+						<td>分成费率</td>
+						<td>分润金额</td>
+						<td>入账时间</td>
+					</tr>
+					<foreach name="split" item="item">
+					<tr class="b_line">
+						<td align="center">{$item.us_name}</td>
+						<td align="center">{$item.lf_name}</td>
+						<td align="center">{$item.fee_rate}</td>
+						<td align="center">{$item.income_rate}</td>
+						<td align="center">{$item.money}</td>
+						<td align="center">{$item.addtime|vtime="Y-m-d H:i:s",###}</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+	<include file="common:footer" />

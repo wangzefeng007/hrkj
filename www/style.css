@@ -1,0 +1,20 @@
+body{font-family:"\5FAE\8F6F\96C5\9ED1",Arial, Helvetica, sans-serif;background:#fff;}
+body,h1,input{padding:0; margin:0;}a,input{outline:0}
+.cl:after,.wrap:after{content:"";display:block;clear:both;height:0;visibility:hidden;}.cl,.wrap{zoom:1}
+a:link,a:visited,a:active{color:#fff;text-decoration:none;}a:hover{color:#000000;text-decoration:none;}
+
+.wxzf_main{width: 100%;margin: 0 auto;min-width:320px;max-width:640px;position:relative;}
+.wxzf_main h1{font-size: 1.1rem;line-height: 30px;text-align: center;font-weight: 500;border-bottom: 1px solid #dcdcdc;padding: 20px 0;}
+.wxzf_main h1 .icon{background: url(../images/icon1.png) no-repeat;display: inline-block;width: 36px;height: 36px;-webkit-background-size:100% 100%;background-size:100% 100%;vertical-align: middle;margin:-5px 8px 0 0;}
+.wxzf_main .title{text-align: center;font-size: 1.1rem;padding-top: 20px;color: #666;}
+.wxzf_main .form{padding: 20px;}
+.wxzf_main .label{border: 1px solid #dcdcdc;color: #666;height: 38px;padding: 3px 3px 3px 70px;position: relative;}
+.wxzf_main .label span.money{position: absolute;left: 10px;font-size: 0.9rem;line-height: 40px;}
+.wxzf_main .label span.tip{position: absolute;right: 10px;top: 0;line-height: 46px;font-size: 0.8rem;color: #cbcbcb;}
+.wxzf_main .label .input{display: block;width: 100%;border: 0;height: 38px;line-height: 28px;padding: 5px;box-sizing:border-box;}
+.wxzf_main .label .icon1{position: absolute;display: block;width: 18px;height: 18px;background: url(../images/icon2.png) no-repeat;-webkit-background-size:100% 100%;background-size:100% 100%;right: 10px;top: 50%;margin-top: -9px;}
+.wxzf_main .form .btn{background-color: #65d363;color: #fff;font-size: 1rem;border: 0;width: 100%;display: block;line-height: 42px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;margin-top: 20px;}
+.wxzf_main .form .btn1{background-color: #a7d6a7;}
+.wxzf_main .pic{text-align: center;padding: 20px 0;}.wxzf_main .pic img{width: 200px;}
+.wxzf_main .not{background-color: #f1f1f1;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;margin: 20px;padding: 15px;text-align: center;font-size: 1.1rem;line-height: 5rem;color: #333;}
+.wxzf_main .not .icon2{background: url(../images/icon3.png) no-repeat;display: inline-block;width: 22px;height: 22px;-webkit-background-size: 100%;background-size: 100%;vertical-align: middle;margin:-5px 6px 0 0;}

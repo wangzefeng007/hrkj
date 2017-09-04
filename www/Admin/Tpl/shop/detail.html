@@ -1,0 +1,97 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/store_detail.css">
+	<div class="sm">
+		<div class="current">当前位置：店铺查看</div>
+		<div class="info_bar">
+			<div class="pic_area">
+				<if condition="$shop.logo neq ''">
+				<img src="{$shop.logo}" />
+				<else />
+				<img src="__RES__/images/img_no.png" />
+				</if>
+			</div>
+			<div class="info_area">
+				<div>姓名：{$shop.us_name}</div>
+				<div>账号：{$shop.mobile}</div>
+				<div>级别：{$shop.lf_name}</div>
+			</div>
+			<div class="info_area">
+				<div>店名：{$shop.name}</div>
+				<div>
+					<if condition="$item[status_real] eq 1">
+					已实名
+					<else />
+					未实名
+					</if>
+				</div>
+				<div>
+					<if condition="$item[status] eq 1">
+					已开通
+					<else />
+					未开通
+					</if>
+				</div>
+			</div>
+		</div>
+		<div class="search_bar">
+			<form action="{:U('goods/detail')}" id="" name="" method="get">
+				<label class="inline">商品名称：</label>
+				<input class="inline text_l rm" type="text" name="name" value="{$_params['name']}"/>
+				<label class="inline">关键词：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="price" <if condition="$_params['keytype'] eq price">selected="selected"</if>>价格</option>
+				</select>
+				<select class="select rm" name="keyword">
+					<option value="0">请选择</option>
+					<option value="desc" <if condition="$_params['keyword'] eq desc">selected="selected"</if>>由高到低</option>
+					<option value="asc" <if condition="$_params['keyword'] eq asc">selected="selected"</if>>由低到高</option>
+				</select>
+				<button class="inline submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<form action="{:U('shop/delete')}" method="post" class="ajax-form" id="audit-form">
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="submit">批量删除</button>
+		</div>
+		<div class="order_bar">
+			
+			<table cellpadding="0" cellspacing="0">
+				<tbody>
+					
+					<tr class="small_title">
+						<td width="4%">&nbsp;</td>
+						<td width="12%">商品名称</td>
+						<td width="20%">&nbsp;</td>
+						<td>价格</td>
+						<td>销量</td>
+						
+						<td>库存</td>
+						<td width="11%">操作</td>
+					</tr>
+					
+					<foreach name="goods.list" item="item">
+					<tr>
+						<td align="center"><input type="checkbox" name="id[]" value="{$item.id}"/></td>
+						<td align="center"><img class="goods_thumb_size_img" data-echo="{$item.thumb|default='__RES__/images/img_no.png'}" src="__RES__/images/img_no.png" /></td>
+						<td>{$item.name}</td>
+						<td align="center">{$item.price}</td>
+						<td align="center">{$item.sale_count}</td>
+						
+						<td align="center">{$item.stock}</td>
+						<td align="center">
+							<a class="opera" href="{:str_replace('admin.php','wap.php',U('web/goods',array(usid=>$item['usid'],gid=>$item['gid'])))}" target="_blank">商品预览</a> |
+							<a class="opera" href="javascript:void(0)" onclick="confirm_url('要删除该商品吗','{:U('shop/delete',array(id=>$item[id]))}')">删除</a>
+						</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			
+		</div>
+		</form>
+	</div>
+	<script type="text/javascript" src="__RES__/js/echo.js"></script>
+	<script type="text/javascript" src="__RES__/js/common.js"></script>
+	<include file="common:footer" />

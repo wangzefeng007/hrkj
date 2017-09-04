@@ -1,0 +1,1 @@
+<?php	return array ( 'VERIFY_LENGTH' => '4', 'VERIFY_WIDTH' => '160', 'VERIFY_HEIGHT' => '38', 'VERIFY_SEED' => '3456789', 'VERIFY_FONTFILE' => './Admin/Lib/Tool/font.ttf', 'VERIFY_SIZE' => '24', 'VERIFY_COLOR' => '#333333', 'VERIFY_BGCOLOR' => '#FFFFFF', 'VERIFY_NAME' => 'verify', 'VERIFY_FUNC' => 'strtolower', );?>

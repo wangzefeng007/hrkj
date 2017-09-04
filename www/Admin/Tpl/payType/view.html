@@ -1,0 +1,77 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/setting/css/set_access_edit.css">	
+	<div class="sm">
+		<div class="current">当前位置：支付方式</div>
+		<form action="{:U('payType/save')}" id="" name="" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$info.id}">
+		<div class="base_bar">
+			<div class="group">
+				<label>名称：</label>
+				<input type="text" name="name" value="{$info.name}"/>
+			</div>
+			<div class="group">
+				<label>排序号：</label>
+				<input type="text" name="sort" value="{$info.sort}"/>
+			</div>
+			<div class="group">
+				<label>通道：</label>
+				<select name="pcid">
+					<option value="0">请选择</option>
+					<foreach name="pay_channel" item="item">
+					<option value="{$item.id}" <if condition="$item[id] eq $info[pcid]">selected="selected"</if>>{$item.name}</option>
+					</foreach>
+				</select>
+			</div>
+			<foreach name="cash_type" item="cash">
+				<div class="group">
+					<label>{$cash.name} 费率成本：</label>
+					<input type="hidden" name="platform_cost[{$cash['id']}][id]" value="{$platform_cost_fee[$info['id']][$cash['id']]['id']}">
+					<input type="text" name="platform_cost[{$cash['id']}][fee_rate]" value="{$platform_cost_fee[$info['id']][$cash['id']]['fee_rate']|default='0.000000'}"/>
+				</div>
+				<div class="group">
+					<label>{$cash.name} 结算成本：</label>
+					<input type="text" name="platform_cost[{$cash['id']}][fee_static]" value="{$platform_cost_fee[$info['id']][$cash['id']]['fee_static']|default='0.00'}"/>
+				</div>
+			</foreach>
+			
+			<!--<div class="group">
+				<label>当笔支付下限：</label>
+				<input type="text" name="min" value="{$info.min}"/>
+			</div>
+			<div class="group">
+				<label>当笔支付上限：</label>
+				<input type="text" name="max" value="{$info.max}"/>
+			</div>
+			<div class="group">
+				<label>当天支付下限：</label>
+				<input type="text" name="day_min" value="{$info.day_min}"/>
+			</div>
+			<div class="group">
+				<label>当天支付上限：</label>
+				<input type="text" name="day_max" value="{$info.day_max}"/>
+			</div>-->
+			
+			<div class="group">
+				<label>备注：</label>
+				<input type="text" name="desc" value="{$info.desc}"/>
+			</div>
+			
+			<div class="group">
+				<label>状态：</label>
+				<input type="radio" class="radio" name="status" value="1" <if condition="$info[status] eq 1">checked="checked"</if>/><label class="tip">启用</label>
+				<input type="radio" class="radio" name="status" value="0" <if condition="$info[status] eq 0">checked="checked"</if>/><label class="tip">关闭</label>
+			</div>
+			<div class="group">
+				<label>是否前端显示：</label>
+				<input type="radio" class="radio" name="is_show" value="1" <if condition="$info[is_show] eq 1">checked="checked"</if>/><label class="tip">打开</label>
+				<input type="radio" class="radio" name="is_show" value="0" <if condition="$info[is_show] eq 0">checked="checked"</if>/><label class="tip">关闭</label>
+			(支付通道要被启用,前端显示才能生效)</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

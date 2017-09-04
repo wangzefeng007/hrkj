@@ -1,0 +1,25 @@
+.container{
+	position: relative;
+}
+
+.downbtn{
+	position: absolute;
+	left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#iosDownload{
+	top: 747px;
+}
+
+#AndroidDownload{
+	top: 857px;
+}
+
+#useBrowser{
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}

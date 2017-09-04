@@ -1,0 +1,115 @@
+@CHARSET "UTF-8";
+
+body{
+	margin: 0px;
+	padding: 0px;
+	background: #e7e8eb;
+	font-family: "微软雅黑";
+}
+.nav_bar{
+	display: block;
+	width: 100%;
+	height: 60px;
+	background: #3697a0;
+}
+.nav_logo{
+	display: block;
+	float: left;
+}
+.nav_logo img{
+	display: block;
+	width: 140px;
+	height: 40px;
+	margin: 10px 0px 0px 30px;
+}
+.nav_btn{
+	display: block;
+	float: right;
+	padding-right: 40px;
+}
+.nav_btn ul{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+.nav_btn ul li {
+	float: left;
+}
+.nav_btn ul li a{
+	color: white;
+	text-decoration: none;
+	display: block;
+	width: 140px;
+	height: 40;
+	font-size: 15px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+	margin-top: 10px;
+	text-align: center;
+	line-height: 40px;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.nav_btn ul li a.active{
+	color: #333333;
+	background: white;
+}
+.content_bar{
+	display: block;
+	padding: 24px;
+}
+.content_bar_body{
+	display: block;
+	width: 100%;
+	border: 1px solid #d9dadc;
+	background: white;
+	padding-bottom: 80px;
+}
+.agreement_title{
+	display: block;
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 80px;
+}
+.agreement_content{
+	display: block;
+	overflow: scroll;
+	height: 300px;
+	margin: 20px 300px;
+	border: 1px solid #d5e4fa;
+	font-size: 14px;
+	background: #f5f9ff;
+	padding: 30px 26px;
+}
+.agreement_checkbox{
+	text-align: center;
+	font-size: 15px;
+	margin: 10px 0px 30px 0px;
+}
+.agreement_checkbox input{
+	background: white;
+}
+.agreement_checkbox label{
+	cursor: pointer;
+}
+.agreement_btn{
+	text-align: center;
+}
+.agreement_btn button{
+	text-align: center;
+	background: #e95f71;
+	border: 1px solid #c6c4c4;
+	display: block;
+	width: 160px;
+	height: 30px;
+	margin: 0px auto;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+}

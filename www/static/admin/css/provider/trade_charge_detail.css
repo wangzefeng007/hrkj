@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+body{
+	background: white;
+	margin: 0px;
+	padding: 0px;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+
+.sm{
+	padding: 0px 30px;
+	margin: 0px;
+}
+.sm .current{
+	padding: 16px 22px;
+	margin: 0px;
+	border-bottom: 1px solid #dadada;
+	font-size: 14px;
+}
+.sm .current .statistic{
+	float: right;
+	font-size: 16px;
+	font-weight: bold;
+	color: #ff331e;
+}
+.statistic_bar{
+	background: #f4f8ff;
+	border: 1px solid #c2d5ef;
+	padding: 14px 20px;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 16px 22px;
+}
+
+.table{
+	margin: 14px 22px 0px 22px;
+}
+.table table{
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #c2d5ef;
+	width: 100%;
+}
+.table table thead tr{
+	background: #d5e4fa;
+}
+.table table thead tr th{
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 8px 0px;
+}
+.table table tbody tr.odd{
+	background: #ffffff;
+}
+.table table tbody tr.even{
+	background: #f4f4f4;
+}
+.table table tbody tr td{
+	text-align: center;
+	font-size: 14px;
+	padding: 12px 0px;
+}
+.table table tbody tr td.success{
+	color: #239c23;
+}
+.table table tbody tr td.fail{
+	color: #f94e3d;
+}
+.table table tbody tr td.close{
+	color: #999999;
+}
+.table table tbody tr td a{
+	text-decoration: none;
+	color: #3366cc;
+	font-size: 14px;
+	padding: 0px 8px;
+}
+
+.paging_bar{
+	margin: 14px 22px 0px 22px;
+	padding: 12px 0px 0px 0px;
+	clear: both;
+	font-size: 14px;
+	text-align: right;
+	color: #666666;
+}
+.paging_bar span{
+	padding: 0px 2px;
+}
+.paging_bar a{
+	color: #666666;
+	text-decoration: none;
+	border: 1px solid #d3d3d3;
+	padding: 4px 14px;
+	font-size: 14px;
+}
+.paging_bar a:hover{
+	color: white;
+	background: #d3d3d3;
+}

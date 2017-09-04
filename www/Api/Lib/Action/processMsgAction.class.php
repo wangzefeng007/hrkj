@@ -1,0 +1,314 @@
+<?php
+class processMsgAction  extends baseAction
+{
+    function _initialize()
+	{
+        parent::_initialize();
+	}
+	/*
+	*	流程消息统一配置
+	*	参数 type - 消息类型(对应函数名), param - 对应参数
+	*/
+	public function msg($type,$param)
+	{
+		$type = I('type',$type);
+		$param = I('param',$param);
+		if (TASK_MSG)
+		{
+			// 异步消息与即时消息逻辑判定不同,需要重写!
+			// send_task('MsgTask',$type,$param);	//发送异步消息
+		}
+		else
+		{
+			$this->$type($param);	//发送普通消息
+		}
+	}
+	
+	//用户结算后产生的消息
+	public function CashMsg($cash)
+	{
+		$date_time = date("Y-m-d H:i:s");
+		// echo "CashMsg-用户结算短信日志:{$date_time}\n";
+		// echo "订单号:{$cash['sn']}\n";
+		Vendor('MsgCenter.MsgCenter');
+
+		//获取结算方的个人信息
+		$from_us = D('user_saler')->where(array('id' => $cash['usid']))->find();
+		//获取分润收入表
+		$income = D('account_user_saler_income')->where(array('from_usid' => $cash['usid'],'order_sn' => $cash['sn']))->select();
+		if ($income)
+		{
+			foreach ($income as $val)
+			{
+				if ($val['money'] >= 0.01)	//分润金额超过0.01元,发送消息
+				{
+					$rs_us = D('user_saler')->where(array('id' => $val['usid']))->find();
+					$target = array (
+						'mobile' => $rs_us['mobile'],
+					);
+					$params = array (
+						'name' => $from_us['name'],
+						'money' => $val['money'],
+					);
+					//================日志=================
+					// echo "用户结算分润产生--发送消息\n";
+					$log = array(
+						'target' => $target,
+						'type' => 'normalSplit',
+						'params' => $params,
+					);
+					// var_dump($log);
+					//=====================================
+					MsgCenter::send($target,'normalSplit',$params);
+					//$smsmsg = "恭喜，汇融钱包为您产生".$val['money']."元分润。别人刷卡你赚钱，请持续分享。客服电话400-699-8890";
+					//sendsms($rs_us['mobile'],$smsmsg);
+				}
+			}
+		}
+		
+	}
+	
+	//订单支付成功后所产生的消息
+	public function TradeMsg($sn)
+	{
+		$host = "http://{$_SERVER['HTTP_HOST']}"; //服务器主机
+		
+		$date_time = date("Y-m-d H:i:s");
+		// echo "TradeMsg-交易异步短信日志:{$date_time}\n";
+		// echo "订单号:$sn\n";
+		Vendor('MsgCenter.MsgCenter');
+		$str = strtolower(substr($sn,0,2));
+		$db = array(
+			'os' => 'order_shop',	//店铺交易
+			'of' => 'order_ftf',	//云收款
+			'ou' => 'order_upgrade',	//用户升级
+		);
+		$paylog = D('order_paylog')->where(array('order_sn' => $sn))->find();
+		// echo "打印付款日志\n";
+		// var_dump($paylog);
+		if ($paylog['status'] == '1')
+		{
+			$order = D($db[$str])->where(array('sn' => $sn))->find();	//获取相应订单
+			$income = D('account_user_saler_income')->where(array('order_sn' => $sn))->select();		//获取收入汇总表--用于查分润
+			
+			if ($order)
+			{
+				if ($str == 'os')
+				{
+					$rs_us = D('user_saler')->where(array('id' => $order['usid']))->find();		//获取订单收入方的个人信息
+					
+					//店铺交易付款后--发送消息(通知分销商)
+					$target = array (
+							'mobile' => $rs_us['mobile'],
+					);
+						
+					$params = array (
+							'sn' => $sn,
+					);
+					//================日志=================
+					// echo "店铺交易付款后--发送消息\n";
+					$log = array(
+							'target' => $target,
+							'type' => 'orderPayFen',
+							'params' => $params,
+					);
+					// var_dump($log);
+					//=====================================
+					MsgCenter::send($target,'orderPay',$params,$type=2);
+					
+					
+					//店铺交易付款后--发送消息(通知卖家/供应商)
+					if ($order['upid'])	//如果是供应商商品,则消息发给供应商
+					{
+						$rs_up = D('user_provider')->where(array('id' => $order['upid']))->find();
+						$mobile = $rs_up['tel'];
+					}
+					else
+					{
+						$from_info = D('user_saler')->where(array('id' => $order['from_usid']))->find();
+						$mobile = $from_info['mobile'];
+					}
+					
+					$target = array (
+						'mobile' => $mobile,
+					);
+					
+					$params = array (
+						'sn' => $sn,
+					);
+					//================日志=================
+					// echo "店铺交易付款后--发送消息\n";
+					$log = array(
+						'target' => $target,
+						'type' => 'orderPay',
+						'params' => $params,
+					);
+					// var_dump($log);
+					//=====================================
+					MsgCenter::send($target,'orderPay',$params,$type=2);
+				
+					
+					//店铺交易付款后--发送消息(通知买家)
+					// $url = U('Wap://order/index',array('ubid'=>$order['ubid']));
+					$url = "{$host}/wap.php/order/index/ubid/{$order['ubid']}";
+					$rs_ub = D('userSaler')->where(array('id' => $order['ubid']))->find();
+					
+					$target = array (
+						'mobile' => $rs_ub['mobile'],
+					);
+					
+					if($rs_up)
+					{
+						$info = $rs_up;
+						$info['mobile'] = $info['tel'];
+					}
+					else
+					{
+						if($from_info)
+						{
+							$info = $from_info;
+						}
+						else
+						{
+							$info = $rs_us;
+						}
+					}
+					
+					
+					$params = array (
+							'sn' => $sn,
+							'url' => getShortUrl($url),
+							'provider'=>$info['name'],
+							'mobile'=>$info['mobile']
+					);
+					
+					
+					//================日志=================
+					// echo "店铺交易付款后--发送消息\n";
+					$log = array(
+						'target' => $target,
+						'type' => 'orderPayToBuy',
+						'params' => $params,
+					);
+					// var_dump($log);
+					//=====================================
+					MsgCenter::send($target,'orderPayToBuy',$params);
+					
+					if ($income)
+					{
+						foreach($income as $val)
+						{
+							if ($val['type'] == 5)
+							{
+								//佣金分润产生后--发送消息
+								$income_us = D('user_saler')->where(array('id' => $val['usid']))->find();
+								$target = array (
+									'mobile' => $income_us['mobile'],
+								);
+								$params = array (
+									'name' => $rs_us['name'],
+									'sn' => $sn,
+									'money' => $val['money'],
+								);
+								//================日志=================
+								// echo "佣金分润产生后--发送消息\n";
+								$log = array(
+									'target' => $target,
+									'type' => 'commissionSplit',
+									'params' => $params,
+								);
+								// var_dump($log);
+								//=====================================
+								MsgCenter::send($target,'commissionSplit',$params);
+							}
+							elseif ($val['type'] == 6)
+							{
+								//分销佣金产生后--发送消息
+								$target = array (
+									'mobile' => $rs_us['mobile'],
+								);
+								$params = array (
+									'sn' => $sn,
+									'money' => $val['money'],
+								);
+								//================日志=================
+								// echo "分销佣金产生后--发送消息\n";
+								$log = array(
+									'target' => $target,
+									'type' => 'commission',
+									'params' => $params,
+								);
+								// var_dump($log);
+								//=====================================
+								MsgCenter::send($target,'commission',$params);
+							}
+							/* elseif ($val['type'] == 7)
+							{
+								//分销返现产生后--发送消息
+								$target = array (
+									//'mobile' => $rs_us['mobile'],
+								);
+								$params = array (
+									//'money' => $order['money'],
+								);
+								MsgCenter::send($target,'cashback',$params);
+							} */
+						}
+					}
+				}
+				elseif ($str == 'of')
+				{
+					//获取订单收入方的个人信息
+					$rs_us = D('user_saler')->where(array('id' => $order['usid']))->find();
+					//云收款成功后--发送消息
+					$target = array (
+						'mobile' => $rs_us['mobile'],
+					);
+					$params = array (
+						'money' => $order['money'],
+					);
+					//================日志=================
+					// echo "云收款成功后--发送消息\n";
+					$log = array(
+						'target' => $target,
+						'type' => 'yunPay',
+						'params' => $params,
+					);
+					// var_dump($log);
+					//=====================================
+					MsgCenter::send($target,'yunPay',$params);
+				}
+				elseif ($str == 'ou')
+				{
+					//获取订单升级用户的个人信息
+					$from_us = D('user_saler')->where(array('id' => $order['usid']))->find();
+					if ($income)
+					{
+						foreach ($income as $val)
+						{
+							$rs_us = D('user_saler')->where(array('id' => $val['usid']))->find();
+							$target = array (
+								'mobile' => $rs_us['mobile'],
+							);
+							$params = array (
+								'name' => $from_us['name'],
+								'money' => $val['money'],
+							);
+							//================日志=================
+							// echo "用户升级分润产生--发送消息\n";
+							$log = array(
+								'target' => $target,
+								'type' => 'upgradeSplit',
+								'params' => $params,
+							);
+							// var_dump($log);
+							//=====================================
+							MsgCenter::send($target,'upgradeSplit',$params);
+						}
+					}
+				}
+			}
+		}
+		// echo "==========================================================\n\n\n";
+	}
+}

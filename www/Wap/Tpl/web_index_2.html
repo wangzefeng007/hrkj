@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{:htmlspecialchars($shopInfo['name'])}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/shop_stream.css">
+<script type="text/javascript" src="__WAP__/plugins/zepto/zepto.min.js"></script>
+</head>
+<body>
+	<header>
+		<div class="button"></div>
+		<div class="title">店铺首页</div>
+		<div class="button"></div>
+	</header>
+	<div class="sign_bar"><img src="{$shopInfo.background|default='__WAP__/images/shop_pic.jpg'}"></div>
+	<div class="info_bar">
+		<div class="logo"><img src="{$shopInfo.logo|default='__WAP__/images/shop_logo.png'}"></div>
+		<div class="info">
+			<div class="name"><a href="{:U('shopInfo',array('usid'=>$usid))}">{:htmlspecialchars($shopInfo['name'])}</a></div>
+			<div class="phone">
+				<img src="__WAP__/images/icon_phone.png" />
+				{$shopInfo.mobile}
+			</div>
+		</div>
+	</div>
+	<div class="goods_sort_bar">
+		<a class="button primary" href="#">最新商品</a>
+		<a class="button default" href="#">价格排行<img src="__WAP__/images/icon_arrow_up.png"></a>
+		<a class="button default" href="#">销量排行<img src="__WAP__/images/icon_arrow_down.png"></a>
+	</div>
+	<div class="goods_block_bar">
+		<div class="stream">
+			<volist name="goodsList" id="vo" mod="2" >
+				<eq name="mod" value="0">
+					<a class="item" href="{:U('goods', array('gid'=>$vo['id'], 'usid'=>$usid))}">
+						<div class="img"><img src="{$vo.thumb|default='__WAP__/images/img_goods.jpg'}" /></div>
+						<div class="info">
+							<div class="name">{:htmlspecialchars($vo['name'])}</div>
+							<div class="price">￥{$vo.price}</div>
+						</div>
+					</a>
+				</eq>
+			</volist>
+		</div>
+		<div class="stream">
+			<volist name="goodsList" id="vo" mod="2" >
+				<eq name="mod" value="1">
+					<a class="item" href="{:U('goods', array('gid'=>$vo['id'], 'usid'=>$usid))}">
+						<div class="img"><img src="{$vo.thumb|default='__WAP__/images/img_goods.jpg'}" /></div>
+						<div class="info">
+							<div class="name">{:htmlspecialchars($vo['name'])}</div>
+							<div class="price">￥{$vo.price}</div>
+						</div>
+					</a>
+				</eq>
+			</volist>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+$(function(){
+	// 调整店标高度
+	var $logo = $(".info_bar .logo img");
+	var w = $logo.width();
+	$logo.height(w-8);
+});
+</script>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

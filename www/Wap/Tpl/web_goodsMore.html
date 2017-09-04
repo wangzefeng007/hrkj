@@ -1,0 +1,9 @@
+<foreach name="goodsList" item="vo">
+	<a class="item" href="{:U('goods', array('gid'=>$vo['id'], 'usid'=>$usid))}">
+		<div class="img"><img src="{$vo.thumb|default='__WAP__/images/img_goods.jpg'}" /></div>
+		<div class="info">
+			<div class="name">{:htmlspecialchars($vo['name'])}</div>
+			<div class="price">￥{$vo.price}</div>
+		</div>
+	</a>
+</foreach>

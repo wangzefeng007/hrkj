@@ -1,0 +1,356 @@
+@CHARSET "UTF-8";
+
+.last_use{
+	text-align: center;
+	padding: 50px 0px 30px 0px;
+}
+.last_use label{
+	font-size: 14px;
+	color: #fd7365;
+	vertical-align: middle;
+}
+.last_use select{
+	width: 350px;
+	height: 30px;
+	border: 1px solid #c6d7f1;
+	vertical-align: middle;
+}
+.cate_panel{
+	margin: 0px 120px 20px 120px;
+	padding: 20px 24px;
+	border: 1px solid #d5e4fa;
+	background: #f5f9ff;
+	zoom: 1; overflow:auto;		/* 清除浮动 */
+}
+.cate_panel .block{
+	margin-right: 20px;
+	border: 1px solid #d5e4fa;
+	background: white;
+	float: left;
+	width: 240px;
+	font-size: 14px;
+}
+.cate_panel .block .search_bar{
+	display: block;
+	position: relative;
+	height: 32px;
+	background: #f5f9ff;
+	padding: 2px;
+}
+.cate_panel .block .search_bar .input{
+	display: block;
+	position: relative;
+	z-index: 1;
+	border: 1px solid #dce7f6;
+	background: white;
+	height: 28px;
+	overflow: hidden;
+}
+.cate_panel .block .search_bar .input input{
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 28px;
+	background: none;
+	z-index: 3;
+	border: none;
+	line-height: 28px;
+	padding-left: 4px;
+}
+.cate_panel .block .search_bar .input .placeholder{
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 2;
+	color: #aaaaaa;
+	height: 28px;
+	line-height: 28px;
+	padding-left: 4px;
+}
+.cate_panel .block .search_bar .input .placeholder img{
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	margin-right: 4px;
+}
+.cate_panel .block .zone{
+	border-bottom: 1px dashed #cccccc;
+	padding: 10px 0px 8px 0px;
+}
+.cate_panel .block .zone .item{
+	margin: 0px 6px;
+	padding: 2px 14px;
+}
+.cate_panel .block .zone .item .right{
+	float: right;
+}
+.cate_panel .block .zone .item a{
+	font-size: 14px;
+	text-decoration: none;
+	color: #404040;
+}
+.cate_panel .block .zone .primary a{
+	color: #3366cc;
+	font-size: 14px;
+}
+.cate_panel .block .zone .active{
+	background: #fffaea;
+	color: #795129;
+	border: 1px solid #ffecad;
+}
+.cate_panel .block .zone .item img{
+	border: none;
+	vertical-align: baseline;
+}
+.cate_panel .block .no_border{
+	border: none;
+}
+.current_cate_panel{
+	margin: 20px 120px 20px 120px;
+	padding: 10px 20px;
+	border: 1px solid #fec4be;
+	background: #ffedeb;
+	font-size: 14px;
+	color: #212121;
+}
+.button_panel{
+	margin: 60px 0px;
+	text-align: center;
+}
+.button_panel button{
+	background: #d5d5d5;
+	border: 1px solid #c6c4c4;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 8px 24px;
+	color: white;
+	cursor: pointer;
+}
+
+
+.post_panel{
+	display: block;
+	margin: 40px 60px;
+	border: 1px solid #c2d5ef;
+}
+.post_panel .panel_title{
+	padding: 14px 20px;
+	background: #d5e4fa;
+	font-size: 15px;
+	font-weight: bold;
+}
+.post_panel .row{
+	padding: 30px 60px;
+	zoom: 1; overflow:auto;		/* 清除浮动 */
+}
+.post_panel .odd{
+	background: #ffffff;
+}
+.post_panel .even{
+	background: #f6f6f6;
+}
+.post_panel .row .tag_name{
+	display: block;
+	width: 120px;
+	text-align: right;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 6px 10px 0px 0px;
+}
+.post_panel .row .input_panel{
+	display: block;
+	float: left;
+	font-size: 14px;
+}
+.post_panel .row .tip_panel{
+	margin: 4px 0px 0px 0px;
+	vertical-align: middle;
+	font-size: 14px;
+}
+.post_panel .row .tip_panel a{
+	color: #3366cc;
+	text-decoration: none;
+	
+}
+.post_panel .row .input_panel label{
+	margin-right: 30px;
+	cursor: pointer;
+}
+.post_panel .row .input_panel .text{
+	font-size: 15px;
+	color: #999999;
+	height: 30px;
+	border: 1px solid #c6d7f1;
+	overflow: hidden;
+	white-space: nowrap;
+	
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+.post_panel .row .input_panel .long{
+	font-size: 14px;
+	color: #999999;
+	width: 350px;
+}
+.post_panel .row .input_panel .left{
+	float: left;
+}
+.post_panel .row .input_panel .normal_txt{
+	font-size: 14px;
+	margin-top: 6px;
+	padding: 0px 12px 0px 0px;
+}
+.post_panel .row .input_panel input{
+	border: none;
+	height: 30px;
+	line-height: 30px;
+	height /*\**/:28px\9;
+}
+.post_panel .row .input_panel input.long{
+	width: 350px;
+	width /*\**/:348px\9;
+}
+.post_panel .row .input_panel .median{
+	font-size: 14px;
+	color: #999999;
+	width: 120px;
+}
+.post_panel .row .input_panel input.median{
+	width: 120px;
+	width /*\**/:188px\9;
+}
+.post_panel .row .input_panel .short{
+	font-size: 14px;
+	color: #999999;
+	width: 120px;
+	text-align: center;
+}
+.post_panel .row .input_panel input.short{
+	width: 90px;
+	width /*\**/:88px\9;
+}
+.post_panel .row .input_panel .short span{
+	font-size: 14px;
+	color: black;
+	background: #d5e4fa;
+	padding: 8px 10px;
+}
+.post_panel .row .input_panel .tip{
+	font-size: 14px;
+	color: #999999;
+	padding: 4px 0px;
+}
+.post_panel .row .input_panel .strong{
+	font-weight: bold;
+}
+.post_panel .row .input_panel .textarea{
+	display: block;
+	width: 800px;
+	height: 200px;
+	border: 1px solid #c6d7f1;
+}
+.post_panel .row .input_panel .radio{
+	background: none;
+	vertical-align: middle;
+}
+.post_panel .row .input_panel .image_group img{
+	width: 98px;
+	height: 98px;
+	margin: 20px 20px 10px 0px;
+	border: 1px solid #cdcdcd;
+}
+.post_panel .row .input_panel .image_upload button{
+	width: 80px;
+	height: 30px;
+	border: 1px solid #b1b1b1;
+	background: #ecedee;
+}
+
+.btn_panel{
+	margin: 40px 0px 60px 0px;
+}
+.btn_panel .submit{
+	display: block;
+	width: 130px;
+	height: 30px;
+	line-height: 30px;
+	background: #7cbae5;
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	border: none;
+	margin: 0px auto;
+	cursor: pointer;
+}
+
+.info_table_panel{
+	clear: both;
+	padding: 20px 0px 0px 0px;
+}
+.info_table_panel .info_table{
+	border-collapse: collapse;
+	border: 1px solid #fdd68c;
+	border-right: none;
+	border-bottom: none;
+	width: 500px;
+}
+.info_table_panel .info_table thead tr{
+	background: #fff8db;
+}
+.info_table_panel .info_table thead tr th{
+	border: 1px solid #fdd68c;
+	border-top: none;
+	border-left: none;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	color: black;
+	margin: 0px;
+	padding: 8px 0px;
+}
+.info_table_panel .info_table tbody tr{
+	background: #fffdf3;
+}
+.info_table_panel .info_table tbody tr td{
+	border: 1px solid #fdd68c;
+	border-top: none;
+	border-left: none;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	color: black;
+	margin: 0px;
+	padding: 8px 0px;
+}
+.info_table_panel .info_table tbody tr td .icon{
+	border: none;
+	width: 14px;
+}
+.info_table_panel .info_table td{
+	color: #999999;
+	font-size: 14px;
+	text-align: center;
+	padding: 10px 30px 10px 0px;
+}
+
+.frame_table{
+	width: 70%;
+	border-collapse: collapse;
+}
+.frame_table tr td{
+	padding: 14px 0px;
+	font-size: 14px;
+}
+.frame_table tr td .checkbox{
+	vertical-align: text-top;
+}
+.frame_table tr td .label{
+	padding: 0px 12px 0px 0px;
+	vertical-align: text-top;
+}

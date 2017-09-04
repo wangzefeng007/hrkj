@@ -1,0 +1,61 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/set_bank.css">
+		<div class="sm">
+		<div class="current">当前位置：消息设置</div>
+		<!--<div class="search_bar">
+			<form action="" id="" name="" method="post">
+				<label class="inline">名称：</label>
+				<input class="inline text_l rm" type="text" name="name" value="{$_params.name}"/>
+				<button class="inline submit" type="submit">搜索</button>
+			</form>
+		</div>-->
+		<div class="select_bar" style=" border-top:none">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<!--<button class="button" type="button" id="delete">删除</button>
+			<button class="button_primary right" type="button" onclick="window.location.href='{:U('add')}'">新增</button>-->
+		</div>
+		<div class="table">
+			<form action="{:U('delete')}" method="post" class="ajax-form" id="level-form">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>消息类型</th>
+						<th>类型</th>
+						<!--<th>电子邮件</th>-->
+						<!--<th>站内消息</th>-->
+						<th>手机短信</th>
+						<th>极光推送</th>
+						<!--<th>微信</th>-->
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td><input type="checkbox" name="id[]" value="{$item.id}"/></td>
+						<td><a href="{:U('edit',array(id=>$item[id]))}">{$item.name}</a></td>
+						<td>{$item.type}</td>
+						<!--<td><if condition="$status[$item['id']]['mail'] eq 1"><span style="color: #239c23;">启用</span><else /><span style="color: #999999;">关闭</span></if> | <a href="{:U('board_edit',array(id=>$item[id],send_type=>'mail'))}">编辑</a></td>-->
+						<!--<td><if condition="$status[$item['id']]['msg'] eq 1"><span style="color: #239c23;">启用</span><else /><span style="color: #999999;">关闭</span></if> | <a href="{:U('board_edit',array(id=>$item[id],send_type=>'msg'))}">编辑</a></td>-->
+						<td><if condition="$status[$item['id']]['sms'] eq 1"><span style="color: #239c23;">启用</span><else /><span style="color: #999999;">关闭</span></if> | <a href="{:U('board_edit',array(id=>$item[id],send_type=>'sms'))}">编辑</a></td>
+						<td><if condition="$status[$item['id']]['jpush'] eq 1"><span style="color: #239c23;">启用</span><else /><span style="color: #999999;">关闭</span></if> | <a href="{:U('board_edit',array(id=>$item[id],send_type=>'jpush'))}">编辑</a></td>
+						<!--<td><if condition="$status[$item['id']]['weixin'] eq 1"><span style="color: #239c23;">启用</span><else /><span style="color: #999999;">关闭</span></if> | <a href="{:U('board_edit',array(id=>$item[id],send_type=>'weixin'))}">编辑</a></td>-->
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#delete").click(function(){
+			$("#level-form").submit();
+		});
+
+	});
+	</script>
+	<include file="common:footer" />

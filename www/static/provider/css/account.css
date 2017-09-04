@@ -1,0 +1,119 @@
+@CHARSET "UTF-8";
+
+.base_bar .group span{
+	font-size: 14px;
+	line-height: 30px;
+	color: #999;
+}
+.base_bar .group table{
+	border-collapse: collapse;
+}
+.base_bar .group table td{
+	font-size: 14px;
+	padding: 0px 12px 8px 0px;
+}
+.base_bar .group table td.red{
+	color: #ff2828;
+}
+.base_bar .group table td.default{
+	color: #666666;
+}
+.base_bar .group .img_container{
+	border-collapse: collapse;
+}
+.base_bar .group .img_container td{
+	color: #999999;
+	font-size: 14px;
+	text-align: center;
+	padding: 10px 30px 10px 0px;
+}
+.base_bar .group .img_container td img{
+	border: 1px solid #cdcdcd;
+	height: 120px;
+	width: 120px;
+	margin: 4px 4px 4px 0px;
+}
+.base_bar .group table td a{
+	font-size: 14px;
+	color: #3366cc;
+	text-decoration: none;
+}
+.base_bar .group textarea{
+	float: left;
+	height: 120px;
+	width: 500px;
+	border: 1px solid #c6c4c4;
+}
+.base_bar .group .radio{
+	float: none;
+	height: auto;
+	width: auto;
+	border: none;
+	vertical-align: middle;
+}
+.base_bar .group .tip{
+	display: inline;
+	float: none;
+	width: auto;
+	text-align: left;
+	font-size: 14px;
+	height: auto;
+	line-height: 30px;
+	padding-right: 6px;
+	vertical-align: middle;
+}
+.base_bar .group .img_view{
+	border: 1px solid #cdcdcd;
+	height: 120px;
+	width: 120px;
+}
+.title_bar{
+	margin: 10px 22px;
+	padding: 12px 360px 12px 24px;
+	border-bottom: 1px dashed #d8d8d8;
+	zoom: 1; overflow: hidden;		/* 清除浮动 */
+	border: none;
+	background: none;
+}
+
+.base_bar .group .info_table{
+	border-collapse: collapse;
+	border: 1px solid #fdd68c;
+	border-right: none;
+	border-bottom: none;
+	width: 500px;
+}
+.base_bar .group .info_table thead tr{
+	background: #fff8db;
+}
+.base_bar .group .info_table thead tr th{
+	border: 1px solid #fdd68c;
+	border-top: none;
+	border-left: none;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	color: black;
+	margin: 0px;
+	padding: 8px 0px;
+}
+.base_bar .group .info_table tbody tr{
+	background: #fffdf3;
+}
+.base_bar .group .info_table tbody tr td{
+	border: 1px solid #fdd68c;
+	border-top: none;
+	border-left: none;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	color: black;
+	margin: 0px;
+	padding: 8px 0px;
+}
+.base_bar .group .info_table td{
+	color: #999999;
+	font-size: 14px;
+	text-align: center;
+	padding: 10px 30px 10px 0px;
+}

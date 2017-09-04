@@ -1,0 +1,222 @@
+@CHARSET "UTF-8";
+
+@media screen and (max-width: 380px) {
+	html{
+		font-size: 10px;
+	}
+}
+@media screen and (min-width: 380px) and (max-width:500px) {
+	html{
+		font-size: 12px;
+	}
+}
+@media screen and (min-width: 500px) and (max-width:650px) {
+	html{
+		font-size: 13px;
+	}
+}
+@media screen and (min-width: 650px) {
+	html{
+		font-size: 14px;
+	}
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #f3f1ef;
+	font-size: 1.2rem;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+.gray_solid{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	border-bottom: 1px solid #e1e1e1;
+	height: 0px;
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+header{
+	background: #479edf;
+	color: white;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	display: table;
+	width: 100%;
+}
+header .button, .title{
+	display: table-cell;
+	height: 50px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;
+}
+header .button{
+	width: 27%;
+	height: 50px;
+}
+header .title{
+	width: 46%;
+	font-size: 1.8rem;
+	margin-top: 0px;
+	line-height: 50px;
+}
+header .button .back{
+	overflow: hidden;
+	display: table-cell;
+	text-decoration: none;
+	color: white;
+	font-size: 1.6rem;
+	padding: 2px 0px 0px 0px;
+}
+header .button .back img{
+	border: none;
+	width: 26px;
+	height: auto;
+	padding: 0px 0px 0px 10px;
+	vertical-align: middle;
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+
+
+/* ------------------------------------------------ 确认支付 ------------------------------------ */
+.payment_info_bar{
+	margin: 8px 0px;
+	background: white;
+	padding: 4px 12px 4px 12px;
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
+}
+.payment_info_bar .item{
+	padding: 14px 0px 14px 0px;
+	overflow: hidden;
+}
+.payment_info_bar .item .tag{
+	display: inline-block;
+	width: 28%;
+	vertical-align: text-top;
+	font-size: 1.4rem;
+}
+.payment_info_bar .item .content{
+	display: inline-block;
+	width: 70%;
+	vertical-align: text-top;
+	font-size: 1.4rem;
+}
+.payment_info_bar .item .price{
+	color: #ff3e11;
+}
+.payment_info_bar .item .img{
+	display: inline-block;
+	width: 42%;
+	vertical-align: middle;
+}
+.payment_info_bar .item .img img{
+	width: 100%;
+	vertical-align: middle;
+}
+.payment_info_bar .item .left{
+	float: left;
+}
+.payment_info_bar .item .right{
+	float: right;
+}
+.payment_info_bar .checkbox{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-image: url("../images/icon_checkbox_no.png");
+	vertical-align: middle;
+}
+.payment_info_bar .checkbox_checked{
+	background-image: url("../images/icon_checkbox_ok.png");
+}
+.payment_tip_bar{
+	padding: 6px 18px 6px 18px;
+}
+.payment_tip_bar .content{
+	color: #ff3000;
+	font-size: 1.4rem;
+}
+.payment_btn_bar{
+	padding: 8px 18px 6px 14px;
+}
+.payment_btn_bar .submit{
+	background: #e95f71;
+	color: white;
+	font-size: 1.4rem;
+	font-family: "微软雅黑";
+	width: 100%;
+	height: 40px;
+	border: none;
+	line-height: 40px;
+	
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+/* ------------------------------------------------ 确认支付 ------------------------------------ */
+
+/* ------------------------------------------------ 收货信息 ------------------------------------ */
+.wx_location_bar{
+	padding: 8px 18px 6px 14px;
+	text-align: right;
+}
+.wx_location_bar .button{
+	text-decoration: none;
+	color: #ff6600;
+	font-size: 1.6rem;
+}
+.wx_location_bar .button img{
+	border: none;
+	vertical-align: middle;
+	width: 18px;
+	height: 18px;
+	margin: 0px 2px;
+}
+.payment_info_bar .input_block{
+	padding: 8px 0px 8px 0px;
+	overflow: hidden;
+}
+.payment_info_bar .input_block .left{
+	float: left;
+}
+.payment_info_bar .input_block .right{
+	float: right;
+}
+.payment_info_bar .input_block .label{
+	display: inline-block;
+	width: 26%;
+	font-size: 1.4rem;
+}
+.payment_info_bar .input_block .block{
+	display: block;
+}
+.payment_info_bar .input_block .content{
+	border: none;
+	font-size: 1.6rem;
+	display: inline-block;
+	width: 70%;
+}
+.payment_info_bar .input_block .content .text{
+	border: none;
+	font-size: 1.4rem;
+	background: none;
+	width: 100%;
+}
+.payment_info_bar .input_block .content .select{
+	border: none;
+	font-size: 1.4rem;
+	background: none;
+	width: 100%;
+}
+/* ------------------------------------------------ 收货信息 ------------------------------------ */

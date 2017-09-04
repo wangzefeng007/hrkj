@@ -1,0 +1,44 @@
+<include file="common:header" />
+<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+<div class="sm">
+    <form action="{:U('save')}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$rs.id}">
+        <div class="current">当前位置：Banner更新</div>
+        <div class="base_bar">
+            <div class="group">
+                <label>链接：</label>
+                <input type="text" name="url" value="{$rs.url}"/>
+            </div>
+            <div class="group">
+                <label>排序：</label>
+                <input type="text" name="sort" value="{$rs.sort}"/>（越小排越前面）
+            </div>
+            <div class="group">
+                <label>图片：</label>
+                <div class="file-btn file-btn-success fileinput-button">
+                    <input name="images" type="file" />
+                </div>
+            </div>
+            <if condition="$rs.img_url neq null">
+            <div class="group">
+                <label></label>
+                <div class="file-btn file-btn-success fileinput-button">
+                    <img src="{$rs.img_url}" width="200px" height="100px">
+                </div>
+            </div>
+            </if>
+            <div class="group">
+                <label>是否默认首图：</label>
+                <input type="radio" class="radio" name="default" value="1" checked="checked"><label class="tip">是</label>
+                <input type="radio" class="radio" name="default" value="0" checked="checked"><label class="tip">否</label>
+            </div>
+        </div>
+        <div class="order_bar"></div>
+        <div class="button_bar">
+            <div>
+                <button class="primary" type="submit">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="common:footer" />

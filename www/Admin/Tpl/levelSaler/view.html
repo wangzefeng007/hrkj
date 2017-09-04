@@ -1,0 +1,35 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/provider/css/set_grade_edit.css">	
+	<div class="sm">
+		<div class="current">当前位置：分销级别设置</div>
+		<form action="{:U('levelSaler/save')}" id="" name="" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$level.id}">
+		<div class="base_bar">
+			<div class="group">
+				<label>名称：</label>
+				<input type="text" name="name" value="{$level.name}"/>
+			</div>
+			<div class="group">
+				<label>绑定等级：</label>
+				<foreach name="level_fee" item="item">	
+				<input type="checkbox" class="checkbox" name="lfid[]" value="{$item.id}" <if condition="$item[in]">checked="true"</if>>{$item.name}
+				</foreach>
+			</div>
+			<div class="group">
+				<label>级别排序：</label>
+				<input type="text" name="sort" value="{$level.sort}"/>&nbsp;分销级别再排列顺序，排前的佣金高，以此类推
+			</div>
+			<div class="group">
+				<label>状态：</label>
+				<input type="radio" value="1" class="radio" name="status" <if condition="$level[status] eq 1">checked="checked"</if>/><label class="tip">打开</label>
+				<input type="radio" value="0" class="radio" name="status" <if condition="$level[status] eq 0">checked="checked"</if>/><label class="tip">关闭</label>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

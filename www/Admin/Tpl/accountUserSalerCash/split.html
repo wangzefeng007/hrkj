@@ -1,0 +1,200 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<div class="sm">
+		<div class="current">
+			当前位置：分润结算
+			<div class="statistic">
+				共{$data.count}笔订单
+				&emsp;&emsp;
+				累计收款{$data.money|default=0}元
+			</div>
+		</div>
+		<div class="status_bar">
+			结算状态：
+			<foreach name="cash_status" key="key" item="item">
+			<a <if condition="$_params['status'] heq $key">class="active"</if> href="{:_U(array(status=>$key))}">
+				<span>{$item}</span>
+			</a>
+			</foreach>
+			<a <if condition="$_params['status'] heq ''">class="active"</if> href="{:_U(array(status=>false))}">
+				<span>全部</span>
+			</a>
+			
+			<!--<br/><br/>
+			结算方式：
+			<a <if condition="$_params['ctid'] eq 0">class="active"</if> href="{:_U(array(ctid=>false))}">
+				<span>全部</span>
+			</a>
+			<foreach name="cash_type" item="item">
+			<a <if condition="$_params['ctid'] eq $item[id]">class="active"</if> href="{:_U(array(ctid=>$item[id]))}">
+				<span>{$item.name}</span>
+			</a>
+			</foreach>
+		</div>-->
+		</div>
+		<div class="search_bar">
+			<form action="{$_url}" id="" name="" method="get">
+				<label>申请时间：</label>
+				<input class="text_l rm" onfocus="HS_setDate(this)" type="text" name="add_starttime" placeholder="开始时间" value="{$_params.add_starttime}" onclick="laydate({'istime': true, 'format': 'YYYY-MM-DD hh:mm:ss'})"/>
+				<label>—</label>
+				<input class="text_l lfm" onfocus="HS_setDate(this)" type="text" name="add_endtime" placeholder="结束时间" value="{$_params.add_endtime}" onclick="laydate({'istime': true, 'format': 'YYYY-MM-DD hh:mm:ss'})"/>
+				
+				<label>结算时间：</label>
+				<input class="text_l rm" onfocus="HS_setDate(this)" type="text" name="dispos_starttime" placeholder="开始时间" value="{$_params.dispos_starttime}" onclick="laydate({'istime': true, 'format': 'YYYY-MM-DD hh:mm:ss'})"/>
+				<label>—</label>
+				<input class="text_l lfm" onfocus="HS_setDate(this)" type="text" name="dispos_endtime" placeholder="结束时间" value="{$_params.dispos_endtime}"  onclick="laydate({'istime': true, 'format': 'YYYY-MM-DD hh:mm:ss'})"/>
+				
+				<label>商户：</label>
+				<select class="select rm" name="keytype">
+					<option value="">请选择</option>
+					<option value="mobile" <if condition="$_params['keytype'] eq 'mobile'">selected="selected"</if>>手机号码</option>
+					<option value="name" <if condition="$_params['keytype'] eq 'name'">selected="selected"</if>>姓名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params[keyword]}" />
+                                <label>结算单号：</label>
+                                <input class="text_l rm" type="text" name="sn" value="{$_params[sn]}" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<if condition="$data[count] gt 0">
+				<a class="button_primary right xls_download" href="javascript:void(0);" id="xls">表格下载</a>
+				<if condition="$_params['ctid'] eq 11">
+					<a class="button_primary right" href="javascript:void(0);" id="pay_cash">已结算</a>
+				</if>
+				<if condition="$_params['ctid'] eq 10">
+					<a class="button_primary right xls_download" href="javascript:void(0);" id="cmbc_txt">民生TXT文档下载</a>
+					<a class="button_primary right " href="javascript:void(0);" id="query" title="此操作仅对 '{:status_desc('CASH_STATUS',CASH_STATUS_INPAY)}' 和 '{:status_desc('CASH_STATUS',CASH_STATUS_SENDFAIL)}' 项目有效">出账结果查询</a>
+						<a data-animation="fade" data-reveal-id="myModal" id="secondAllocate" href="javascript:void(0)" class="button_primary right" title="此操作 仅对 '{:status_desc('CASH_STATUS',CASH_STATUS_SENDFAIL)}' 项目有效">二次清算</a>
+						<a class="button_primary right" href="javascript:void(0)"   id="sendmoney" data-reveal-id="myModal" data-animation="fade" title="此操作仅对 '{:status_desc('CASH_STATUS',CASH_STATUS_UNSEND)}' 和 '{:status_desc('CASH_STATUS',CASH_STATUS_SUBMITFAIL)}' 项目有效">立即发款</a>
+				</if>
+			</if>
+		</div>
+		<form action="{:U('pay_cash')}" method="post" id="pay_cash-form" class="ajax-form">
+			<input name="pay_cash_id" type="hidden" value="" id="pay_cash_id" />
+		</form>
+		<form action="{:_U(array(export=>xls))}" method="post" id="audit-form">
+		<input name="xls_type" type="hidden" value="" id="xls_type" />
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>结算单号</th>
+						<th>商户</th>
+						<th>银行账号</th>
+						
+						<th>结算方式</th>
+						<th>结算金额</th>
+						<th>结算费</th>
+						
+						<th>实得金额</th>
+						<th>申请时间</th>
+						<th>结算时间</th>
+						<th>状态</th>
+						<th width="5%">备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td><input name="id[]" type="checkbox" value="{$item.id}" class="chk" /></td>
+						<td <if condition="$item[risk] eq 1">style="color:red"</if>>{$item.sn}{:$item['re_sn']?'<br/>('.$item['re_sn'].')':''}</td>
+						<td>{$item.name}<br/>{$item.mobile}</td>
+						<td>{$item.bank_no}<br/>{$item.bank}</td>
+						
+						<td>{$item.ct_name}</td>
+						<td>{$item.money}</td>
+						<td>{$item.fee_static}</td>
+						
+						<td>{$item['real_money']?$item['real_money']:($item['money']-$item['fee_static'] - $item['fee_rate'])}</td>
+						<td>{$item.addtime|vtime="Y-m-d H:i:s",###}</td>
+						<td>{$item.dispostime|vtime="Y-m-d H:i:s",###}</td>
+						<td>
+							{$item.status|status_desc='CASH_STATUS',###}
+							
+						</td>
+						<td>{$item.msg}</td>
+					</tr>
+					</foreach>
+
+				</tbody>
+			</table>
+		</div>
+		</form>
+		<form action="{:str_replace('admin.php','api.php',U('cmup/send_money'))}" method="post" id="sendmoney-form" class="ajax-form">
+			<input name="id" type="hidden" value="" id="send_id" />
+			<input name="type" type="hidden" value="" id="send_type" />
+		<div id="myModal" class="reveal-modal">
+			<h3>请输入发款密码</h3>
+			<span>立即发款: 仅对 '{:status_desc('CASH_STATUS',CASH_STATUS_UNSEND)}' 和 '{:status_desc('CASH_STATUS',CASH_STATUS_SUBMITFAIL)}' 项目有效</span><br/>
+			<span>二次清算: 仅对 '{:status_desc('CASH_STATUS',CASH_STATUS_SENDFAIL)}' 项目有效</span><br/>
+			<br/>
+			<span>点击确定后,将会把所选项目的发款资料提交到民生服务器,谨慎操作!</span><br/><br/>
+				<input class="download_input" type="password" name="high_password"/>
+				<button type="submit" class="button_primary" id="pwd_submit">确定</button>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		</form>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />
+	<script type="text/javascript">
+	$(function(){
+		$(".xls_download").click(function(){
+			$('#xls_type').val($(this).attr('id'));
+			chked = $("input:checkbox:checked").val();
+			if ($('#xls_type').val() != 'xls' && typeof(chked)=='undefined')	{
+				alert('请选择要结算的项目');
+			}
+			else {
+				$("#audit-form").submit();
+			}
+		});
+		//立即发款
+		$("#sendmoney").click(function(){
+			obj = $(".chk:checked");
+			str = '';
+			for(i=0;i<obj.length;i++) {
+				str += obj.eq(i).val()+',';
+			}
+			$("#send_id").val(str);
+			$("#send_type").val('1');
+		});
+		//二次清算
+		$("#secondAllocate").click(function(){
+			obj = $(".chk:checked");
+			str = '';
+			for(i=0;i<obj.length;i++) {
+				str += obj.eq(i).val()+',';
+			}
+			$("#send_id").val(str);
+			$("#send_type").val('2');
+		});
+		//处理状态查询
+		$("#query").click(function(){
+			obj = $(".chk:checked");
+			str = '';
+			for(i=0;i<obj.length;i++) {
+				str += obj.eq(i).val()+',';
+			}
+			$("#send_id").val(str);
+			$("#send_type").val('0');
+			$("#sendmoney-form").submit();
+		});
+		//已结算按钮
+		$("#pay_cash").click(function(){
+			obj = $(".chk:checked");
+			str = '';
+			for(i=0;i<obj.length;i++) {
+				str += obj.eq(i).val()+',';
+			}
+			$("#pay_cash_id").val(str);
+			$("#pay_cash-form").submit();
+		});
+	});
+	</script>
+	

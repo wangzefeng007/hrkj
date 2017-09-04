@@ -1,0 +1,124 @@
+<extend name="Public/base" />
+<block name="body">
+<div id="main" >	
+	<div id="ur_here">当前位置：系统首页 > {$title}中心</div>
+	<div id="view">    
+		<ul class="tabMenu clearfix">
+			<li class="sed">基本属性</li><li>其他属性</li>
+		</ul>
+		<form class="myForm" action="{:U(MODULE_NAME.'/toHandle')}" method="post">
+		<ul class="tabCont">
+			<li class="sed">
+			<table cellspacing="0">
+				<tr>
+					<th>{$title}标题</th>
+					<td><input type="text" name="title" value="{$val.title}" class="txt" style="width: 350px;" /></td>
+				</tr>
+				<tr>
+					<th>所属栏目</th>
+					<td>
+						<select name="cid" class="select">
+							<foreach name="cate" item="v">
+								<option value="{$v.id}" <eq name="cid" value="$v.id">selected</eq>>{$v.html}{$v.name}</option>
+							</foreach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>关 键 字</th>
+					<td>
+						<input type="text" name="keywords" value="{$val.keywords}" class="txt" />
+						<span class="direction">用来查找相关文章，可输入多个关键字，中间用“,”分开</span>
+					</td>
+				</tr>
+				<tr>
+					<th>内容</th>
+					<td>
+						<textarea name="content" id="content" style="margin:6px 0; ">{$val.content}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<th>状态</th>
+					<td>
+						<label><input type="radio" name="status" value="0" class="radio" <if condition="($val.status eq 0) OR ($val.status eq NULL)">checked</if>>正常</label>
+						<label><input type="radio" name="status" value="1" class="radio" <if condition="($val.status eq 1)">checked</if>>禁用</label>
+					</td>
+				</tr>
+				<tr>
+					<th>属性</th>
+					<td>
+						<label><input type="checkbox" name="hot" value="1" class="checkbox" <if condition="($val.hot eq 1)">checked</if>>热销</label>
+						<label><input type="checkbox" name="new" value="1" class="checkbox" <if condition="($val.new eq 1)">checked</if>>新品</label>
+					</td>
+				</tr>					
+				<tr>
+					<th></th>
+					<td class="td_foot">
+						<input type="hidden" name="id" value="{$val.id}" class="txt" />
+						<input type="submit" value="保 存" class="sub" />
+						<input type="button" value="返 回" class="sub reset" onclick="javascript:history.go(-1);"/>
+					</td>
+				</tr>
+			</table>
+			</li>
+
+			<li>
+			<table cellspacing="0">
+				<tr>
+					<th>{$title}图片</th>
+					<td>
+						<div class="imgbox"><input type="file" id="imageUp" /></div>
+						<ul class="imglist clearfix">
+						<foreach name="images" item="v">
+							<li>
+								<input name="images[]" type="hidden" value="{$v}">
+								<img src="{$Think.config.URL_UPLOADER}s_{$v}" onerror="err(this);">
+								<a href="javascript:" class="close">x</a>
+							</li>
+						</foreach>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th>当前价格</th>
+					<td>
+						<input type="text" name="price" value="{$val.price}" class="txt" />
+					</td>
+				</tr>		
+				<tr>
+					<th>市场价格</th>
+					<td>
+						<input type="text" name="cprice" value="{$val.cprice}" class="txt" />
+					</td>
+				</tr>		
+				<tr>
+					<th>当前库存</th>
+					<td>
+						<input type="text" name="count" value="{$val.count}" class="txt" />
+					</td>
+				</tr>		
+				<tr>
+					<th>已售出</th>
+					<td>
+						<input type="text" name="ccount" value="{$val.ccount}" class="txt" />
+					</td>
+				</tr>					
+				<tr>
+					<th></th>
+					<td class="td_foot">
+						<input type="submit" value="保 存" class="sub" />
+						<input type="button" value="返 回" class="sub reset" onclick="javascript:history.go(-1);"/>
+					</td>
+				</tr>
+			</table>
+			</li>
+		</ul>
+		</form>
+	</div>
+	</div>
+</div>
+<!-- 引入编辑器文件 -->
+<include file="Public:editer" />
+<!-- 图片上传操作文件 -->
+<include file="Public:image" />
+</block>

@@ -1,0 +1,68 @@
+<include file="common:header" />
+<link rel="stylesheet" href="__RES__/css/trade_income_list.css">
+<link rel="stylesheet" href="__RES__/css/trade_collection_detail.css">
+</head>
+<body>
+	<div class="sm">
+		<div class="current">
+			当前位置：收益详情
+
+		</div>
+		<div class="statistic_bar">
+			收益商户：{$user.name}
+			&emsp;&emsp;
+			账号：{$user.mobile}
+		</div>
+		<div class="search_bar">
+			<form action="{:U('userSalerAccount/splitList')}" id="" name="" method="get">
+				<input type="hidden" name="type" value="{$_params.type}">
+				<input type="hidden" name="usid" value="{$_params.usid}">
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" name="starttime" placeholder="开始时间" value="{$_params.starttime}"/>
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" name="endtime" placeholder="结束时间" value="{$_params.endtime}"/>
+				<label>支付方式：</label>
+				<select class="select rm" name="ptid">
+					<option value="">请选择</option>
+					<foreach name="pay_type" item="item">
+					<option value="{$item.id}">{$item.name}</option>
+					</foreach>
+					
+				</select>
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>结算金额</th>
+						<th>分润</th>						
+						<th>支付方式</th>						
+						<th>收益时间</th>
+						<th>来源用户</th>
+						<th>来源帐号</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">						
+						<td>{$item.order_money}</td>
+						<td>{$item.money}</td>
+						<td>{$item.pt_name}</td>
+						<td>{$item.addtime|date="Y-m-d H:i:s",###}</td>
+						<td>{$item.name}</td>
+						<td>{$item.mobile}</td>
+					</tr>
+					</foreach>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />

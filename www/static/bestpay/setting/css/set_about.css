@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+body{
+	background: white;
+	margin: 0px;
+	padding: 0px;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+
+.sm{
+	padding: 0px 30px;
+	margin: 0px;
+}
+.sm .current{
+	padding: 16px 22px;
+	margin: 0px;
+	border-bottom: 1px solid #dadada;
+	font-size: 14px;
+}
+.input_bar{
+	margin: 0px;
+	padding: 20px 60px;
+}
+.input_bar .textarea{
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 260px;
+	border: 1px solid #c6c4c4;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	line-height: 20px;
+}
+.button_bar{
+	margin: 0px;
+	padding: 50px 0px 0px 0px;
+	text-align: center;
+}
+.button_bar .button{
+	margin: 0px;
+	background: #d5d5d5;
+	border: 1px solid #c6c4c4;
+	padding: 8px 60px;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+}
+.button_bar .button:hover{
+	background: #7cbae5;
+	border: 1px solid #619dc7;
+}

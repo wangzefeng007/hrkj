@@ -1,0 +1,83 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/merchant_manage.css">
+	<div class="sm">
+		<div class="current">
+			当前位置：##title##
+			<div class="statistic">
+				##count##
+			</div>
+		</div>
+		<div class="status_bar">
+			##status##
+			状态：
+			<a <if condition="!$_params['status']">class="active"</if> href="{:U('userSaler/lists')}">
+				<span >全部</span>
+			</a>
+			<a <if condition="$_params['status'] eq 1">class="active"</if> href="{:U('userSaler/lists',array(status=>1))}">
+				<span>已开通</span>
+			</a>
+			<a href="{:U('userSaler/lists',array(status=>0))}" <if condition="$_params['status'] eq 0">class="active"</if>>
+				<span>未审核</span>
+			</a>
+			<a href="{:U('userSaler/lists',array(status=>2))}" <if condition="$_params['status'] eq 2">class="active"</if>>
+				<span>信息不全</span>
+			</a >
+			<a href="{:U('userSaler/lists',array(status=>-1))}" <if condition="$_params['status'] eq -1">class="active"</if>>
+				<span>冻结</span>
+			</a>
+		</div>		
+		<div class="search_bar">
+			
+			<form action="##form_action##" method="##form_method##">
+				##inputs##
+				<label>注册日期：</label>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}" />
+				<label>等级：</label>
+				<select class="select rm" name="lfid">
+					<option value="0">全部</option>
+					<foreach name="levels" item="item">
+					<option value="{$item.id}" <if condition="$_params['lfid'] eq $item['id']">selected="selected"</if>>{$item.name}</option>
+					</foreach>
+				</select>
+				<label>关键词：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="mobile" <if condition="$_params['keytype'] eq mobile">selected="selected"</if>>手机号码</option>
+					<option value="name" <if condition="$_params['keytype'] eq name">selected="selected"</if>>姓名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button" id="audit">批量审核</button>
+			<button class="button" type="button" id="freeze">批量冻结</button>
+			<button class="button" type="button" id="unfreeze">批量解冻</button>
+		</div>
+		<div class="table">
+			<form action="{:U('userSaler/audit')}" method="post" class="ajax-form" id="audit-form">
+			<input type="hidden" name="audit_value" id="audit_value">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						##listTitle##
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						##listData##
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+
+<include file="common:footer" />

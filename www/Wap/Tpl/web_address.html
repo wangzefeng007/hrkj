@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>收货信息</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/payment.css">
+</head>
+<body>
+	<header>
+		<div class="button"><a class="back" href="javascript:window.history.back();"><img src="__WAP__/images/btn_back.png" />返回</a></div>
+		<div class="title">收货信息</div>
+		<div class="button"></div>
+	</header>
+	<form action="/api.php/orderShop/add" method="post" class="ajaxForm">
+	<input type="hidden" name="usid" value="{$usid}">
+	<div class="wx_location_bar">
+		<!--<a class="button"><img src="__WAP__/images/icon_location.png" />使用微信地址</a>-->
+	</div>
+	<div class="payment_info_bar">
+		<div class="input_block">
+			<span class="label">收货人：</span>
+			<span class="content"><input placeholder="请输入姓名" class="text" type="text" name="name" /></span>
+		</div>
+	</div>
+	<div class="payment_info_bar">
+		<div class="input_block">
+			<span class="label">手机号：</span>
+			<span class="content">
+				<input placeholder="请输入手机号码" class="text" type="tel" name="mobile" maxlength="11"/>
+			</span>
+		</div>
+	</div>
+	<div class="payment_info_bar">
+		<div class="input_block">
+			<span class="label">选择省：</span>
+			<span class="content">
+			<a class="btn-select">
+				<span class="cur-select"></span>
+				<select class="select" id="select1" name="province"></select>
+			</a>
+			</span>
+		</div>
+	</div>
+	<div class="payment_info_bar">
+		<div class="input_block">
+			<span class="label">选择市：</span>
+			<span class="content">
+			<a class="btn-select">
+				<span class="cur-select"></span>
+				<select class="select" id="select2" name="city"></select>
+			</a>
+			</span>
+		</div>
+	</div>
+	<div class="payment_info_bar">
+		<div class="input_block">
+			<span class="label">选择区：</span>
+			<span class="content">
+			<a class="btn-select">
+				<span class="cur-select"></span>
+				<select class="select" id="select3" name="area"></select>
+			</a>
+			</span>
+		</div>
+	</div>
+	<div class="payment_info_bar">
+		<div class="input_block">
+			<span class="label">详细地址：</span>
+			<span class="content">
+				<input placeholder="请输入详细地址" class="text" type="text" name="address"/>
+			</span>
+		</div>
+	</div>
+	<div class="payment_info_bar">
+		<div class="input_block">
+			<span class="label">留言：</span>
+			<span class="content">
+				<input class="text" type="text" name="message"/>
+			</span>
+			<input name="goods" type="hidden" id="goods" value='{$goods}'>
+		</div>
+	</div>
+	<div class="payment_btn_bar">
+		<button class="submit">下一步</button>
+	</div>
+	</form>
+</body>
+<!-- 省市区三级联动 -->
+<script type="text/javascript" src="__WAP__/js/jsAddress.js"></script>
+<include file="public:js" />
+<script type="text/javascript">
+	window.onload = function () {
+		addressInit('select1', 'select2', 'select3');
+	}
+$(function(){
+	//ajax表单提交
+	$('.ajaxForm').ajaxForm(function(r){
+		if (typeof(r) == 'string') r = eval("("+r+")");
+		if(r.result.code == '10000'){	//添加成功
+
+			jSuccess(r.result.msg, {
+				TimeShown : 400,
+				onClosed:function(){
+					url = "{:U('payment',array('sn'=>'sn_no'))}";
+					window.location.href = url.replace('sn_no', r.data);
+				}
+			});
+
+		}
+		else{
+			jError(r.result.msg,{TimeShown : 600}); 
+		}
+	});
+});
+</script>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

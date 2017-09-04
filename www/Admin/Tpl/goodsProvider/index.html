@@ -1,0 +1,119 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<style>
+	.table table{
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		border-collapse: collapse;
+		border: none;
+	}
+	.table table thead tr{
+		background: #d5e4fa;
+		border: 1px solid #c2d5ef;
+	}
+	.table table tbody tr{
+		border-bottom: 1px solid #e9e9e9;
+	}
+	</style>
+		<div class="sm">
+		<div class="current">当前位置：商品管理</div>
+		<div class="status_bar">
+			状态：
+			<a <if condition="$_params['status'] heq ''">class="active"</if> href="{:U('goodsProvider/index')}">
+				<span >全部</span>
+			</a>
+			<a <if condition="$_params['status'] heq 1">class="active"</if> href="{:U('goodsProvider/index',array(status=>1))}">
+				<span>分销中</span>
+				
+			</a>
+			<a <if condition="$_params['status'] heq -1">class="active"</if> href="{:U('goodsProvider/index',array(status=>-1))}">
+				<span>待审核</span>
+			</a>
+			<a <if condition="$_params['status'] heq -2">class="active"</if> href="{:U('goodsProvider/index',array(status=>-2))}">
+				<span>审核不通过</span>
+				
+			</a>
+			<a <if condition="$_params['status'] heq 0">class="active"</if> href="{:U('goodsProvider/index',array(status=>0))}">
+				<span>下架</span>
+				
+			</a>
+		</div>
+		<div class="search_bar">
+			<form action="{:U('goods/index')}" id="" name="" method="get">
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" />
+				<label>商品分类：</label>
+				<select class="select rm">
+					<option>请选择</option>
+				</select>
+				<label>关键词：</label>
+				<input class="text_l rm" type="text" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button" id="audit">批量审核</button>
+			<button class="button" type="button">批量推荐</button>
+			<button class="button" type="button" id="delete">批量删除</button>
+		</div>
+		<div class="table">
+			<form method="post" action="{:U('goodsProvider/audit')}" class="ajax-form" id="goods_form">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th width="8%" class="left">商品名称</th>
+						<th width="15%">&nbsp;</th>
+						<th>供应商</th>
+						<th>价格</th>
+						<th>销量</th>						
+						<th>库存</th>
+						<th>状态</th>
+						<th>分销用户数</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr>
+						<td><input type="checkbox" name="id" value="{$item.id}"/></td>
+						<td class="left"><if condition="$item.thump neq ''"><img src="{$item.thumb}" /><else /><img src="__RES__/images/img_no.png" /></if></td>
+						<td class="left">{$item.name}</td>
+						<td>{$item.username}</td>
+						<td class="red">{$item.price}</td>
+						<td>{$item.sale_count}</td>						
+						<td>{$item.stock}</td>
+						<td>{$item.status|status_desc="GOODS_STATUS",###}</td>
+						<td>{$item.saler_count}</td>						
+						<td>
+							<a href="javascript:void(0)" onclick="confirm_url('确定要审核该商品吗','{:U('goodsProvider/audit',array(id=>$item[id]))}')">审核</a>|
+							<a href="#">查看</a>|
+							<a href="javascript:void(0)" onclick="confirm_url('确定要删除该商品吗','{:U('goodsProvider/delete',array(id=>$item[id]))}')">删除</a>|
+						</td>
+					</tr>
+					</foreach>
+				
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#audit").click(function(){
+			$("#goods_form").attr("action","{:U('goodsProvider/audit')}");
+			$("#goods_form").submit();
+		});
+		$("#delete").click(function(){
+			$("#goods_form").attr("action","{:U('goodsProvider/delete')}");
+			$("#goods_form").submit();
+		});
+	})
+	</script>
+	<include file="common:footer" />

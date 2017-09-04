@@ -1,0 +1,333 @@
+p{
+	margin: 0;
+}
+
+a{
+	text-decoration: none;
+	color: #000;
+}
+
+a:hover{
+	color: #000;
+}
+
+img{
+	max-width: 100%;
+}
+
+select{
+	background-color: transparent !important;
+}
+
+*{
+	box-sizing: border-box;
+}
+
+html{
+	font-size: 32px;
+	margin: 0 auto;
+}
+
+body{
+	margin: 0;
+	font-size: 1rem;
+	line-height: normal;
+	font-weight: normal;
+	color: #000;
+}
+
+.hidden{
+	display: none;
+}
+
+.circle{
+	border-radius: 50%;
+}
+
+.fl{
+	float: left;
+}
+
+.fr{
+	float: right;
+}
+
+.cf{
+	zoom: 1;
+}
+
+.cf:after{
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.shade{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: #000;
+	opacity: 0.5;
+	z-index: 5;
+}
+
+.oneRowText{
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+li.oneRowText{
+	list-style-position: inside;
+}
+
+.twoRowText{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.goodsImgWrapper{
+	padding-top: 100%;
+	position: relative;
+}
+
+.goodsImgWrapper img{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.mySelect,.myInput,.myRadioLabel,.myCheckboxLabel,.dateInput,.timeInput{
+	border: 1px #ccc solid;
+	border-radius: 5px;
+	height: 1.8em;
+}
+
+.mySelect,.myInput,.dateInput,.timeInput{
+	font-size: 32px;
+	padding-left: 0.2em;
+}
+
+.mySelect,.dateInput,.timeInput{
+	color: #999;
+	padding-right: 5%;
+	-webkit-appearance: none;
+	background-repeat: no-repeat;
+	background-position: 95% center;
+	background-size: 0.5em auto;
+	background-image: url(../image/dropdown.png);
+}
+
+.myRadioLabel,.myCheckboxLabel{
+	display: inline-block;
+	text-align: center;
+	color: #4c4c4c;
+	line-height: 1.8em;
+}
+
+#header{
+    background-color: #fff;
+    color: #4c4c4c;
+    border-bottom: 1px #e4e4e4 solid;
+	padding: 0.5em 0.6em;
+	text-align: center;
+	/*background-color: #0ba39c;*/
+	/*background-color: #22292c;
+	/*color: #fff;*/
+}
+
+#header a{
+	width: 5em;
+	color: #fff;
+}
+
+#header .fl{
+	text-align: left;
+}
+
+#header .fr{
+	text-align: right;
+}
+
+#message{
+	font-size: 24px;
+	padding: 0.5em;
+	background-color: #fff;
+}
+
+#message #msgContent:before{
+	content: url(../image/message.png);
+	vertical-align: middle;
+}
+
+.banner{
+	display: block;
+	width: 100%;
+}
+
+.threeIcons,.fourIcons{
+	padding: 1em 0;
+	background-color: #fff;
+}
+
+.threeIcons a,.fourIcons a{
+	text-align: center;
+	color: #606060;
+}
+
+.threeIcons a{
+	width: 33%;
+}
+
+.fourIcons a{
+	width: 25%;
+	font-size: 24px;
+}
+
+.threeIcons a:nth-child(n+4),.fourIcons a:nth-child(n+5){
+	margin-top: 0.5em;
+}
+
+.searchBar{
+	padding: 0.7em 0;
+	text-align: center;
+}
+
+.searchBar input{
+	font-size: 32px;
+}
+
+.searchBar .searchInput{
+	display: inline-block;
+	width: 70%;
+	background-color: #f2f2f2;
+	background-repeat: no-repeat;
+	background-position: 2% center;
+	background-image: url(../image/search.png);
+	text-indent: 12%;
+}
+
+.searchBar .searchInput::-webkit-input-placeholder{
+	font-size: 24px;
+	line-height: 38px;
+}
+
+.searchBar .searchbtn{
+	padding: 3px 0.5em;
+	background-color: #0ba39c;
+	color: #fff;
+	border: none;
+	vertical-align: middle;
+}
+
+#footer{
+	width: 100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	background-color: #fff;
+}
+
+#footer div{
+	width: 28%;
+	padding: 0.8em 0;
+	text-align: center;
+	color: #839da9;
+}
+
+#footer div:nth-child(2){
+	margin: 0 8%;
+}
+
+#footer .footerCur{
+	color: #0ba39c;
+	border-bottom: 5px #0ba39c solid;
+}
+
+.am-slider-default{
+	margin: 0;
+}
+
+.am-slider .am-control-nav{
+	bottom: 20px;
+}
+
+.am-slider-default .am-control-nav li a{
+	width: 20px;
+	height: 20px;
+	background-color: #fff;
+	opacity: 0.8;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.am-slider-default .am-control-nav li a.am-active{
+	background-color: #00d2ff;
+	opacity: 1;
+}
+
+.am-gotop{
+	width: 60px;
+	bottom: 6em;
+	right: 1em;
+}
+
+.am-gotop .am-icon-btn{
+	background-color: rgba(85,85,85,0.5);
+	color: #eee;
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	font-size: 30px;
+}
+
+.goods{
+	position: relative;
+}
+
+.goods .sexangle{
+	width: 75px;
+	height: 66px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-size: 100% 100%;
+	background-image: url(../image/mall/sexangle.png);
+	color: #fff;
+	text-align: center;
+}
+
+.goods .sexangle .discountNum{
+	font-size: 28px;
+	line-height: 1em;
+	margin: 9px 0 3px;
+}
+
+.goods .sexangle .discountText{
+	font-size: 20px;
+	line-height: 1em;
+}
+
+#notify{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 50%;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    border-radius: 5px;
+    z-index: 100;
+    display: none;
+}

@@ -1,0 +1,35 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="{:U('board_save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<input type="hidden" name="send_type" value="{$send_type}">
+		<div class="current">当前位置：消息设置</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>消息类型：</label>
+				<input type="text" value="{$rs.name}" disabled="disabled"/>
+			</div>
+			<div class="group">
+				<label>发送类型：</label>
+				<input type="text" value="微信" disabled="disabled"/>
+			</div>
+			<div class="group">
+				<label>正文：</label>
+				<textarea name="data[content]" class="textarea" rows="6">{$data.content}</textarea>
+			</div>
+			<div class="group">
+				<label>是否启用：</label>
+				<input type="radio" class="radio" name="data[status]" value="1" checked="checked" /><label class="tip">启用</label>
+				<input type="radio" class="radio" name="data[status]" value="0" <if condition="$data[status] eq 0">checked="checked"</if> /><label class="tip">不启用</label>
+			</div>
+		</div>
+		<div class="order_bar"></div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

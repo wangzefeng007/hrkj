@@ -1,0 +1,174 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<div class="sm">
+		<div class="current">
+			当前位置：商户管理
+			<div class="statistic">
+				账户余额累计{$data.total_normal_usable|default="0"}元
+				&emsp;
+				分润余额累计{$data.total_split_usable|default="0"}元
+				&emsp;
+				共{$data.count|default="0"}位商户
+			</div>
+		</div>
+		<div class="status_bar">
+			状态：
+			<a  href="{:_U(array(status=>10))}" <if condition="$_params['status'] eq 10">class="active"</if>>
+				<span >全部</span>
+			</a>
+			<a href="{:_U(array(status=>1))}"  <if condition="$_params['status'] eq 1">class="active"</if>>
+				<span>已开通</span>
+			</a>
+			<a href="{:_U(array(status=>0))}" <if condition="$_params['status'] heq 0">class="active"</if>>
+				<span>未审核</span>
+			</a>
+			<a href="{:_U(array(status=>3))}" <if condition="$_params['status'] heq 3">class="active"</if>>
+			<span>审核不通过</span>
+			</a>
+			<a href="{:_U(array(status=>2))}" <if condition="$_params['status'] heq 2">class="active"</if>>
+				<span>信息不全</span>
+			</a >
+			<a href="{:_U(array(status=>-1))}" <if condition="$_params['status'] eq -1">class="active"</if>>
+				<span>冻结</span>
+			</a>
+			<a href="{:_U(array(status_business=>2))}" <if condition="$_params['status_business'] eq 2">class="active"</if>>
+				<span>开店申请</span>
+			</a>
+			<a href="{:_U(array(status_business=>1))}" <if condition="$_params['status_business'] eq 1">class="active"</if>>
+				<span>已经开店</span>
+			</a>
+		</div>		
+		<div class="search_bar">
+			<form action="{:_U()}" id="" name="" method="get">
+				<label>审核日期：</label>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}" />
+				<label>注册日期：</label>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="startaddtime" value="{$_params.startaddtime}" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endaddtime" value="{$_params.endaddtime}" />
+				<label>等级：</label>
+				<select class="select rm" name="lfid">
+					<option value="0">全部</option>
+					<foreach name="levels" item="item">
+					<option value="{$item.id}" <if condition="$_params['lfid'] eq $item['id']">selected="selected"</if>>{$item.name}</option>
+					</foreach>
+				</select>
+				<label>关键词：</label>
+				<!--<select class="select rm" name="keytype">-->
+					<!--<option value="0">请选择</option>-->
+					<!--<option value="mobile" <if condition="$_params['keytype'] eq mobile">selected="selected"</if>>手机号码</option>-->
+					<!--<option value="name" <if condition="$_params['keytype'] eq name">selected="selected"</if>>姓名</option>-->
+					<!--<option value="realname" <if condition="$_params['keytype'] eq realname">selected="selected"</if>>审核人姓名</option>-->
+				<!--</select>-->
+				<!--<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}" />-->
+				<input class="text_l rm" type="text" name="mobile" value="{$_params.mobile}"  placeholder="手机号码"/>
+				<input class="text_l rm" type="text" name="name" value="{$_params.name}" placeholder="姓名"/>
+				<input class="text_l rm" type="text" name="realname" value="{$_params.realname}" placeholder="审核人姓名"/>
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button" id="audit">批量审核</button>
+			<button class="button" type="button" id="freeze">批量冻结</button>
+			<button class="button" type="button" id="unfreeze">批量解冻</button>
+			<a class="button_primary right" href="javascript:void(0);" id="xls">表格下载</a>
+		</div>
+			<form action="{:_U(array(export=>xls))}" method="post" id="xls-form">
+				<input name="id" id="xls_id" type="hidden" value="" />
+			</form>
+		<div class="table">
+			<form action="{:U('userSaler/audit')}" method="post" class="ajax-form" id="audit-form">
+			<input type="hidden" name="audit_value" id="audit_value">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>姓名</th>
+						<th>账号</th>
+						<th>费率级别</th>
+						<th><a class="table_th_a" title="点击排序" href="{:U('',array('sort'=>($sort['normal_usable']=='desc')?'normal_usable,asc':'normal_usable,desc'))}">账户余额 {:($sort['normal_usable']=='desc')?'↓':''}{:($sort['normal_usable']=='asc')?'↑':''}</a></th>
+						<th><a class="table_th_a" title="点击排序" href="{:U('',array('sort'=>($sort['split_usable']=='desc')?'split_usable,asc':'split_usable,desc'))}">分润余额 {:($sort['split_usable']=='desc')?'↓':''}{:($sort['split_usable']=='asc')?'↑':''}</a></th>
+						<th>注册时间</th>
+						<th>最后登录</th>
+						<th>状态</th>
+						<th>审核人</th>
+						<th><a class="table_th_a" title="点击排序" href="{:U('',array('sort'=>($sort['checktime']=='desc')?'checktime,asc':'checktime,desc'))}<if condition="$_params[status] neq null">/status/{$_params[status]}/</if>">审核时间 {:($sort['checktime']=='desc')?'↓':''}{:($sort['checktime']=='asc')?'↑':''}</a></th>
+						<th>直属下级</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+
+						<td><input type="checkbox" name="id[]" class="chk" value="{$item.id}"/></td>
+						<td>{$item.name}</td>
+						<td>{$item.mobile}</td>
+						<td>{$item.lf_name}</td>
+						<td>￥{$item[normal_usable]|default="0.00"}</td>
+						<td>￥ {$item[split_usable]|default="0.00"}</td>
+						<td>{$item.addtime|vtime="Y-m-d",###}</td>
+						<td>{$item.logintime|vtime="Y-m-d H:i:s",###}</td>
+						<td class="success">
+							<if condition="$item.status eq 1">已开通
+							<elseif condition="$item.status  lt 0" />已冻结
+							<elseif condition="$item.status  eq 2" />资料未完善
+							<elseif condition="$item.status  eq 3" />审核不通过
+							<else />待审核</if>
+						</td>
+						<td>{$item.realname}</td>
+						<td>{$item.checktime|vtime="Y-m-d H:i:s",###}</td>
+						<td><a href="{:U('userSaler/child',array(id=>$item[id]))}">查看</a></td>
+						<td>
+							<a href="{:U('userSaler/edit',array(id=>$item[id]))}">编辑</a>|
+							<a href="{:U('userSaler/business',array(id=>$item[id]))}">门店</a>|
+							<!--<a href="#">限制</a>|-->
+							<if condition="$item.status eq 1">
+							<a href="javascript:void(0)" onclick="confirm_url('要冻结该用户吗？','{:U('userSaler/audit',array(id=>$item[id],audit_value=>-1))}')">冻结</a>|
+							<elseif condition="$item.status lt 0" />
+							<a href="javascript:void(0)" onclick="confirm_url('要解冻该用户吗？','{:U('userSaler/audit',array(id=>$item[id],audit_value=>1))}')">解冻</a>|
+							<elseif condition="$item.status eq 0" />
+							<a href="javascript:void(0)" onclick="confirm_url('要审核通过该用户吗？','{:U('userSaler/audit',array(id=>$item[id],audit_value=>'+1'))}')">通过</a>|
+							<!--<a href="javascript:void(0)" onclick="confirm_url('要拒绝通过该用户吗？','{:U('userSaler/audit',array(id=>$item[id],audit_value=>2))}')">不通过</a>|-->
+							</if>
+							<a href="javascript:void(0)" onclick="confirm_url('要删除该用户吗','{:U('userSaler/delete',array(id=>$item['id']))}')">删除</a>
+						</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#audit").click(function(){
+			$("#audit_value").val('+1');			//+1审核通过标识,用于区分解冻
+			$("#audit-form").submit();
+		});
+		$("#freeze").click(function(){
+			$("#audit_value").val('-1');
+			$("#audit-form").submit();
+		});
+		$("#unfreeze").click(function(){
+			$("#audit_value").val('1');
+			$("#audit-form").submit();
+		});
+		$("#xls").click(function(){
+			obj = $(".chk:checked");
+			str = '';
+			for(i=0;i<obj.length;i++) {
+				str += obj.eq(i).val()+',';
+			}
+			$("#xls_id").val(str);
+			$("#xls-form").submit();
+		});
+	});
+	</script>
+<include file="common:footer" />

@@ -1,0 +1,209 @@
+@CHARSET "UTF-8";
+
+@media screen and (max-width: 380px) {
+	html{
+		font-size: 10px;
+	}
+}
+@media screen and (min-width: 380px) and (max-width:500px) {
+	html{
+		font-size: 12px;
+	}
+}
+@media screen and (min-width: 500px) and (max-width:650px) {
+	html{
+		font-size: 13px;
+	}
+}
+@media screen and (min-width: 650px) {
+	html{
+		font-size: 14px;
+	}
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #f3f1ef;
+	font-size: 1.2rem;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+header{
+	background: #479edf;
+	color: white;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	display: table;
+	width: 100%;
+}
+header .button, .title{
+	display: table-cell;
+	height: 50px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;
+}
+header .button{
+	width: 27%;
+	height: 50px;
+}
+header .title{
+	width: 46%;
+	font-size: 1.8rem;
+	margin-top: 0px;
+	line-height: 50px;
+}
+header .button .back{
+	overflow: hidden;
+	display: table-cell;
+	text-decoration: none;
+	color: white;
+	font-size: 1.6rem;
+	padding: 2px 0px 0px 0px;
+}
+header .button .back img{
+	border: none;
+	width: 26px;
+	height: auto;
+	padding: 0px 0px 0px 10px;
+	vertical-align: middle;
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+
+/* ------------------------------------------------ 店招 & LOGO ------------------------------------ */
+.sign_bar{
+	text-align: center;
+}
+.sign_bar img{
+	border: none;
+	width: 100%;
+	height: auto;
+	margin: 0px auto;
+	padding: 0px;
+	display: block;
+}
+.info_bar{
+	margin: 0px auto;
+	display: block;
+	width: 100%;
+	max-width: 480px;
+	padding: 8px 0px 8px 0px;
+}
+.info_bar .logo{
+	display: inline-block;
+	width: 30%;
+	text-align: right;
+}
+.info_bar .logo img{
+	width: 70%;
+	border: 2px solid #cecece;
+	vertical-align: middle;
+	
+	-moz-border-radius: 100%;
+	-khtml-border-radius: 100%;
+	-webkit-border-radius: 100%;
+	border-radius: 100%;
+}
+.info_bar .info{
+	display: inline-block;
+	width: 68%;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.info_bar .info .name{
+	font-size: 1.8rem;
+	color: black;
+	padding-left: 10%;
+	overflow: hidden;
+}
+.info_bar .info .name a{
+	text-decoration: none;
+	font-size: 1.8rem;
+	color: black;
+}
+.info_bar .info .phone{
+	font-size: 1.4rem;
+	color: #494848;
+	padding-left: 10%;
+	padding-top: 1.2rem;
+}
+.info_bar .info .phone img{
+	width: 12%;
+	vertical-align: middle;
+}
+/* ------------------------------------------------ 店招 & LOGO ------------------------------------ */
+
+/* ------------------------------------------------ 店铺介绍 ------------------------------------ */
+.des_bar{
+	background: white;
+	font-size: 1.4rem;
+	color: black;
+	padding: 1.4rem 2.2rem;
+	display: block;
+	margin: 0px auto;
+}
+.des_bar div{
+	padding: 5px 0px;
+}
+/* ------------------------------------------------ 店铺介绍 ------------------------------------ */
+
+/* ------------------------------------------------ 店铺首页 ------------------------------------ */
+.goods_sort_bar{
+	background: white;
+	display: block;
+	padding: 10px 0px;
+	border-top:1px solid #e3e3e3; 
+	border-bottom:1px solid #e3e3e3; 
+}
+.goods_sort_bar a{
+	text-decoration: none;
+	font-size: 1.6rem;
+}
+.goods_sort_bar .button{
+	display: inline-block;
+	width: 32%;
+	text-align: center;
+}
+.goods_sort_bar .button img{
+	width: 1.8rem;
+	vertical-align: middle;
+}
+.goods_sort_bar .default{
+	color: #5c5e5e
+}
+.goods_sort_bar .primary{
+	color: #3697a0
+}
+.goods_block_bar{
+	background: #f3f1ef;
+	padding: 3px 4px;
+	overflow: hidden;
+}
+.goods_block_bar .item{
+	float: left;
+	display: block;
+	width: 98%;
+	background: white;
+	margin: 4px 1%;
+	text-decoration: none;
+}
+.goods_block_bar .item .img img{
+	width: 100%;
+	height: 100%;
+}
+.goods_block_bar .item .info{
+	padding: 8px 8px 14px 8px;
+}
+.goods_block_bar .item .info .name{
+	color: #333333;
+	font-size: 1.4rem;
+}
+.goods_block_bar .item .info .price{
+	color: #ff0000;
+	font-size: 1.6rem;
+	padding-top: 4px;
+}
+/* ------------------------------------------------ 店铺首页 ------------------------------------ */

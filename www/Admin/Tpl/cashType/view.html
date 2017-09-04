@@ -1,0 +1,46 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/setting/css/set_access_edit.css">	
+	<div class="sm">
+		<div class="current">当前位置：结算方式</div>
+		<form action="{:U('cashType/save')}" id="" name="" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$info.id}">
+		<div class="base_bar">
+			<div class="group">
+				<label>名称：</label>
+				<input type="text" name="name" value="{$info.name}"/>
+			</div>
+
+			<div class="group">
+				<label>结算上限：</label>
+				<input type="text" name="max" value="{$info.max}"/>
+			</div>
+			
+			<div class="group">
+				<label>结算下限：</label>
+				<input type="text" name="min" value="{$info.min}"/>
+			</div>
+			
+			<div class="group">
+				<label>结算费用：</label>
+				<input type="text" name="fee" value="{$info.fee}"/>
+			</div>
+			
+			<div class="group">
+				<label>备注：</label>
+				<input type="text" name="desc" value="{$info.desc}"/>
+			</div>
+			
+			<div class="group">
+				<label>状态：</label>
+				<input type="radio" class="radio" name="status" value="1" <if condition="$info[status] eq 1">checked="checked"</if>/><label class="tip">打开</label>
+				<input type="radio" class="radio" name="status" value="0" <if condition="$info[status] eq 0">checked="checked"</if>/><label class="tip">关闭</label>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

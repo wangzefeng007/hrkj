@@ -1,0 +1,42 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/provider/css/goods_cate_edit.css">
+	<div class="sm">
+		<div class="current">当前位置：商品分类设置</div>
+		<form action="{:U('goodsCategory/save')}" id="" name="" method="post" class="ajax-form">
+		<div class="base_bar">
+			<div class="group">
+				<label>名称：</label>
+				<input type="text"  name="name" value="{$category.name}"/>
+			</div>
+			<div class="group">
+				<label>上级：</label>
+				<select name="pid">					
+					<option>请选择</option>
+					<foreach name="category_tree" item="item">
+					<option value="{$item.id}" <if condition="$pid eq $item[id]">selected="selected"</if>><php>echo str_repeat("&nbsp;",$item['level']*2);</php>{$item.name}</option>
+					</foreach>
+				</select>
+			</div>
+			<!--
+			<div class="group">
+				<label>图片：</label>
+				<div class="file_control">
+					<input class="text" type="text" />
+					<button class="button">上传图片</button>
+					<input class="file" type="file"/>
+				</div>
+			</div>
+			-->
+			<div class="group">
+				<label>排序：</label>
+				<input type="text" name="sort" value="{$category.sort}"/>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

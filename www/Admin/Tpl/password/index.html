@@ -1,0 +1,32 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/setting/css/set_access_edit.css">	
+	<div class="sm">
+		<div class="current">当前位置：修改密码</div>
+		<form action="{:U('save')}" id="" name="" method="post" class="ajax-form">
+		<div class="base_bar">
+			<div class="group">
+				<label>旧密码：</label>
+				<input type="password" name="password_old" value=""/>
+			</div>
+
+			<div class="group">
+				<label>新密码：</label>
+				<input type="password" name="password" value=""/>
+			</div>
+			
+			<div class="group">
+				<label>确认密码：</label>
+				<input type="password" name="password2" value=""/>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+	parent.document.getElementById("frame_main").style.height = document.body.scrollHeight;
+	</script>
+	<include file="common:footer" />

@@ -1,0 +1,95 @@
+<script type="text/javascript" src="__RES__/js/datetime.js"></script>
+<script type="text/javascript" src='__RES__/js/jquery.form.min.js' ></script>
+<script type="text/javascript" src='__RES__/js/jNotify/jNotify.js' ></script>
+
+<script type="text/javascript">
+$(function(){
+	/* 输入框 模拟placeHolder效果 */
+	$(".text_ph input").each(function(){
+		if($(this).val())
+		{
+			$(this).next("div").hide();
+		}
+	});
+	$(".text_ph input").focusin(function(){
+		$(this).next("div").hide();
+	});
+	$(".text_ph input").focusout(function(){
+		if(!$(this).val()){
+			$(this).next("div").show();
+		}
+	});
+	/* 多选框全选、不选效果 */
+	$("#selectAll").change(function(){
+		if(document.getElementById("selectAll").checked){
+			$(".table table tbody tr td input").prop("checked", true);
+		} else {
+			$(".table table tbody tr td input").prop("checked", false);
+		}
+	});
+});
+
+
+$(function(){	
+	//ajax表单提交
+	$('.ajax-form').ajaxForm(function(response){
+		response = eval("("+response+")");
+		if(response.result.code == '10000')
+		{
+			jSuccess(response.result.msg, {
+				TimeShown : 800,
+				onClosed:function(){
+					window.location.href = response.link;
+				}
+			});			
+		}
+		else
+		{
+			jError(response.result.msg);
+		}
+	});
+	
+});
+
+//ajax 请求 只支持get请求方法
+function ajaxurl(url)
+{
+	$.ajax({
+		url:url,
+		type:'get',
+		dataType:'json',
+		success:function(response)
+		{
+			//response = eval("("+response+")");
+			if(response.result.code == '10000')
+			{
+				jSuccess(response.result.msg, {
+					TimeShown : 800,
+					onClosed:function(){
+						window.location.href = response.link;
+					}
+				});			
+			}
+			else
+			{
+				jError(response.result.msg);
+			}
+		},
+		error:function()
+		{
+			alert('请求失败');
+		}
+	});
+}
+
+//确认对话框请求
+function confirm_url(msg,url)
+{
+	if (confirm(msg))
+	{
+		ajaxurl(url);
+	}
+}
+</script>
+</body>
+</html>

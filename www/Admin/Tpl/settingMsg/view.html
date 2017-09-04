@@ -1,0 +1,25 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="{:U('save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<div class="current">当前位置：消息设置</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>消息类型名称：</label>
+				<input type="text" name="name" value="{$rs.name}"/>
+			</div>
+			<div class="group">
+				<label>类型编号：</label>
+				<input type="text" name="type" value="{$rs.type}"/>
+			</div>
+		</div>
+		<div class="order_bar"></div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

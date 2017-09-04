@@ -1,0 +1,54 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/setting/css/set_access_edit.css">	
+	<div class="sm">
+		<div class="current">当前位置：通道管理</div>
+		<form action="{:U('payChannel/save')}" id="" name="" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$pay.id}">
+		<div class="base_bar">
+			<div class="group">
+				<label>通道名称：</label>
+				<input type="text" name="name" value="{$pay.name}"/>
+			</div>
+			<div class="group">
+				<label>通道编号：</label>
+				<input type="text" />
+			</div>
+			<!--
+			<div class="group">
+				<label>通道编号：</label>
+				<input type="text" />
+			</div>
+			-->
+			<div class="group">
+				<label>成本费率：</label>
+				<input type="text" name="cost_rate" value="{$pay.cost_rate}"/>%
+			</div>
+
+
+			<div class="group">
+				<label>状态：</label>
+				<input type="radio" class="radio" name="status" value="1" <if condition="$pay[status] eq 1">checked="checked"</if>/><label class="tip">打开</label>
+				<input type="radio" class="radio" name="status" value="0" <if condition="$pay[status] eq 0">checked="checked"</if>/><label class="tip">关闭</label>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		/* 删除按钮*/
+		$(document).on("click", ".delete", function(){
+			$(this).parent().remove();
+		});
+		/* 新增按钮*/
+		$(document).on("click", ".add", function(){
+			$(".template").after('<div class="group">' + $(".template").html() + '</div>').insertAfter(".blankrow");
+			parent.document.getElementById("frame_main").style.height = document.body.scrollHeight + "px";
+		});
+	});
+	</script>
+	<include file="common:footer" />

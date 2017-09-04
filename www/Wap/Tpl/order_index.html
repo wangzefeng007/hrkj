@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>我的订单</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/order.css">
+</head>
+<body>
+	<header>
+		<div class="button"></div>
+		<div class="title">我的订单</div>
+		<div class="button"></div>
+	</header>
+	<div class="order_status_bar">
+		<a class="{$active.-1}" href="{:U('index',array('mobile'=>$mobile))}">全部</a>
+		<a class="{$active.0}" href="{:U('index',array('status'=>'0','mobile'=>$mobile))}">待付款</a>
+		<a class="{$active.1}" href="{:U('index',array('status'=>'1','mobile'=>$mobile))}">待发货</a>
+		<a class="{$active.3}" href="{:U('index',array('status'=>'3','mobile'=>$mobile))}">待评价</a>
+	</div>
+	<foreach name="lists" item="vo">
+		<div class="order_item_bar">
+			<div class="title">
+				<a class="left" href="{:U('detail',array('sn'=>$vo['sn']))}">订单号：{$vo.sn}&ensp;&gt; {$vo.us_shop}</a>
+				<a class="right" href="#">{$vo.status_name}</a>
+			</div>
+			<foreach name="vo.goods_list" item="go">
+				<hr class="gray_solid">
+				<div class="info_block">
+					<div class="img"><img src="{$go.thumb|default='__WAP__/images/img_goods.jpg'}" /></div>
+					<div class="info_title">
+						<div class="name">{:htmlspecialchars($go['name'])}</div>
+						<!--<div class="standard">颜色：墨绿色&emsp;尺寸：M</div>-->
+					</div>
+					<div class="info_price">
+						<div class="price">￥{$go.price}</div>
+						<div class="num">×{$go.num}</div>
+					</div>
+				</div>
+			</foreach>
+			<hr class="gray_solid">
+			<div class="statistic_block">
+				<span>共{$vo.goods_list|count}件&emsp;</span>
+				<span>运费：{$vo.logistics_fee}&emsp;</span>
+				<span>实付：</span>
+				<span class="price">￥{$vo.money}</span>
+			</div>
+			<div class="btn_block">
+				<if condition="($vo.status eq 0)">
+					<a class="default" href="#">取消订单</a>
+					<a class="default" href="#">付款</a>
+				<elseif condition="($vo.status eq 1)"/>
+					<a class="default" href="#">退货</a>
+					<a class="default" href="#">评价</a>
+					<a class="default" href="{:U('express',array('sn'=>$vo['sn']))}">查看物流</a>
+				<elseif condition="($vo.status eq 3)"/>
+					<a class="default" href="{:U('express',array('sn'=>$vo['sn']))}">查看物流</a>
+				</if>
+			</div>
+		</div>
+	</foreach>
+</body>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

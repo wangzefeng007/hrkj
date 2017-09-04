@@ -1,0 +1,101 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<div class="sm">
+		<div class="current">
+			当前位置：供应商收款
+			<div class="statistic">
+				共{$data.count}笔订单
+				&emsp;&emsp;
+				累计收款{$data.money}元
+			</div>
+		</div>
+		<div class="status_bar">
+			状态：
+			<a <if condition="$_params[status] heq ''">class="active"</if> href="{:U('accountUserProviderIncome/index')}">
+				<span>全部</span>
+			</a>
+			<a <if condition="$_params['status'] heq 0">class="active"</if> href="{:U('accountUserProviderIncome/index',array(status=>0))}">
+				<span>冻结</span>
+			</a>
+			<a <if condition="$_params['status'] heq 1">class="active"</if> href="{:U('accountUserProviderIncome/index',array(status=>1))}">
+				<span>未结算</span>
+			</a>
+			<a <if condition="$_params['status'] heq 2">class="active"</if> href="{:U('accountUserProviderIncome/index',array(status=>2))}">
+				<span>已结算</span>
+			</a>
+			<br/><br/>
+			支付方式：
+			<a <if condition="$_params['ptid'] eq 0">class="active"</if> href="{:U('accountUserProviderIncome/index')}">
+				<span>全部</span>
+			</a>
+			<foreach name="pay_type" item="item">
+			<a <if condition="$_params['ptid'] eq $item[id]">class="active"</if> href="{:U('accountUserProviderIncome/index',array(ptid=>$item[id]))}">
+				<span>{$item.name}</span>
+				<!--<span class="red">6</span>-->
+			</a>
+			</foreach>
+		</div>
+		<div class="search_bar">
+			<form action="{:U('accountUserProviderIncome/index')}" id="" name="" method="get">
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" name="starttime" placeholder="开始时间" value="{$_params.starttime}"/>
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" name="endtime" placeholder="结束时间" value="{$_params.endtime}"/>
+
+				<label>商户：</label>
+				<select class="select rm" name="keytype">
+					<option value="">请选择</option>
+					<option value="username" <if condition="$_params['keytype'] eq 'username'">selected="selected"</if>>帐号</option>
+					<option value="shop_name" <if condition="$_params['keytype'] eq 'shop_name'">selected="selected"</if>>店铺名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button_primary right" type="button">表格下载</button>
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						
+						<th>收款单</th>
+						<th>供应商</th>
+						<th>账号</th>						
+						<th>支付方式</th>
+						<th>收款金额</th>
+						<th>产生时间</th>
+						<th>收款时间</th>
+						<th>状态</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						
+						<td>{$item.order_sn}</td>
+						<td>{$item.shop_name}</td>
+						<td>{$item.username}</td>						
+						<td>{$item.pt_name}</td>
+						<td>{$item.money}</td>
+						<td>{$item.addtime|date="Y-m-d H:i:s",###}</td>
+						<td>{$item.dispostime|date="Y-m-d H:i:s",###}</td>
+						<if condition="$item[status] eq 0">
+						<td class="fail">冻结中</td>
+						<elseif condition="$item[status] eq 1" />
+						<td class="success">未结算</td>
+						<else />
+						<td class="success">已结算</td>
+						</if>
+					</tr>
+					</foreach>
+				
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />

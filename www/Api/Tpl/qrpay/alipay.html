@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>支付宝支付</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link href="__PUBLIC__/pay/lib/css/style.css" rel="stylesheet" type="text/css">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="alipay_main">
+  <h1><i class="icon"></i>欢迎使用扫扫码支付</h1>
+  <div class="title">{$storename}</div>
+  <div class="form">
+    <div class="label" id="money"> <span class="money">金额(元)</span>
+      <input type="text" id="moneyval" name="money" value="" class="input">
+      <i class="icon1"></i>
+    </div>
+	<div class="label" id="tips" style="padding-left:0px;display:none;color:#ED3E3E; border: 0px none; height: 20px;"></div>
+    <button type="button" class="btn">确认支付</button>
+  </div>
+  <div class="pic"><img src="__PUBLIC__/pay/lib/images/img1.png" alt=""/></div>
+</div>
+</body>
+<script>
+//var shop_id='{$userinfo['shop_id']}';
+var money='0.01';
+var openid='{$openid}';
+var usid='{$usid}';
+var regex = /^\d+\.?\d{0,2}$/;
+$("#moneyval").on("blur",function(){
+    $(this).val(parseFloat($(this).val()).toFixed(2));
+});
+$('.btn').click(function(){
+	$(this).addClass('btn1');
+	$(this).attr('disabled','disabled');
+	money = $('#moneyval').val();//alert(money);	
+	$.post("{:U('qrpay/alipay')}",{'openid':openid,'money':money,'usid':usid},function(data) {
+	if(data.status==1){	
+		AlipayJSBridge.call("tradePay",{
+			tradeNO: data.desc.CHANNEL_ID
+			}, function(result){
+		});
+	
+	}else{
+		$('#money').css('border','1px solid #ED3E3E');//#E13C3C
+		$('#tips').show();
+		$('#tips').html(data.desc);
+		$('.btn').removeAttr('disabled');
+		$('.btn').removeClass('btn1');	
+		
+	}
+	
+	});
+});
+$('.icon1').click(function(){
+	$('input[name=money]').val('');
+});
+</script>
+</html>

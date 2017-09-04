@@ -1,0 +1,164 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/merchant_add.css">	
+	<div class="sm">
+		<div class="current">当前位置：商户 >&ensp;新增商户</div>
+		<form action="{:U('userSaler/add')}" id="" name="" method="post" class="ajax-form">
+		
+		<div class="base_bar">
+			<div class="group">
+				<label><span class="danger">*</span>用户名：</label>
+				<input type="text" name="mobile"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>密码：</label>
+				<input type="password" name="password"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>确认密码：</label>
+				<input type="password" name="re-password"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>姓名：</label>
+				<input type="text" name="name"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>身份证：</label>
+				<input type="text" name="card_no"/>
+			</div>
+			<!--
+			<div class="group">
+				<label><span class="danger">*</span>所在区域：</label>
+				<select class="select small">
+					<option>请选择</option>
+				</select>
+				<select class="select small">
+					<option>请选择</option>
+				</select>
+				<select class="select small">
+					<option>请选择</option>
+				</select>
+			</div>
+			-->
+			<div class="group">
+				<label><span class="danger">*</span>银行卡：</label>
+				<input type="text" name="bank_no"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>重复银行卡：</label>
+				<input type="text" name="re-bank_no"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>所属银行：</label>
+				<input type="text" name="bank"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>开户行所在地：</label>
+				<input type="text" name="bank_name"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>支行：</label>
+				<input type="text" name="bank_address"/>
+			</div>
+			<div class="group">
+				<label><span class="danger">*</span>联行号：</label>
+				<input type="text" name="bank_type"  value="{$user.bank_type}"/>
+			</div>
+		</div>
+		<div class="title_bar">
+			<span>证件照片视频</span>
+		</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>身份证正面与银行卡正面照：</label>
+				<div class="file-btn file-btn-success fileinput-button">
+					<input type="file" class="button" name="images[card_front]" id="imageUp_1">
+				</div>
+				<div class="image_group">
+				</div>
+			</div>
+			<div class="group">
+				<label>身份证及银行卡反面照：</label>
+				<div class="file-btn file-btn-success fileinput-button">
+					<input class="file" type="file" name="images[card_back]" id="imageUp_2"/>
+				</div>
+				<div class="image_group">
+				</div>
+			</div>
+			<div class="group">
+				<label>本人持卡半身照：</label>
+				<div class="file-btn file-btn-success fileinput-button">
+					<input class="file" type="file" name="images[card_hand]" id="imageUp_3"/>
+				</div>
+				<div class="image_group">
+				</div>
+			</div>
+			<div class="group">
+				<label>上传视频：</label>
+				<input name="images[video]" type="text" class="text" value="" readonly="readonly"  />
+				<div class="file-btn file-btn-success fileinput-button">
+					<input class="file" type="file" name="images[video]" id="videoUp_1"/>
+				</div>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="dufalut" type="button" onclick="javascript:history.go(-1);">取消</button>
+				<button class="primary" type="submit" name="submit" value="1">确认</button>
+			</div>
+		</div>
+		</form>
+	</div>
+		<script type="text/javascript">
+	$(function(){
+		$("#search").click(function(){
+			var pword = $("#pword").val();
+			if (pword != '')
+			{
+				var url = "/admin.php?m=userSaler&a=search&pword="+encodeURI(pword);
+				$.ajax({
+				url:url,
+				type:'get',
+				dataType:'json',
+				success:function(response)
+				{
+					if(response.result.code == '10000')
+					{
+						$("#pid").empty();
+						var pids = response.data;
+						
+						if (pids)
+						{						
+							for(var k in pids)
+							{
+								$("#pid").append("<option value='"+pids[k].id+"'>"+pids[k].name+"-"+pids[k].mobile+"</option>");
+							}
+							$("#pid").show();
+						}
+					}
+					else
+					{
+						alert("未找到对应商户");
+					}
+				}	
+				});
+			}
+		});
+
+	});
+	</script>
+	<script type="text/javascript">
+	$(function(){
+		imageUp("imageUp_1");
+		imageUp("imageUp_2");
+		imageUp("imageUp_3");
+		videoUp("videoUp_1");
+	});
+		var file_url  = "__RES__", 					//引用js路径
+		up_url  = "{:U('upload/upload')}",			//图片处理路径		
+		dir_url = "{:substr(C('URL_UPLOADER_TMP'),1)}",	//图片保存路径
+		del_url = "{:U('upload/imgdel')}";			//删除处理路径
+	</script>
+	<script type="text/javascript" src="__RES__/js/uploadify/jquery.uploadify.min.js?ver={:rand(0,9999)}"></script>
+	<script type="text/javascript" src="__RES__/js/uploadfile.js?ver={:rand(0,9999)}"></script>
+	<link rel="stylesheet" href="__RES__/js/uploadify/uploadify.css">	
+	<include file="common:footer" />

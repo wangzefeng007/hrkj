@@ -1,0 +1,73 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+		<div class="sm">
+		<div class="current">当前位置：费用级别</div>
+		<div class="search_bar">
+			<form action="{:U('levelFee/index')}" id="" name="" method="get">
+				<label class="inline">名称：</label>
+				<input class="inline text_l rm" type="text" name="name" value="{$_params.name}"/>
+				<button class="inline submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button" onclick="window.location.href='{:U('levelFee/add')}'">新增</button>
+			<!--<button class="button" type="button" id="delete">删除</button>-->
+		</div>
+		<div class="table">
+			<form action="{:U('levelFee/delete')}" method="post" class="ajax-form" id="level-form">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>等级序号</th>
+						<th>名称</th>
+						
+						<th>升级费用</th>
+						<th>升级返佣金比率</th>
+						<th>是否前端显示</th>
+						<th>是否可升级</th>
+						
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td><input type="checkbox" name="id[]" value="{$item.id}"/></td>
+						<td>{$item.level}</td>
+						<td>{$item.name}</td>
+						
+						<td>{$item.fee_upgrade}</td>
+						<td>{$item.split_rate}</td>
+						<td><if condition="$item[is_show] eq 0">否<else />是</if></td>
+						<td><if condition="$item[is_update] eq 0">否<else />是</if></td>
+						
+						<td class="success">
+							<if condition="$item[status] eq 1">
+							<img src="__RES__/images/icon_success.png" />已启用
+							<else />
+							<img src="__RES__/images/icon_fail.png" />已启用
+							</if>
+						</td>
+						<td><a href="{:U('levelFee/edit',array(id=>$item[id]))}">编辑</a>|<a href="javascript:void(0)" onclick="confirm_url('确定要删除该等级吗？','{:U('levelFee/delete',array(id=>$item[id]))}')">删除</a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#delete").click(function(){
+			$("#level-form").submit();
+		});
+
+	});
+	</script>
+	<include file="common:footer" />

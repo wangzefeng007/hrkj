@@ -1,0 +1,80 @@
+<include file="common:header" />
+<link rel="stylesheet" href="__RES__/css/trade_income_list.css">
+<link rel="stylesheet" href="__RES__/css/trade_collection_detail.css">
+</head>
+<body>
+	<div class="sm">
+		<div class="current">
+			当前位置：直属下级
+
+		</div>
+		<div class="statistic_bar">
+			商户：{$user.name}
+			&emsp;&emsp;
+			账号：{$user.mobile}
+		</div>
+		<div class="status_bar">
+			状态：
+			<a <if condition="$_params['status'] heq ''">class="active"</if> href="{:_U(array(status=>false))}">
+				<span >全部</span>
+			</a>
+			<a <if condition="$_params['status'] eq 1">class="active"</if> href="{:_U(array(status=>1))}">
+				<span>已开通</span>
+			</a>
+			<a href="{:_U(array(status=>0))}" <if condition="$_params['status'] heq 0">class="active"</if>>
+				<span>未审核</span>
+			</a>
+			<a href="{:_U(array(status=>2))}" <if condition="$_params['status'] heq 2">class="active"</if>>
+				<span>资料未完善</span>
+			</a >
+			<a href="{:_U(array(status=>-1))}" <if condition="$_params['status'] eq -1">class="active"</if>>
+				<span>冻结</span>
+			</a>
+		</div>		
+		<div class="search_bar">
+			<form action="{:_U()}" id="" name="" method="get">
+				<label>关键词：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="mobile" <if condition="$_params['keytype'] eq mobile">selected="selected"</if>>手机号码</option>
+					<option value="name" <if condition="$_params['keytype'] eq name">selected="selected"</if>>姓名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>账号</th>
+						<th>姓名</th>						
+						<th>费率级别</th>						
+						<th>注册时间</th>
+						<th>状态</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">						
+						<td>{$item.mobile}</td>
+						<td>{$item.name}</td>
+						<td>{:$levels[$item['lfid']]}</td>
+						<td>{$item.addtime|vtime="Y-m-d",###}</td>
+						<td class="success">
+							<if condition="$item.status eq 1">已开通
+							<elseif condition="$item.status  lt 0" />已冻结
+							<elseif condition="$item.status  eq 2" />资料未完善
+							<else />待审核</if>
+						</td>
+						</tr>
+					</foreach>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />

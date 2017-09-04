@@ -1,0 +1,30 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="{:U('save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<div class="current">当前位置：消息推送</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>标题：</label>
+				<input type="text" name="title" value="{$rs.title}"/>
+			</div>
+			<div class="group">
+				<label>正文：</label>
+				<textarea name="content" class="textarea" rows="6">{$rs.content}</textarea>
+			</div>
+			<div class="group">
+				<label>状态：</label>
+				<input type="radio" class="radio" name="status" value="1" checked="checked" /><label class="tip">已推荐</label>
+				<input type="radio" class="radio" name="status" value="0" <if condition="$rs[status] neq 1">checked="checked"</if> /><label class="tip">未推荐</label>
+			</div>
+		</div>
+		<div class="order_bar"></div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

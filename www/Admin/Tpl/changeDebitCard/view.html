@@ -1,0 +1,114 @@
+<include file="common:header" />
+<link rel="stylesheet" href="__RES__/css/merchant_edit.css?v=1.0.0">
+<div class="sm">
+	<form action="{:U('save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<div class="current">当前位置：储蓄卡变更审核</div>
+		<div class="content_bar">
+			<div class="group">
+				<label>
+				申请时间：{$rs.addtime|vtime="Y-m-d H:i:s",###}
+				</label>
+			</div>
+			<div class="group">
+				<label>姓名：{$rs.name}
+				</label>
+			</div>
+			<div class="group">
+				<label>账号：{$rs.mobile}
+				</label>
+			</div>
+			<div class="group">
+				<label>状态：
+					<if condition="$rs.status eq 1">待审核
+						<elseif condition="$rs.status  eq 2" />审核通过
+						<elseif condition="$rs.status  eq 3" />审核不通过
+						<else />其他</if>
+				</label>
+			</div>
+			<div class="group">
+				<label>证件号：
+					{$rs.card_no}
+				</label>
+			</div>
+			<div class="group">
+				<label>原卡号：
+					{$rs.old_bank_no}
+				</label>
+			</div>
+			<div class="group">
+				<label>新卡号：
+					<font color="red">{$rs.new_bank_no}</font>
+				</label>
+			</div>
+			<div class="group">
+				<label>已变更次数 <font color="red">{$rs.count}</font>
+				</label>
+			</div>
+
+			<div class="group">
+				<if condition="$rs.status eq 1">
+				<label>状态：
+					<input type="radio" value="2" name="status" id="2" checked="checked"/>同意
+					<input type="radio" value="3" name="status" id="3"/>拒绝
+				</label>
+				</if>
+				<label>
+					状态修改备注：<input name="audit_memo" type="text" id="audit_memo" value="{$rs.audit_memo}" width="50px"  placeholder="当资料有无时，选择'拒绝'，并且此填写拒绝的原因" />
+				</label>
+			</div>
+		</div>
+		<div class="content_right">
+			<div class="group">
+				<label>手持储蓄卡照片：</label>
+				<div class="image_group">
+					<if condition="$rs['card_image']">
+						<li>
+							<input type="hidden"
+								   value="{$rs.card_image}" name="card_image">
+							<a class="fancybox" rel="group"
+							   href="{$rs.card_image}"><img src="{$rs.card_image}" width="300px" height="500px" border="0"
+							></a>
+							<a class="close"
+							   onclick="close_img(this)" href="javascript:">x</a>
+						</li>
+					</if>
+				</div>
+				<input name="usid" hidden="hidden" value="{$rs.usid}"/>
+			</div>
+		</div>
+		<div class="submit_bar">
+			<div>
+				<if condition="$rs.status eq 1"><button class="primary" type="submit">保存</button></if>
+			</div>
+		</div>
+	</form>
+</div>
+<link rel="stylesheet" href="__RES__/js/plugins/fancybox/jquery.fancybox.css">
+<script type="text/javascript" src="__RES__/js/plugins/fancybox/jquery.fancybox.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".fancybox").fancybox({
+            autoCenter: false,
+            autoScale: true,
+            maxWidth  : parseInt(document.body.clientWidth) * 0.95,
+            maxHeight : parseInt(document.body.clientHeight) * 0.95,
+            helpers : {
+                overlay : false
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        imageUp("imageUp_1");
+    });
+    var file_url  = "__RES__", 					//引用js路径
+        up_url  = "{:U('upload/upload')}",			//图片处理路径
+        dir_url = "{:substr(C('URL_UPLOADER_TMP'),1)}",	//图片保存路径
+        del_url = "{:U('upload/imgdel')}";			//删除处理路径
+</script>
+<script type="text/javascript" src="__RES__/js/uploadify/jquery.uploadify.min.js?ver={:rand(0,9999)}"></script>
+<script type="text/javascript" src="__RES__/js/uploadfile.js?ver={:rand(0,9999)}"></script>
+<link rel="stylesheet" href="__RES__/js/uploadify/uploadify.css">
+<include file="common:footer" />

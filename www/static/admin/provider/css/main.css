@@ -1,0 +1,180 @@
+@CHARSET "UTF-8";
+
+/* ---------------------- 主体页面 start --------------------------- */
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+iframe{
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	width: 100%;
+}
+.frame_top{
+	display: block;
+	clear: both;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	height: 55px;
+	overflow: hidden;
+	background: #3697a0;
+}
+.frame_left{
+	display: block;
+	float: left;
+	clear: left;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+.frame_main{
+	display: block;
+	float: right;
+	clear: right;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	background: white;
+	height: auto;
+	overflow: hidden;
+}
+/* ---------------------- 主体页面 end --------------------------- */
+
+/* ---------------------- 头部 start --------------------------- */
+.tf{
+	background: #3697a0;
+	display: block;
+	height: 55px;
+	overflow: hidden;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+	padding: 0px 24px;
+	clear: both;
+}
+.tf .tf_logo{
+	display: block;
+	float: left;
+}
+.tf .tf_logo img{
+	width: 140px;
+	height: 40px;
+	margin-top: 6px;
+}
+.tf .tf_menu{
+	display: block;
+	float: right;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+.tf .tf_menu li{
+	float: left;
+	line-height: 55px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #176e76;
+}
+.tf .tf_menu li a{
+	text-decoration: none;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 0px 15px;
+}
+.tf .tf_control{
+	display: block;
+	float: right;
+	padding-left: 40px;
+}
+.tf .tf_control span{
+	color: white;
+	font-size: 14px;
+	line-height: 55px;
+	padding: 0px 4px;
+}
+.tf .tf_control a{
+	color: white;
+	font-size: 14px;
+	line-height: 55px;
+	text-decoration: underline;
+	font-weight: bold;
+	padding: 0px 4px;
+}
+/* ---------------------- 头部 end --------------------------- */
+
+/* ---------------------- 左侧菜单 start --------------------------- */
+.lf{
+	background: #f6f6f6;
+	display: block;
+	width: 180px;
+	overflow: hidden;
+	font-family:"方正黑体简体";
+	padding: 0px;
+	margin: 0px;
+	float: left;
+	clear: left;
+}
+.lf ul{
+	list-style: none;
+	border-right: 1px solid #e6e2e2;
+	border-bottom: 1px solid #e6e2e2;
+	display: block;
+	width: 179px;
+	margin: 0px;
+	padding: 16px 0px;
+}
+.lf ul li{
+	display: block;
+	width: 100%;
+}
+.lf ul li.title a{
+	font-size: 16px;
+	font-weight: bold;
+	padding-left: 40px;
+}
+.lf ul li.title a:hover{
+	color: black;
+	background: #f6f6f6;
+}
+.lf ul li a{
+	color: black;
+	text-decoration: none;
+	font-size: 13px;
+	padding: 4px 0px 2px 64px;
+	display: block;
+}
+.lf ul li a .badge{
+	color: white;
+	background: #fd7365;
+	padding: 0px 5px;
+	margin-left: 4px;
+	font-family: '微软雅黑';
+	font-size: 12px;
+	
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.lf ul li a:hover{
+	color: white;
+	background: #fd7365;
+}
+.lf ul li a:hover .badge{
+	color: #fd7365;
+	background: white;
+}
+.lf ul li:hover a{
+	color: white;
+}
+.lf ul li a img{
+	border: none;
+	vertical-align: middle;
+	height: 24px;
+	width: 24px;
+	margin-right: 2px;
+}
+/* ---------------------- 左侧菜单 start --------------------------- */

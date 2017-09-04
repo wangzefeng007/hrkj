@@ -1,0 +1,74 @@
+<include file="common:header" />
+<link rel="stylesheet" href="__RES__/css/common-list.css">
+</head>
+<body>
+	<div class="sm">
+		<div class="current">
+			当前位置：收益列表
+			<div class="statistic">
+				共{$data.count}笔订单
+				&emsp;&emsp;
+				累计收款{$data.money}元
+			</div>
+		</div>
+		<div class="search_bar">
+			<form action="{:U('userSalerAccount/lists')}" id="" name="" method="get">
+				<!--
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" name="starttime" placeholder="开始时间" value="{$_params.starttime}"/>
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" name="endtime" placeholder="结束时间" value="{$_params.endtime}"/>
+				-->
+				<label>商户：</label>
+				<select class="select rm" name="keytype">
+					<option value="">请选择</option>
+					<option value="mobile" <if condition="$_params['keytype'] eq mobile">selected="selected"</if>>手机号码</option>
+					<option value="name" <if condition="$_params['keytype'] eq name">selected="selected"</if>>姓名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button_primary right" type="button">表格下载</button>
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>商户</th>
+						<th>账号</th>
+						<th>支付方式</th>
+						<th>结算金额</th>
+						<th>商户分润</th>
+						<th>升级分润</th>
+						<th>佣金分润</th>
+						<th>分销佣金</th>
+						<th>分销返现</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td><input type="checkbox" /></td>
+						<td>{$item.name}</td>
+						<td>{$item.mobile}</td>
+						<td>{$item.pt_name}</td>
+						<td>{$item.money}</td>
+						<td>{$item.normal_split_money}</td>
+						<td class="primary"><a class="red" href="./trade_income_detail.html">{$item.upgrade_split_money}</a></td>
+						<td class="primary"><a class="red" href="./trade_income_detail.html">{$item.commission_split_money}</a></td>
+						<td class="primary"><a class="red" href="./trade_income_detail.html">{$item.commission_money}</a></td>
+						<td class="primary"><a class="red" href="./trade_income_detail.html">{$item.saler_back_money}</a></td>
+					</tr>
+					</foreach>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />

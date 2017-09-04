@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+.paging_bar{
+	margin: 0px 0px 0px 0px;
+	background: none;
+	padding: 8px 0px 12px 0px;
+	text-align: center;
+	height: auto;
+}
+.paging_bar .default{
+	border: none;
+	background: white;
+	color: #999999;
+	font-size: 1.4rem;
+	padding: 4px 18px 4px 18px;
+	text-decoration: none;
+	margin: 0px 1px 0px 1px;
+	border: 1px solid #cbcbcb;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.paging_bar .active{
+	background: #cbcbcb;
+	color: white;
+}

@@ -1,0 +1,171 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/merchant_edit.css">
+	<div class="sm">
+		<div class="current">当前位置：商户&ensp;&gt;&ensp;商户编辑</div>
+		<form action="{:U('userSaler/business')}" method="post" class="ajax-form" >
+		<input type="hidden" name="id" value="{$user.id}">
+		<input type="hidden" name="verify" value="{$verify}">
+		
+		<div class="base_bar">
+		<!--
+			<div class="group">
+				<label>上级商户：</label>
+				<input type="text" name="pword" id="pword" value="{$user.parent.name} - {$user.parent.mobile}" disabled="true"/>
+			</div>
+			-->
+			
+			
+			<div class="group">
+				<label><span class="danger">*</span>店铺名：</label>
+				<input type="text" name="name" value="{$user.business_name}"/>
+			</div>			
+			<div class="group">
+				<label><span class="danger">*</span>店铺所在地：</label>
+				<input type="text" name="address"  value="{$user.business_address}"/>
+			</div>			
+			<div class="group">
+				<label>状态：</label>
+					<select name="status" id="status">
+						<if condition="$user['status_business'] eq 2">
+							<option value="1">审核通过</option>
+							<option value="0">审核不通过</option>
+						<elseif condition="$user['status_business'] eq 1" />
+							<option value="1">正常</option>							
+						<else />
+							<option value="0">未提交</option>
+						</if>
+					</select>
+			</div>			
+		</div>
+		<div class="title_bar">
+			<span>证件照片</span>
+			<!--<button class="button" type="button">上传图片</button>-->
+		</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>门店照：</label>				
+				<div class="image_group">					
+					<li>						
+						<a class="fancybox" rel="group" href="{$user.businesspic}"><img src="{$user.businesspic}" height="80" border="0"></a>
+						<a class="close" onclick="close_img(this)" href="javascript:">x</a>
+					</li>							
+				</div>
+			</div>
+			
+		</div>
+		<if condition="!$user.profile.video && is_file(ROOT_PATH.$user['profile']['video'].'.flv')">						
+			<div class="video_bar" style="text-align:center">
+				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" height="600" width="500"> 
+					<param name="movie" value="__RES__/vcastr22.swf?vcastr_file={$user.profile.video}.flv"> 
+					<param name="quality" value="high"> 
+					<param name="allowFullScreen" value="true" />
+					<param name="wmode" value="opaque">
+					<embed src="__RES__/vcastr22.swf?vcastr_file={$user.profile.video}.flv" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="500" height="600" wmode="opaque">
+					</embed> 
+				</object> 
+			</div>
+		</if>
+		<if condition="$user.profile.video_ag && is_file(ROOT_PATH.$user['profile']['video_ag'].'.flv')">						
+			<div class="base_bar">
+				<div class="group">
+					<label>二次认证视频：</label>
+					<if condition="!$user.profile.video_ag && is_file(ROOT_PATH.$user['profile']['video_ag'])">	
+						<a href="{$user.profile.video_ag}" target="_blank" title="无法直接下载的,请点 右键-另存为" style="color:#3366cc;text-decoration:none;">下载视频</a>
+					</if>
+				</div>
+				<div class="group">
+					<div class="video_bar" style="text-align:center">
+						<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" height="600" width="500"> 
+							<param name="movie" value="__RES__/vcastr22.swf?vcastr_file={$user.profile.video_ag}.flv"> 
+							<param name="quality" value="high"> 
+							<param name="allowFullScreen" value="true" />
+							<param name="wmode" value="opaque">
+							<embed src="__RES__/vcastr22.swf?vcastr_file={$user.profile.video_ag}.flv" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="500" height="600" wmode="opaque">
+							</embed> 
+						</object> 
+					</div>
+				</div>
+			</div>
+		</if>
+		<div class="button_bar">
+			<div>
+				<button class="dufault" type="button" onclick="javascript:history.go(-1);">取消</button>
+				<button class="primary" type="submit" name="submit" value="1">确认</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<link rel="stylesheet" href="__RES__/js/plugins/fancybox/jquery.fancybox.css">
+	<script type="text/javascript" src="__RES__/js/plugins/fancybox/jquery.fancybox.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox({
+			autoCenter: false,
+			autoScale: true,
+			maxWidth  : parseInt(document.body.clientWidth) * 0.95,
+			maxHeight : parseInt(document.body.clientHeight) * 0.95,
+			helpers : {
+				overlay : false
+			}
+		});
+	});
+	</script>
+	<script type="text/javascript">
+	$(function(){
+		$("#status").change(function(){
+			if ($("#status").val() == '+2') $("#status_data").show();
+			else $("#status_data").hide();
+		});
+		$("#search").click(function(){
+			var pword = $("#pword").val();
+			if (pword != '')
+			{
+				var url = "/admin.php?m=userSaler&a=search&pword="+encodeURI(pword);
+				$.ajax({
+				url:url,
+				type:'get',
+				dataType:'json',
+				success:function(response)
+				{
+					if(response.result.code == '10000')
+					{
+						$("#pid").empty();
+						var pids = response.data;
+						
+						if (pids)
+						{						
+							for(var k in pids)
+							{
+								$("#pid").append("<option value='"+pids[k].id+"'>"+pids[k].name+"-"+pids[k].mobile+"</option>");
+							}
+							$("#pid").show();
+						}
+					}
+					else
+					{
+						alert("未找到对应商户");
+					}
+				}	
+				});
+			}
+		});
+
+	});
+	</script>
+	<script type="text/javascript">
+	$(function(){
+		imageUp("imageUp_1");
+		imageUp("imageUp_2");
+		imageUp("imageUp_3");
+		// imageUp("imageUp_4");
+		videoUp("videoUp_1");
+	});
+		var file_url  = "__RES__", 					//引用js路径
+		up_url  = "{:U('upload/upload')}",			//图片处理路径		
+		dir_url = "{:substr(C('URL_UPLOADER_TMP'),1)}",	//图片保存路径
+		del_url = "{:U('upload/imgdel')}";			//删除处理路径
+	</script>
+	<script type="text/javascript" src="__RES__/js/uploadify/jquery.uploadify.min.js?ver={:rand(0,9999)}"></script>
+	<script type="text/javascript" src="__RES__/js/uploadfile.js?ver={:rand(0,9999)}"></script>
+	<link rel="stylesheet" href="__RES__/js/uploadify/uploadify.css">	
+	<include file="common:footer" />

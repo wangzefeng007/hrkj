@@ -1,0 +1,263 @@
+@CHARSET "UTF-8";
+
+body{
+	background: white;
+	margin: 0px;
+	padding: 0px;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+
+.sm{
+	padding: 0px 30px;
+	margin: 0px;
+}
+.sm .current{
+	padding: 16px 22px;
+	margin: 0px;
+	border-bottom: 1px solid #dadada;
+	font-size: 14px;
+}
+
+.base_bar{
+	margin: 40px 0px 0px 0px;
+	padding: 0px;
+}
+.base_bar .group{
+	margin: 0px;
+	padding: 0px;
+	zoom: 1; overflow: hidden;		/* 清除浮动 */
+	clear: both;
+	padding: 8px 0px;
+}
+.base_bar .group label{
+	display: block;
+	float: left;
+	width: 25%;
+	text-align: right;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	padding-right: 6px;
+}
+.base_bar .group span{
+	display: block;
+	float: left;
+	width: 25%;
+	text-align: left;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	padding-right: 6px;
+}
+.base_bar .group input{
+	float: left;
+	height: 30px;
+	width: 300px;
+	border: 1px solid #c6c4c4;
+	line-height: 30px;
+}
+.base_bar .group input.checkbox{
+	height: auto;
+	width: auto;
+	float: none;
+	vertical-align: middle;
+	border: none;
+}
+.base_bar .group select{
+	float: left;
+	height: 30px;
+	width: 300px;
+	border: 1px solid #c6c4c4;
+}
+.base_bar .group button{
+	float: left;
+	height: 30px;
+	width: 50px;
+	border: 1px solid #b1b1b1;
+	background: #efeff0;
+	margin: 0px 8px;
+}
+.base_bar .group .text_ph{
+	position: relative;
+	overflow: hidden;
+	display: block;
+	height: 30px;
+	width: 600px;
+	border: 1px solid #c6c4c4;
+}
+.base_bar .group .text_ph div{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 1;
+	font-size: 12px;
+	height: 30px;
+	width: 600px;
+	display: block;
+	color: #999999;
+	line-height: 30px;
+	padding-left: 6px;
+}
+.base_bar .group .text_ph input{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
+	border: none;
+	background: none;
+	height: 30px;
+	width: 600px;
+}
+.title_bar{
+	margin: 10px 22px;
+	padding: 12px 360px 12px 24px;
+	border-bottom: 1px dashed #d8d8d8;
+	zoom: 1; overflow: hidden;		/* 清除浮动 */
+}
+.title_bar span{
+	font-size: 16px;
+	font-weight: bold;
+}
+.title_bar .button{
+	float: right;
+	height: 28px;
+	width: 74px;
+	border: 1px solid #b1b1b1;
+	background: #eff0f0;
+	cursor: pointer;
+}
+.img_bar{
+	margin: 0px;
+	padding: 20px 60px;
+	zoom: 1; overflow: hidden;		/* 清除浮动 */
+}
+.img_bar .item{
+	float: left;
+	display: block;
+	height: 150px;
+	width: 130px;
+	position: relative;
+	margin-right: 60px;
+}
+.img_bar .item .img{
+	width: 118px;
+	height: 118px;
+	border: 1px solid #cdcdcd;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+	margin: 5px;
+	cursor: pointer;
+}
+.img_bar .item .delete{
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 2;
+}
+.img_bar .item .delete img{
+	width: 18px;
+	height: 18px;
+	border: none;
+}
+.img_bar .item .title{
+	display: block;
+	width: 130px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	z-index: 2;
+	text-align: center;
+	font-size: 13px;
+	color: #666666;
+}
+.video_bar{
+	margin: 0px;
+	padding: 14px 60px;
+}
+.video_bar .title{
+	display: block;
+	width: 440px;
+	text-align: center;
+	color: #666666;
+	font-size: 13px;
+	padding-top: 14px;
+}
+.button_bar{
+	margin: 20px 60px 20px 25%;
+	padding: 0px 0px 0px 6px;
+	zoom: 1; overflow: hidden;		/* 清除浮动 */
+	padding-bottom: 100px;
+}
+.button_bar div{
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+.button_bar .dufalut{
+	width: 150px;
+	height: 30px;
+	background: #d5d5d5;
+	border: 1px solid #c6c4c4;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.button_bar .primary{
+	width: 150px;
+	height: 30px;
+	background: #7cbae5;
+	border: 1px solid #619dc7;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.order_bar{
+	margin: 18px 22px 0px 22px;
+	padding: 0px;
+}
+.order_bar table{
+	width: 60%;
+	border-collapse:collapse;
+}
+.order_bar table thead tr{
+	background: #d5e4fa;
+	border: 1px solid #c2d5ef;
+}
+.order_bar table thead tr th{
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 0px;
+}
+.order_bar table tbody{
+	border: 1px solid #c6d7f1;
+}
+.order_bar table tbody .small_title{
+	background: #f2f7ff;
+}
+.order_bar table tbody .b_line{
+	border-bottom: 1px solid #efefef;
+}
+.order_bar table tbody .small_title td{
+	padding: 12px 0px;
+	text-align: center;
+	font-size: 14px;
+}
+.order_bar table tbody tr td{
+	padding: 12px 0px;
+	font-size: 14px;
+	color: #666666;
+}
+.order_bar table tbody tr td img{
+	border: 1px solid #cdcdcd;
+}
+.order_bar table tbody tr td.red{
+	color: #fd7365;
+}

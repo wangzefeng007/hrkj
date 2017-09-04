@@ -1,0 +1,50 @@
+<!--header-->
+<include file="common:header" />
+
+<div id='wrapper'>
+	<section id='content'>
+		<div class='container-fluid'>
+			<div class='row-fluid' id='content-wrapper'>
+				<div class='span12'>
+					<div class='row-fluid'>
+						<div class='span12'>
+							<div class='page-header'>
+								<h1 class='pull-left'>
+									<span>##title##</span>
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class='row-fluid'>
+						<div class='span12 box'>
+							<div class='box-header blue-background'>
+								<div class='title'>
+									<div class='icon-edit'></div>
+									##subtitle##
+								</div>
+								
+							</div>
+							<div class='box-content'>
+								<form accept-charset="UTF-8" action="##form_action##" class="form form-horizontal validate-form ajax-form" method="##form_method##" style="margin-bottom: 0;" />
+									<input type="hidden" name="id" value="{$info.id}">
+									##inputs##									
+									<div class='form-actions'>
+										<button class='btn btn-primary' type='submit' name="submit" value="1">
+											<i class='icon-save'></i>
+											保存
+										</button>
+										<button class='btn' type='cannel'>取消</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<!--footer-->
+<include file="common:footer" />

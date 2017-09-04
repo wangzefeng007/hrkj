@@ -1,0 +1,82 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="" method="post" class="ajax-form">
+		<input type="hidden" value="1" name="submit">
+		<div class="current">当前位置：消息管理</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>标题：</label>
+				<input type="text" name="title"/>
+			</div>
+			
+			<div class="group">
+				<label>对象：</label>
+				<select class="select rm" name="type"  id='duixiang'>
+					<option value="0">所有</option>
+					<option value="1">对个人</option>
+					<option value="2">对等级</option>
+					<option value="3">对商户状态</option>
+				</select>
+			</div>
+			<div class="group" id='duixiang_0' style='display:block'>
+				<label></label>
+				<select class="select rm" id='audience_0' name="audience">
+						<option value="所有">所有</option>
+				</select>
+			</div>
+			<div class="group" id='duixiang_1' style='display:none'>
+				<label>填写该商户的手机号码:</label>
+				<input type="text" id='audience_1' name="audience_1" value=""/>
+			</div>
+			<div class="group" id='duixiang_2' style='display:none'>
+				<label></label>
+				<select class="select rm" id='audience_2' name="audience_1">
+						<foreach name="levels" item="item">
+						<option value="{$item.name}">{$item.name}</option>
+						</foreach>
+				</select>
+			</div>
+			<div class="group" id='duixiang_3' style='display:none'>
+				<label></label>
+				<select class="select rm" id='audience_3' name="audience_1">
+						<option value="已开通">已开通</option>
+						<option value="未审核">未审核</option>
+						<option value="信息不全">信息不全</option>
+						<option value="冻结">冻结</option>
+						<option value="初审通过">初审通过</option>
+				</select>
+			</div>
+			<div class="group">
+				<label>内容：</label>
+				<textarea name="content" class="textarea" rows="6">{$rs.content}</textarea>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />
+<!-------------- 级联下拉菜单-------------->
+<script type="text/javascript">
+//级联下拉菜单
+$(function(){
+	$('#duixiang').change(function(){
+		var val=$('#duixiang').val();
+		for(var i=0;i<4;i++)
+		{
+			$('#duixiang_'+i).hide();
+			$('#audience_'+i).attr("name","audience_1");
+			if(i==val)
+			{
+				$('#audience_'+i).attr("name","audience");
+				$('#duixiang_'+i).show();
+			}
+		}
+	});
+});
+</script>
+

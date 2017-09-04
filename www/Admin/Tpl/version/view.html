@@ -1,0 +1,70 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="{:U('save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<div class="current">当前位置：APP更新</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>系统：</label>
+				<select name="os"  id="os">
+					<option value="1" <if condition="$rs['os'] eq 1">selected="selected"</if> >Android</option>
+					<option value="2" <if condition="$rs['os'] eq 2">selected="selected"</if> >iOS</option>
+				</select>
+			</div>
+			<div class="group">
+				<label>版本编码：</label>
+				<input type="text" name="version_code" value="{$rs.version_code}"/>
+			</div>
+			<div class="group">
+				<label>版本名称：</label>
+				<input type="text" name="version_name" value="{$rs.version_name}"/>
+			</div>
+			<div class="group">
+				<label>版本描述：</label>
+				<input type="text" name="version_desc" value="{$rs.version_desc}"/>
+			</div>
+			<div class="group">
+				<label>下载链接：</label>
+				<input type="text" name="down_url" value="{$rs.down_url}"/>
+			</div>
+			<div class="group" <if condition="$rs.os eq 2">style="display:none"</if> id="channel_id">
+				<label>渠道：</label>
+				<input name="channel_id[]" type="checkbox" style="width:30px;" <if condition="$rs.channel_id eq 1">checked="checked"</if>  style="width:30px;" value="1" /><label  style="width:30px;">百度</label>
+				<input name="channel_id[]" type="checkbox" style="width:30px;" <if condition="$rs.channel_id eq 2">checked="checked"</if>  value="2" /><label  style="width:30px;">360</label>
+				<input name="channel_id[]" type="checkbox" style="width:30px;" <if condition="$rs.channel_id eq 3">checked="checked"</if>  value="3" /><label  style="width:30px;">腾讯</label>
+			<input name="channel_id[]" type="checkbox" style="width:30px;" <if condition="$rs.channel_id eq 4">checked="checked"</if>  value="4" /><label  style="width:30px;">蒲公英</label>
+			<input name="channel_id[]" type="checkbox" style="width:30px;" <if condition="$rs.channel_id eq 5">checked="checked"</if>  value="5" /><label  style="width:30px;">线上</label>
+			<input name="channel_id[]" type="checkbox" style="width:30px;" <if condition="$rs.channel_id eq 6">checked="checked"</if>  value="6" /><label  style="width:30px;">测试</label>
+			</div>
+			<div class="group">
+				<label>状态：</label>
+				<select name="status" id="status">
+						<option value="0" <if condition="$rs.status eq 0">selected="selected"</if>>待审核</option>
+						<option value="1" <if condition="$rs.status eq 1">selected="selected"</if>>审核通过</option>
+						<option value="2" <if condition="$rs.status eq 2">selected="selected"</if>>审核不通过</option>
+				</select>
+			</div>
+			<div class="group">
+				<label>是否强制更新 	：</label>
+				<input type="radio" class="radio" name="is_update" value="2" checked="checked" /><label class="tip">是</label>
+				<input type="radio" class="radio" name="is_update" value="1" <if condition="$rs[is_update] neq 2">checked="checked"</if> /><label class="tip">否</label>
+			</div>
+		</div>
+		<div class="order_bar"></div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+        $(function(){
+            $("#os").change(function(){
+                if ($("#os").val() == '1') $("#channel_id").show();
+                else $("#channel_id").hide();
+            });
+        });
+	</script>
+	<include file="common:footer" />

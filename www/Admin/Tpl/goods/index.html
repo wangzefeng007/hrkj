@@ -1,0 +1,85 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<style>
+	.table table{
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		border-collapse: collapse;
+		border: none;
+	}
+	.table table thead tr{
+		background: #d5e4fa;
+		border: 1px solid #c2d5ef;
+	}
+	.table table tbody tr{
+		border-bottom: 1px solid #e9e9e9;
+	}
+	</style>
+		<div class="sm">
+		<div class="current">当前位置：商品管理</div>
+		<div class="search_bar">
+			<form action="{:U('goods/index')}" id="" name="" method="get">
+				<label>筛选：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="price" <if condition="$_params['keytype'] eq price">selected="selected"</if>>价格</option>
+				</select>
+				<select class="select rm" name="keyword">
+					<option value="desc" <if condition="$_params['keyword'] eq desc">selected="selected"</if>>由高到低</option>
+					<option value="asc" <if condition="$_params['keyword'] eq asc">selected="selected"</if>>由低到高</option>
+				</select>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" value="{$_params[starttime]}" name="starttime"/>
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" value="{$_params[endtime]}" name="endtime"/>
+				<label>关键词：</label>
+				<input class="text_l rm" type="text" name="name" value="{$_params['name']}"/>
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button">批量删除</button>
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th width="8%" class="left">商品名称</th>
+						<th width="15%">&nbsp;</th>
+						<th>卖家</th>
+						<th>账号</th>
+						<th>价格</th>
+						<th>销量</th>
+						
+						<th>库存</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr>
+						<td><input type="checkbox" name="id" value="{$item.id}"/></td>
+						<td class="left"><img class="goods_thumb_size_img" data-echo="{$item.thumb|default='__RES__/images/img_no.png'}" src="__RES__/images/img_no.png" /></td>
+						<td class="left">{$item.name}</td>
+						<td>{$item.us_name}</td>
+						<td>{$item.mobile}</td>
+						<td class="red">{$item.price}</td>
+						<td>{$item.sale_count}</td>
+						
+						<td>{$item.stock}</td>
+						<td><a href="{:str_replace('admin.php','wap.php',U('web/goods/',array('gid'=>$item['id'])))}" target="_blank">查看</a>|<a href="#">关闭</a></td>
+					</tr>
+					</foreach>
+				
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript" src="__RES__/js/echo.js"></script>
+	<script type="text/javascript" src="__RES__/js/common.js"></script>
+	<include file="common:footer" />

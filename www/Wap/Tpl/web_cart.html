@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>购物车</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/cart.css">
+</head>
+<body>
+
+	<header>
+		<div class="button"><a class="back" href="javascript:window.history.back();"><img src="__WAP__/images/btn_back.png" />返回</a></div>
+		<div class="title">购物车</div>
+		<div class="button"></div>
+	</header>
+	<form id="orderForm" action="{:U('web/address')}" method="post" class="myForm" onsubmit="javascript:return settle();">
+	<input type="hidden" name="usid" value="{$usid}">
+	<foreach name="cart.shop" item="vo" key="s_k">
+		<div class="cart_item_bar">
+			<div class="title">
+				<a class="checkbox checkboxshop checkboxvisible" href="javascript:void(0)"></a>
+				<a class="left primary" href="javascript:void(0)">{:htmlspecialchars($vo['name'])}</a>
+				<a class="right danger btn_del" href="javascript:void(0)">删除</a>
+				<a class="right danger btn_edit" href="javascript:void(0)">编辑</a>
+			</div>
+			<hr class="gray_solid">
+				<foreach name="vo.goods" item="go" key="g_k">
+					<div class="info_block">
+						<a class="checkbox checkboxitem checkboxvisible" href="javascript:void(0)"></a>
+						<div class="img"><img src="{$go.thumb|default='__WAP__/images/img_goods.jpg'}" /></div>
+						<div class="info_title">
+							<div class="name">{:htmlspecialchars($go['name'])}<input id="cart_id_{$s_k}_{$g_k}" name="cart_id[{$s_k}][{$g_k}]" type="checkbox" class="chkbox" value="{$g_k}" style="display:none"></div>
+							<!--<div class="standard">颜色：墨绿色&emsp;尺寸：M</div>-->
+						</div>
+						<div class="calc">
+							<a class="button reduce" href="javascript:void(0)">-</a>
+							<div class="input"><input value="{$go.num}" type="text" name="cart_num[{$s_k}][{$g_k}]" id="num_{$s_k}_{$g_k}"></div>
+							<a class="button add" href="javascript:void(0)">+</a>
+						</div>
+						<div class="info_price">
+							<div class="price">￥<span class="price_val">{$go.price}</span></div>
+							<div class="num">×<span class="num_val">{$go.num}</span></div>
+						</div>
+					</div>
+				</foreach>
+			<hr class="gray_solid">
+			<div class="statistic_block">
+				<span>共1件&emsp;</span>
+				<span>合计：</span>
+				<span><strong>￥<span class="total_val">{$vo.s_money}</span></strong></span>
+				<input name="is_cart" type="hidden" id="is_cart" value="{$is_cart}">
+			</div>
+		</div>
+	</foreach>
+	<div class="cart_btn_bar_placeholder"></div>
+	<div class="cart_btn_bar">
+		<a class="checkbox checkboxall checkboxvisible" href="javascript:void(0)"></a><label>&nbsp;全选</label>
+		<a class="delete"><img src="__WAP__/images/icon_delete.png" /></a>
+		<button class="submit">结算</button>
+		<span class="total">总计：<span class="price">￥<span class="all_total">{$cart.t_money}</span></span>&ensp;</span>
+	</div>
+</form>
+</body>
+<script type="text/javascript" src="__WAP__/plugins/zepto/zepto.min.js"></script>
+<script type="text/javascript">
+/* 结算 */
+function settle()
+{
+	var rs = false;
+	$(".checkbox").each(function(i){
+		$checkbox = $(this);
+		if($checkbox.hasClass("checkbox_checked") && !$checkbox.hasClass("checkboxall") && !$checkbox.hasClass("checkboxshop"))
+		{
+			rs = true;
+		}
+	});
+	if(!rs)alert("请选择要结算的商品！");
+	return rs;
+}
+
+$(function(){
+	var is_cart =  "{$is_cart}";
+	/* 立即购买时,自动全选 */
+	if (is_cart == "0") {
+		$(".checkbox").addClass("checkbox_checked");
+		$(".chkbox").prop("checked", true);
+	}
+	totalVal();  //金额计算
+	/* checkbox按钮 */
+	$(document).on("click", ".checkbox", function(){
+		var $btn = $(this).toggleClass("checkbox_checked");
+		$(this).hasClass("checkbox_checked")?($(this).parent().find(".chkbox").prop("checked", true)):($(this).parent().find(".chkbox").prop("checked", false));
+		if(!$(this).hasClass("checkbox_checked"))
+		{
+			$(this).parent().parent().find(".checkboxshop").removeClass("checkbox_checked");
+			$(".checkboxall").removeClass("checkbox_checked");
+		}
+		else
+		{
+			
+			var shopsize = $(this).parent().parent().find(".checkboxitem.checkboxvisible").size();
+			var shopCheckedSize = $(this).parent().parent().find(".checkboxitem.checkbox_checked.checkboxvisible").size();
+			var allSize = $(".checkboxitem.checkboxvisible").size();
+			var allCheckedSize = $(".checkboxitem.checkbox_checked.checkboxvisible").size();
+			if(shopsize==shopCheckedSize)$(this).parent().parent().find(".checkboxshop").addClass("checkbox_checked");
+			if(allSize==allCheckedSize)$(".checkboxall").addClass("checkbox_checked");
+		}
+		totalVal();
+	});
+	/* 删除按钮 */
+	$(document).on("click", ".btn_del", function(){
+		if(confirm("确定是否删除？"))
+		{
+			$(this).parent().parent().find(".checkbox").each(function(i){
+				$checkbox = $(this);
+				if($checkbox.hasClass("checkbox_checked") && $checkbox.hasClass("checkboxitem"))
+				{
+					$checkbox.parent().find(".num_val").html("0");
+					$(".chkbox").prop("checked", false);
+					$checkbox.removeClass("checkbox_checked").removeClass("checkboxvisible");
+					$checkbox.parent().hide();
+					totalVal();
+					cart_del($(this).parent().find(".input input").prop("id"));
+				}
+				else if($checkbox.hasClass("checkbox_checked") && $checkbox.hasClass("checkboxshop"))
+				{
+					$checkbox.parent().parent().find(".num_val").html("0");
+					$checkbox.parent().parent().find(".chkbox").prop("checked", false);
+					$checkbox.removeClass("checkbox_checked").removeClass("checkboxvisible");
+					$checkbox.parent().parent().hide();
+					totalVal();
+				}
+			});
+		}
+	});
+	$(document).on("click", ".delete", function(){
+		if(confirm("确定是否删除？"))
+		{
+			$(".checkbox").each(function(i){
+				$checkbox = $(this);
+				if($checkbox.hasClass("checkbox_checked") && $checkbox.hasClass("checkboxitem"))
+				{
+					$checkbox.parent().find(".num_val").html("0");
+					$(".chkbox").prop("checked", false);
+					$checkbox.removeClass("checkbox_checked").removeClass("checkboxvisible");
+					$checkbox.parent().hide();
+					totalVal();
+					cart_del($(this).parent().find(".input input").prop("id"));
+				}
+				else if($checkbox.hasClass("checkbox_checked") && $checkbox.hasClass("checkboxshop"))
+				{
+					$checkbox.parent().parent().find(".num_val").html("0");
+					$checkbox.parent().parent().find(".chkbox").prop("checked", false);
+					$checkbox.removeClass("checkbox_checked").removeClass("checkboxvisible");
+					$checkbox.parent().parent().hide();
+					totalVal();
+				}
+			});
+		}
+	});
+	/* 店铺全选按钮 */
+	$(document).on("click", ".title .checkbox", function(){
+		$btn = $(this).hasClass("checkbox_checked")?($(this).parent().parent().find(".checkbox").addClass("checkbox_checked")):($(this).parent().parent().find(".checkbox").removeClass("checkbox_checked"));
+		$(this).hasClass("checkbox_checked")?($(this).parent().parent().find(".chkbox").prop("checked", true)):($(this).parent().parent().find(".chkbox").prop("checked", false));
+		if(!$(this).hasClass("checkbox_checked"))
+		{
+			$(".checkboxall").removeClass("checkbox_checked");
+		}
+		else
+		{
+			var allShopSize = $(".checkboxshop.checkboxvisible").size();
+			var allShopCheckedSize = $(".checkboxshop.checkbox_checked.checkboxvisible").size();
+			if(allShopSize==allShopCheckedSize)$(".checkboxall").addClass("checkbox_checked");
+		}
+		totalVal();
+	});
+	/* 底部栏全选按钮 */
+	$(document).on("click", ".cart_btn_bar .checkbox", function(){
+		$btn = $(this).hasClass("checkbox_checked")?($(".checkbox").addClass("checkbox_checked")):($(".checkbox").removeClass("checkbox_checked"));
+		$(this).hasClass("checkbox_checked")?($(".chkbox").prop("checked", true)):($(".chkbox").prop("checked", false));
+		totalVal();
+		//alert($btn.hasClass("checkbox_checked")?"全选":"全不选");
+	});
+	/* 编辑按钮 */
+	$(document).on("click", ".btn_edit", function(){
+		var $calc = $(this).parent().parent().find(".calc");
+		var $title = $(this).parent().parent().find(".info_title");
+		if($calc.css("display")=="none"){
+			$title.hide();
+			$calc.show();
+		} else {
+			$calc.hide();
+			$title.show();
+		}
+	});
+	
+	/* 计算总和 */
+	function totalVal()
+	{
+		var total = 0;
+		$(".info_price").each(function(i){
+			var checked = $(this).parent().find(".checkbox").hasClass("checkbox_checked");
+			if(checked)
+			{
+				total += (parseFloat($(this).find(".price_val").html()) * parseFloat($(this).find(".num_val").html()));
+				total = Math.round(total*100)/100;
+				$(".total_val").html(total);
+				$(".all_total").html(total);
+			}
+			else
+			{
+				total = Math.round(total*100)/100;
+				$(".total_val").html(total);
+				$(".all_total").html(total);
+			}
+		});
+	}
+	//ajax后端更新购物车数量
+	function cart_update(num_id,num){
+		$.post("{:U('cart_update')}", {num_id:num_id,num:num});
+	}	
+	//ajax后端更新删除购物车商品
+	function cart_del(del_id){
+		$.post("{:U('del_cart')}", {del_id:del_id});
+	}
+	/* 数字编辑器 */
+	$(document).on("click", ".add", function(){
+		var $num = $(this).parent().find("input");
+		var num = isNaN(parseFloat($num.val()))?0:parseFloat($num.val()) + 1;
+		$num.val(num);
+		$(this).parent().parent().find(".num_val").html(num);
+		totalVal();
+		cart_update($num.attr('id'),num);
+	});
+	$(document).on("click", ".reduce", function(){
+		var $num = $(this).parent().find("input");
+		var num = isNaN(parseFloat($num.val()))?0:parseFloat($num.val()) - 1;
+		num = num<=1?1:num;
+		$num.val(num);
+		$(this).parent().parent().find(".num_val").html(num);
+		totalVal();
+		cart_update($num.attr('id'),num);
+	});
+	$(document).on("keyup", ".calc input", function(){
+		totalVal();
+	});
+});
+</script>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

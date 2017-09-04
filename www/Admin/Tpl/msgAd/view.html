@@ -1,0 +1,73 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="{:U('save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<div class="current">当前位置：广告管理</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>名称：</label>
+				<input type="text" name="name" value="{$rs.name}"/>
+			</div>
+			<div class="group">
+				<label>图片：</label>
+				<div class="file_control" style="overflow:visible !important; height:auto;">
+					<span class="file-btn file-btn-success fileinput-button">
+						<input class="file" type="file" name="image" id="imageUp"/>
+					</span>
+					<div class="image_group">
+					<if condition="$rs[image]">
+						<li><input type="hidden" value="{$rs.image}" name="image"><img src="{$rs.image}" height="60"><a onclick="close_img(this)" class="close" href="javascript:">x</a></li>
+					</if>
+				</div>
+				</div>
+			</div>
+			<div class="group">
+				<label>链接：</label>
+				<input type="text" name="url" value="{$rs.url}"/>
+			</div>
+			<div class="group">
+				<label>描述：</label>
+				<input type="text" name="desc" value="{$rs.desc}"/>
+			</div>
+			<div class="group">
+				<label>广告位：</label>
+				<select name="class">
+					<option value="1" selected="selected">首页广告</option>
+				</select>
+			</div>
+			<div class="group">
+				<label>宽度：</label>
+				<input type="text" name="width" value="{$rs.width}"/>
+			</div>
+			<div class="group">
+				<label>高度：</label>
+				<input type="text" name="height" value="{$rs.height}"/>
+			</div>
+			<div class="group">
+				<label>状态：</label>
+				<input type="radio" class="radio" name="status" value="1" checked="checked" /><label class="tip">打开</label>
+				<input type="radio" class="radio" name="status" value="0" <if condition="$rs[status] eq 0">checked="checked"</if> /><label class="tip">关闭</label>
+			</div>
+		</div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />
+<!-------------- 文件上传组件-------------->
+<script type="text/javascript">
+$(function(){
+	imageUp("imageUp");
+});
+	var file_url  = "__RES__", 					//引用js路径
+	up_url  = "{:U('upload/upload')}",			//图片处理路径		
+	dir_url = "{:substr(C('URL_UPLOADER_TMP'),1)}",	//图片保存路径
+	del_url = "{:U('upload/imgdel')}";			//删除处理路径
+</script>
+<script type="text/javascript" src="__RES__/js/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__RES__/js/uploadfile.js"></script>
+<link rel="stylesheet" href="__RES__/js/uploadify/uploadify.css">

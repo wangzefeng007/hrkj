@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>订单详情</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/order.css">
+</head>
+<body>
+	<header>
+		<div class="button"><a class="back" href="javascript:window.history.back();"><img src="__WAP__/images/btn_back.png" /></a></div>
+		<div class="title">订单详情</div>
+		<div class="button"></div>
+	</header>
+	<div class="order_detail_status">
+		<div class="item active">	
+			<div class="title"><img src="__WAP__/images/icon_order.png" />{$order.status_name}</div>
+			<div class="content">订单金额（含运费）：￥{$order.money}</div>
+			<div class="content">运费：￥{$order.logistics_fee}</div>
+		</div>
+		<div class="item">
+			<div class="title"><img src="__WAP__/images/icon_receiver.png" />收货人：{$order.name}&emsp;{$order.mobile}</div>
+			<div class="content">收货地址：{$order.province}{$order.city}{$order.area}{$order.address}</div>
+		</div>
+		<div class="item"><hr class="gray_solid"></div>
+		<div class="item">
+			<div class="title"><img src="__WAP__/images/icon_message.png" />买家留言：</div>
+			<div class="content">{$order.message}</div>
+		</div>
+	</div>
+	<div class="order_item_bar">
+		<div class="title">
+			<a class="left" href="#">{$order.us_shop}&ensp;&gt;</a>
+		</div>
+		<foreach name="order.goods_list" item="go">
+			<hr class="gray_solid">
+			<div class="info_block">
+				<div class="img"><img src="{$go.thumb|default='__WAP__/images/img_goods.jpg'}" /></div>
+				<div class="info_title">
+					<div class="name">{:htmlspecialchars($go['name'])}</div>
+					<!--<div class="standard">颜色：墨绿色&emsp;尺寸：M</div>-->
+				</div>
+				<div class="info_price">
+					<div class="price">￥{$go.price}</div>
+					<div class="num">×{$go.num}</div>
+				</div>
+			</div>
+		</foreach>
+		<hr class="gray_solid">
+		<div class="statistic_block">
+			<span>共{$order.goods_list|count}件&emsp;</span>
+			<span>运费：{$order.logistics_fee}&emsp;</span>
+			<span>实付：</span>
+			<span class="price">￥{$order.money}</span>
+		</div>
+		<hr class="gray_solid">
+		<div class="trade_block">
+			<div>卖家：{$saler.name}&emsp;{$saler.mobile}</div>
+			<div>订单号：{$order.sn}</div>
+			<div>下单时间：{$order.addtime|date='Y-m-d H:i', ###}</div>
+			<div>付款时间：<if condition="$order.paytime neq 0">{$order.paytime|date='Y-m-d H:i', ###}<else />-</if></div>
+			<div>成交时间：<if condition="$order.sendtime neq 0">{$order.sendtime|date='Y-m-d H:i', ###}<else />-</if></div>
+		</div>
+	</div>
+	<div class="detail_btn_bar">
+		<a class="default" href="#">取消订单</a>
+		<a class="default" href="{:U('express',array('sn'=>$order['sn']))}">查看物流</a>
+		<a class="default" href="#">付款</a>
+		<a class="default" href="#">评价</a>
+	</div>
+</body>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

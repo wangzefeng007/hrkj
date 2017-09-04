@@ -1,0 +1,108 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<div class="sm">
+		<div class="current">
+			当前位置：升级记录
+			<div class="statistic">
+			</div>
+		</div>
+		<div class="status_bar">
+			付款状态：
+			<a <if condition="$_params['status'] eq ''">class="active"</if> href="{:_U(array('status'=>false))}">
+				<span>全部</span>
+			</a>
+			<a <if condition="$_params['status'] eq '0'">class="active"</if> href="{:_U(array('status'=>0))}">
+				<span>未支付</span>
+				<!--<span class="red">6</span>-->
+			</a>
+			<a <if condition="$_params['status'] eq '1'">class="active"</if> href="{:_U(array('status'=>1))}">
+				<span>已支付</span>
+			</a>
+		</div>
+		<div class="search_bar">
+			<form action="{:U('orderUpgrade/index')}" id="" name="" method="get">
+				<label>升级日期：</label>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}" />
+				<label>关键词：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="order_upgrade.us_mobile" <if condition="$_params['keytype'] eq 'order_upgrade.us_mobile'">selected="selected"</if>>升级商户手机号</option>
+					<option value="user_saler.mobile" <if condition="$_params['keytype'] eq 'user_saler.mobile'">selected="selected"</if>>受益人手机号</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<a class="button_primary right" href="{:_U(array('export'=>xls))}">表格下载</a>
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>升级帐号</th>
+						<th>升级商户</th>
+						<th>订单号</th>
+						<th>升级费用</th>
+						<!--<th>风险金</th>-->
+						<th>升级代理类型</th>
+						<th>受益人</th>
+						<th>受益人手机号</th>
+						<th>受益百分比</th>
+						<th>受益金额</th>
+						
+						<th>付款状态</th>
+						<th>提交时间</th>
+						<th>备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td>{$item.us_mobile}</td>
+						<td>{$item.us_name}</td>
+						<td>{$item.sn}</td>
+						<td><if condition="$item['money'] gt 0">{$item['money']-$item['deposit']}<else />{$item.money}</if></td>
+						<!--<td>{$item['deposit']}</td>-->
+						<td>{$item.lf_name_new}</td>
+						<td>{$item.income_us_name}</td>
+						<td>{$item.income_us_mobile}</td>
+						<td>{$item['income_money']?($item['income_money']/($item['money']-$item['deposit'])):''}</td>
+						<td>{$item.income_money}</td>
+						<td>
+							<if condition="$item['status'] eq 1">
+							<img src="__RES__/images/icon_success.png" />
+							<else />
+							<img src="__RES__/images/icon_fail.png" />
+							</if>
+						</td>
+						<td>{$item.addtime|vtime="Y-m-d H:i:s",###}</td>
+						<td><php>if (substr($item['sn'],0,3)=='OUA') echo '被动升级'; elseif (substr($item['sn'],0,3)=='ouc') echo '推广升级'; elseif (substr($item['sn'],0,3)=='ouf') echo '交易升级';</php>{:$item['memo']?'<br/>'.$item['memo']:''}</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#audit").click(function(){
+			$("#audit_value").val('1');
+			$("#audit-form").submit();
+		});
+		$("#freeze").click(function(){
+			$("#audit_value").val('-1');
+			$("#audit-form").submit();
+		});
+		$("#unfreeze").click(function(){
+			$("#audit_value").val('1');
+			$("#audit-form").submit();
+		});
+	});
+	</script>
+<include file="common:footer" />

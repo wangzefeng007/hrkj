@@ -1,0 +1,348 @@
+@CHARSET "UTF-8";
+
+@media screen and (max-width: 380px) {
+	html{
+		font-size: 10px;
+	}
+}
+@media screen and (min-width: 380px) and (max-width:500px) {
+	html{
+		font-size: 12px;
+	}
+}
+@media screen and (min-width: 500px) and (max-width:650px) {
+	html{
+		font-size: 13px;
+	}
+}
+@media screen and (min-width: 650px) {
+	html{
+		font-size: 14px;
+	}
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #f3f1ef;
+	font-size: 1.2rem;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+.gray_solid{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	border-bottom: 1px solid #e1e1e1;
+	height: 0px;
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+header{
+	background: #479edf;
+	color: white;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	display: table;
+	width: 100%;
+}
+header .button, .title{
+	display: table-cell;
+	height: 50px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;
+}
+header .button{
+	width: 27%;
+	height: 50px;
+}
+header .title{
+	width: 46%;
+	font-size: 1.8rem;
+	margin-top: 0px;
+	line-height: 50px;
+}
+header .button .back{
+	overflow: hidden;
+	display: table-cell;
+	text-decoration: none;
+	color: white;
+	font-size: 1.6rem;
+	padding: 2px 0px 0px 0px;
+}
+header .button .back img{
+	border: none;
+	width: 26px;
+	height: auto;
+	padding: 0px 0px 0px 10px;
+	vertical-align: middle;
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+
+
+/* ------------------------------------------------ 购物车 ------------------------------------ */
+.cart_item_bar{
+	margin: 8px 0px;
+	background: white;
+	padding: 10px 12px 10px 30px;
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
+}
+.cart_item_bar .title{
+	display: block;
+	padding: 2px 6px 10px 2px;
+	height: auto;
+	margin: 4px 0px 0px 0px;
+	overflow: hidden;
+}
+.cart_item_bar .title a{
+	text-decoration: none;
+	color: black;
+	font-size: 1.8rem;
+}
+.cart_item_bar .title a.left{
+	float: left;
+}
+.cart_item_bar .title a.right{
+	float: right;
+}
+.cart_item_bar .title .primary{
+	color: #3697a0;
+	font-size: 1.6rem;
+}
+.cart_item_bar .title .danger{
+	color: #ff6744;
+	font-size: 1.6rem;
+	padding-left: 12px;
+}
+.cart_item_bar .checkbox{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-image: url("../images/icon_checkbox_no.png");
+	position: absolute;
+	left: 4px;
+	vertical-align: middle;
+}
+.cart_item_bar .checkbox_checked{
+	background-image: url("../images/icon_checkbox_ok.png");
+}
+.cart_item_bar .info_block{
+	margin: 6px 0px;
+	overflow: hidden;
+	padding: 2px 0px 2px 0px;
+}
+.cart_item_bar .info_block .img{
+	width: 24%;
+	display: block;
+	vertical-align: top;
+	float: left;
+}
+.cart_item_bar .info_block .img img{
+	width: 90%;
+	margin-right: 10%;
+	
+}
+.cart_item_bar .info_block .info_title{
+	width: 48%;
+	display: block;
+	float: left;
+}
+.cart_item_bar .info_block .info_title .name{
+	padding: 2px 0px;
+	font-size: 1.2rem;
+	color: #333333;
+}
+.cart_item_bar .info_block .info_title .standard{
+	margin: 2px 0px;
+	font-size: 1rem;
+	color: #909191;
+	display: block;
+}
+.cart_item_bar .info_block .calc{
+	width: 40%;
+	display: none;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+	margin: 10px 0px 0px 5%;
+	border: 1px solid #999;
+	padding: 0px;
+	height: 30px;
+	
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.cart_item_bar .info_block .calc .button{
+	display: inline-block;
+	width: 30%;
+	text-decoration: none;
+	color: black;
+	font-size: 2rem;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+}
+.cart_item_bar .info_block .calc .input{
+	display: inline-block;
+	width: 30%;
+	border: none;
+	padding: 0px;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	height: 30px;
+	vertical-align: middle;
+}
+.cart_item_bar .info_block .calc .input input{
+	width: 100%;
+	border: none;
+	height: 30px;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;
+	line-height: 30px;
+}
+.cart_item_bar .info_block .info_price{
+	width: 24%;
+	display: block;
+	float: right;
+}
+.cart_item_bar .info_block .info_price .price{
+	padding: 2px 0px;
+	font-size: 1.2rem;
+	color: #333333;
+	text-align: right;
+}
+.cart_item_bar .info_block .info_price .num{
+	padding: 2px 0px;
+	font-size: 1rem;
+	color: #333333;
+	text-align: right;
+}
+.cart_item_bar .statistic_block{
+	padding: 0.8rem 0px 4px 0px;
+	text-align: right;
+	margin: 0px;
+}
+.cart_item_bar .statistic_block span{
+	font-size: 1.4rem;
+	color: black;
+}
+.cart_item_bar .statistic_block .price{
+	color: #ff0000;
+}
+.cart_item_bar .btn_block{
+	padding: 10px 0px 4px 0px;
+	text-align: right;
+	margin: 0px;
+}
+.cart_item_bar .btn_block .default{
+	text-decoration: none;
+	color: #333333;
+	font-size: 1.4rem;
+	border: 1px solid #cbcbcb;
+	padding: 4px 8px;
+	margin: 0px 2px;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.cart_item_bar .btn_block .default:hover{
+	color: white;
+	background: #3697a0;
+	border: 1px solid #3697a0;
+}
+.cart_btn_bar_placeholder{
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	height: 50px;
+	background: none;
+	padding: 0px;
+	margin: 0px;
+}
+.cart_btn_bar{
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	border-top: 1px solid #cccbcb;
+	overflow: hidden;
+	height: 50px;
+	background: white;
+	padding: 0px 0px 0px 6px;
+	margin: 0px;
+}
+.cart_btn_bar .checkbox{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-image: url("../images/icon_checkbox_no.png");
+}
+.cart_btn_bar .checkbox_checked{
+	background-image: url("../images/icon_checkbox_ok.png");
+}
+.cart_btn_bar label{
+	display: inline-block;
+	font-size: 1.6rem;
+	line-height: 50px;
+	padding: 0px 0px 0px 0px;
+	overflow: hidden;
+	height: 50px;
+	vertical-align: middle;
+}
+.cart_btn_bar .delete{
+	display: inline-block;
+}
+.cart_btn_bar .delete img{
+	height: 24px;
+	width: 24px;
+	border: none;
+	vertical-align: middle;
+}
+.cart_btn_bar .total{
+	float: right;
+	display: block;
+	font-size: 1.6rem;
+	line-height: 50px;
+	padding: 0px 0px 0px 0px;
+	width: 40%;
+	overflow: hidden;
+	text-align: right;
+	height: 50px;
+}
+.cart_btn_bar .total .price{
+	font-weight: bold;
+	color: #ff3000;
+}
+.cart_btn_bar .submit{
+	float: right;
+	display: block;
+	height: 50px;
+	background: #fa8631;
+	color: white;
+	font-size: 1.8rem;
+	border: none;
+	width: 25%;
+	line-height: 50px;
+}
+/* ------------------------------------------------ 我的订单 ------------------------------------ */
+

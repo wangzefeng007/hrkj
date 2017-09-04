@@ -1,0 +1,91 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<div class="sm">
+		<div class="current">当前位置：订单管理</div>
+		<div class="status_bar">
+			订单状态：
+			<a <if condition="$_params[status] heq ''">class="active"</if> href="{:U('orderShop/index')}">
+				<span>全部</span>
+			</a>
+			<a <if condition="$_params[status] heq 0">class="active"</if> href="{:U('orderShop/index',array(status=>0))}">
+				<span>未付款</span>
+			</a>
+			<a <if condition="$_params[status] heq 1">class="active"</if> href="{:U('orderShop/index',array(status=>1))}">
+				<span>已付款</span>
+			</a>
+			<a <if condition="$_params[status] heq 2">class="active"</if> href="{:U('orderShop/index',array(status=>2))}">
+				<span>发货中</span>
+			</a>
+			<a <if condition="$_params[status] heq 3">class="active"</if> href="{:U('orderShop/index',array(status=>3))}">
+				<span>已完成</span>
+			</a>
+
+		</div>
+		<div class="search_bar">
+			<form action="{:U('orderShop/index')}" id="" name="" method="get">
+				<label>订单时间：</label>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}"/>
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}"/>
+				<select name="keytype" class="select rm">
+					<option value="">请选择</option>
+					<option value="name" <if condition="$_params[keytype] eq 'name'">selected="true"</if>>买家姓名</option>
+					<option value="mobile" <if condition="$_params[keytype] eq 'mobile'">selected="true"</if>>买家电话</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}"/>
+				<label>订单号：</label>
+				<input class="text_l rm" type="text" name="sn" value="{$_params.sn}"/>
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="order_bar">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th width="12%">订单号</th>
+						<th width="10%">买家</th>
+						<th width="10%">订单总价</th>
+						<th width="8%">运费</th>
+						<th width="10%">卖家</th>
+						<th width="10%">状态</th>
+						<th width="10%">订单时间</th>
+						
+						<th>操作</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<foreach name="data.list" item="item">	
+		<div class="order_bar">
+			<table cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr class="small_title">
+						<td width="12%">{$item.sn}</td>
+						<td width="10%">{$item.name}</td>
+						<td width="10%">{$item.money}</td>
+						<td width="8%">{$item.logistics_fee}</td>
+						<td width="10%">{$item.us_name}</td>
+						<td width="10%">{$item.status|status_desc="ORDER_STATUS",###}</td>
+						<td width="10%">{$item.addtime|date="Y-m-d H:i:s",###}</td>
+						<td><a href="{:U('detail',array(id=>$item[id]))}">明细</a></td>
+					</tr>
+					<foreach name="item.goods" item="goods">
+					<tr class="b_line">
+						<td align="center"><img class="goods_thumb_size_img" data-echo="{$goods.thumb|default='__RES__/images/img_no.png'}" src="__RES__/images/img_no.png" /></td>
+						<td colspan="2">{$goods.name}</td>
+						<td>&nbsp;</td>
+						<td colspan="6">单价：{$goods.price}<br/>数量：{$goods.num}</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+		</foreach>
+
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript" src="__RES__/js/echo.js"></script>
+	<script type="text/javascript" src="__RES__/js/common.js"></script>
+	<include file="common:footer" />

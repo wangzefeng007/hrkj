@@ -1,0 +1,23 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>汇融钱包</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link type="text/css" rel="styleSheet" href="__WAP__/css/reg.css"/>
+</head>
+<body>
+<div class="phone_w">
+  <div class="nav">支付</div>
+  <div class="content">
+    <div class="resiter-hint-icon"></div>
+    <div class="resiter-hint">恭喜你，您已支付完成！</div>    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+		<div class="sm">
+		<div class="current">
+			当前位置：分润收入
+			<div class="statistic">
+				共{$data.count}笔
+				&emsp;&emsp;
+				订单总额 {$data.order_money|default=0}元
+				&emsp;&emsp;
+				平台收入总额 {$data.money|default=0}元
+				&emsp;&emsp;
+				净收入总额 {$data.income_money|default=0}元
+			</div>
+		</div>
+		<div class="status_bar">
+			支付方式：
+			<a <if condition="$_params['ptid'] eq 0">class="active"</if> href="{:_U(array(ptid=>0))}">
+				<span>全部</span>
+			</a>
+			<foreach name="pay_type" item="item">
+			<a <if condition="$_params['ptid'] eq $item['id']">class="active"</if> href="{:_U(array(ptid=>$item['id']))}">
+				<span>{$item.name}</span>
+			</a>
+			</foreach>
+			<br/><br/>
+			结算状态：
+			<a <if condition="$_params['ctid'] eq 0">class="active"</if> href="{:_U(array(ctid=>0))}">
+				<span>全部</span>
+			</a>
+			<foreach name="cash_type" key="key" item="item">
+			<a <if condition="$_params['ctid'] eq $item['id']">class="active"</if> href="{:_U(array(ctid=>$item['id']))}">
+				<span>{$item.name}</span>
+			</a>
+			</foreach>
+			<br/><br/>
+			<!--结算方式：
+			<a <if condition="$_params['ctid'] eq 0">class="active"</if> href="{:_U(array(ctid=>false))}">
+				<span>全部</span>
+			</a>
+			<foreach name="cash_type" item="item">
+			<a <if condition="$_params['ctid'] eq $item[id]">class="active"</if> href="{:_U(array(ctid=>$item[id]))}">
+				<span>{$item.name}</span>
+			</a>
+			</foreach>-->
+		</div>
+		<div class="search_bar">
+			<form action="{:_U()}" id="" name="" method="get">
+				<label>产生时间：</label>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}" />
+				<label>结算单号：</label>
+				<input class="text_l rm" type="text" name="sn" value="{$_params[sn]}" />
+				<!--<label>等级：</label>
+				<select class="select rm" name="lfid">
+					<option value="0">全部</option>
+					<foreach name="levels" item="item">
+					<option value="{$item.id}" <if condition="$_params['lfid'] eq $item['id']">selected="selected"</if>>{$item.name}</option>
+					</foreach>
+				</select>-->
+				<label>关键词：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="us_mobile" <if condition="$_params['keytype'] eq 'us_mobile'">selected="selected"</if>>手机号码</option>
+					<option value="us_name" <if condition="$_params['keytype'] eq 'us_name'">selected="selected"</if>>姓名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>姓名</th>
+						<th>账号</th>
+						<th>等级</th>
+						<th>订单号</th>
+						<th>订单金额</th>
+						<th>支付通道</th>
+						<th>结算方式</th>
+						<th>结算费率</th>
+						<th>结算金额</th>
+						<th>手续费</th>
+						<th><a class="table_th_a" title="点击排序" href="{:_U(array('sort'=>($sort['split']=='desc')?'split,asc':'split,desc'))}">上级抽佣 {:($sort['split']=='desc')?'↓':''}{:($sort['split']=='asc')?'↑':''}</a></th>
+						<th><a class="table_th_a" title="点击排序" href="{:_U(array('sort'=>($sort['money']=='desc')?'money,asc':'money,desc'))}">平台收入 {:($sort['money']=='desc')?'↓':''}{:($sort['money']=='asc')?'↑':''}</a></th>
+						<th>费率成本</th>
+						<th>费率金额</th>
+						<th>结算成本</th>
+						<th><a class="table_th_a" title="点击排序" href="{:_U(array('sort'=>($sort['income_money']=='desc')?'income_money,asc':'income_money,desc'))}">净收入 {:($sort['income_money']=='desc')?'↓':''}{:($sort['income_money']=='asc')?'↑':''}</a></th>
+						<!--<th>收入类型</th>-->						
+						<!--<th>结算成本</th>
+						<th>费率成本</th>
+						<th>净利润</th>-->
+						<th>产生时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td>{$item.us_name}</td>
+						<td>{$item.us_mobile}</td>
+						<td>{$level_fee[$item['lfid']]}</td>
+						<td>{$item.order_sn}</td>
+						<td>{$item.order_money}</td>
+						<td>{:$pay_type[$item['ptid']]['name']}</td>
+						<td>{:$cash_type[$item['ctid']]['name']}</td>
+						<td>{$item.lf_fee_rate}</td>
+						<td>{$item.fee_money}</td>
+						<td>{$item.lf_fee_static}</td>
+						<td>{$item.split}</td>
+						<td>{$item.money}</td>
+						<td>{$item.cost_rate}</td>
+						<td>{$item.cost_money}</td>
+						<td>{$item.cost_static}</td>
+						<td>{$item.income_money}</td>
+						<!--<td>{$item.type|status_desc="PLATFORM_INCOME",###}</td>-->
+						<!--<td>3.00</td>
+						<td>
+							<php>//echo $rate_fee = ($pay_type[$item[ptid]]?$pay_type[$item[ptid]]:min($pay_type))*0.01;</php>
+						</td>
+						<td>
+						<php>//echo $item['money'] - $item[order_money]*$rate_fee - 3;</php>
+						</td>-->
+						<td>{$item.addtime|date="Y-m-d H:i:s",###}</td>
+					</tr>
+					</foreach>
+
+
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />

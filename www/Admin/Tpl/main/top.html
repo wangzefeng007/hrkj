@@ -1,0 +1,18 @@
+	<div class="tf">
+		<div class="tf_logo"><img src="__RES__/images/logo.png" /></div>
+		<div class="tf_control">
+			<span>账户：{:session('admin.username')}</span>
+			<a href="/admin.php/password/index/" target="frame_main">修改密码</a>
+			<a href="{:U('base/logout')}">安全退出</a>
+		</div>
+		<ul class="tf_menu">
+			<!--
+			<li><a href="#">首页</a></li>
+			<li>|</li>
+			-->
+			<foreach name="top_menu" item="vo">
+				<if condition="$key neq 0"><li>|</li></if>
+				<li><a href="{:U('main/index',array(mid=>$vo['id']))}">{$vo.name}</a></li>
+			</foreach>
+		</ul>
+	</div>

@@ -1,0 +1,70 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+		<div class="sm">
+		<div class="current">当前位置：极光推送</div>
+		
+		
+		
+		<div class="select_bar" style='border-top: 0px;padding:0;'>
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button" id="delete">删除</button>
+			<button class="button_primary right" type="button" onclick="window.location.href='{:U('add')}'">新增</button>
+		</div>
+		<div class="table">
+			<form action="{:U('delete')}" method="post" class="ajax-form" id="level-form">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th  width="5%">&nbsp;</th>
+						<th  width="5%">编号</th>
+						<th  width="10%">标题</th>
+						<th  width="20%">内容</th>
+						<th  width="10%">推送平台</th>
+						<th  width="10%">推送方式</th>
+						<th  width="10%">描述对象</th>
+						<th  width="10%">推送状态</th>
+						<th  width="10%">添加时间</th>
+						<th  width="10%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td><input type="checkbox" name="id[]" value="{$item.id}"/></td>
+						<td>{$item.id}</td>
+						<td>{$item.title}</td>
+						<td>{$item.content}</td>
+						<td>所有平台</td>
+						<td><if condition="$item.type eq 0">向所有商户<elseif  condition="$item.type eq 1"/>按个人<elseif  condition="$item.type eq 2"/>按等级<elseif  condition="$item.type eq 3"/>按商户状态<else /> - </if></td>
+						<td>{$item.audience}</td>
+						<if condition="$item[status] eq 0">
+							<td class="close">未发布|<a href="javascript:void(0)" onclick="confirm_url('确定要发布吗？','{:U('jpush',array(id=>$item[id]))}')">点此发布</a></td>
+						<else />
+							<td class="success">已发布</td>
+						</if>
+						<td>{$item.addtime|date='Y-m-d H:i',###}</td>
+						<if condition="$item[status] eq 0">
+							<td><a href="{:U('edit',array(id=>$item[id]))}">编辑</a></td>
+						<else />
+							<td class="success"><a href="javascript:void(0)" onclick="confirm_url('确定要删除该条目吗？','{:U('delete',array(id=>$item[id]))}')">删除</a></td>
+						</if>
+						
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#delete").click(function(){
+			$("#level-form").submit();
+		});
+
+	});
+	</script>
+	<include file="common:footer" />

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>物流详情</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/order.css">
+</head>
+<body>
+	<header>
+		<div class="button"><a class="back" href="javascript:window.history.back();"><img src="__WAP__/images/btn_back.png" /></a></div>
+		<div class="title">物流详情</div>
+		<div class="button"></div>
+	</header>
+	<div class="express_order_bar">
+		<div class="img"><img src="__WAP__/images/icon_express_sf.png" /></div>
+		<div class="info">
+			<div class="name">{$order.logistics}</div>
+			<div class="order_info">运单号：{$order.logistics_no}</div>
+			<div class="order_info">订单号：{$order.sn}</div>
+		</div>
+	</div>
+	<div class="order_item_bar">
+		<div class="title">
+			<a class="left" href="#">商品信息</a>
+		</div>
+		<foreach name="order.goods_list" item="go">
+			<hr class="gray_solid">
+			<div class="info_block">
+				<div class="img"><img src="{$go.thumb|default='__WAP__/images/img_goods.jpg'}" /></div>
+				<div class="info_title">
+					<div class="name">{:htmlspecialchars($go['name'])}</div>
+					<!--<div class="standard">颜色：墨绿色&emsp;尺寸：M</div>-->
+				</div>
+				<div class="info_price">
+					<div class="price">￥{$go.price}</div>
+					<div class="num">×{$go.num}</div>
+				</div>
+			</div>
+		</foreach>
+	</div>
+	<div class="express_info_bar">
+		<div class="title">
+			<a class="left" href="#">物流跟踪</a>
+		</div>
+		<hr class="gray_solid">
+		<div class="info_block">
+			<div class="item active">
+				<span>2014-12-12 10:00:00</span><br/>
+				<span>【陈洪松】正在派件</span><img src="__WAP__/images/icon_express_node_active.png" />
+			</div>
+			<div class="item">
+				<span>2014-12-12 10:00:00</span><br/>
+				<span>福州市【福州分拨中心】，正发往【福州金山A站】</span><img src="__WAP__/images/icon_express_node_default.png" />
+			</div>
+			<div class="item">
+				<span>2014-12-12 10:00:00</span><br/>
+				<span>福州市【福州分拨中心】，正发往【福州金山A站】</span><img src="__WAP__/images/icon_express_node_default.png" />
+			</div>
+			<div class="item">
+				<span>2014-12-12 10:00:00</span><br/>
+				<span>卖家发货</span><img src="__WAP__/images/icon_express_node_default.png" />
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

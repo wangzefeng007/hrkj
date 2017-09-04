@@ -1,0 +1,92 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+		<div class="sm">
+		<div class="current">当前位置：储蓄卡变更</div>
+			<div class="status_bar">
+				状态：
+				<a  href="{:_U(array(status=>0))}" <if condition="$_params['status'] eq 0">class="active"</if>>
+				<span >全部</span>
+				<a href="{:_U(array(status=>1))}" <if condition="$_params['status'] eq 1">class="active"</if>>
+				<span>未审核</span>
+				</a>
+				</a>
+				<a href="{:_U(array(status=>2))}"  <if condition="$_params['status'] eq 2">class="active"</if>>
+				<span>已通过</span>
+				</a>
+				<a href="{:_U(array(status=>3))}" <if condition="$_params['status'] eq 3">class="active"</if>>
+				<span>已拒绝</span>
+				</a>
+			</div>
+			<div class="search_bar">
+				<form action="{:_U()}" id="" name="" method="get">
+					<label>申请时间：</label>
+					<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="startaddtime" value="{$_params.startaddtime}" />
+					<label>—</label>
+					<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endaddtime" value="{$_params.endaddtime}" />
+					<label>审核时间：</label>
+					<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}" />
+					<label>—</label>
+					<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}" />
+					<label>账号：</label>
+					<input class="text_l rm" type="text" name="mobile" value="{$_params.mobile}"  placeholder="手机号码"/>
+					<label>变更卡号：</label>
+					<input class="text_l rm" type="text" name="bank_no" value="{$_params.bank_no}"  placeholder="变更卡号"/>
+					<button class="submit" type="submit">搜索</button>
+				</form>
+			</div>
+		<!--<div class="select_bar">-->
+			<!--&lt;!&ndash;<input type="checkbox" name="" id="selectAll" /><label>全选</label>&ndash;&gt;-->
+			<!--&lt;!&ndash;<button class="button" type="button" id="delete">删除</button>&ndash;&gt;-->
+		<!--</div>-->
+		<div class="table">
+			<form action="{:U('delete')}" method="post" class="ajax-form" id="level-form">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>申请时间</th>
+						<th>账号</th>
+						<th>姓名</th>
+						<th>变更卡号</th>
+						<th>状态</th>
+						<th>审核人</th>
+						<th>审核时间</th>
+						<th>id</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td>{$item.addtime|vtime="Y-m-d H:i:s",###}</td>
+						<td>{$item.mobile}</td>
+						<td>{$item.name}</td>
+						<td>{$item.bank_no}</td>
+						<td class="success">
+								<if condition="$item.status eq 1">待审核
+								<elseif condition="$item.status  eq 2" />审核通过
+								<elseif condition="$item.status  eq 3" />审核不通过
+								<else />待审核</if>
+						</td>
+						<td>{$item.checkname}</td>
+						<td>{$item.checktime|vtime="Y-m-d H:i:s",###}</td>
+						<td>{$item.id}</td>
+						<td><a href="{:U('edit',array(id=>$item[id]))}"><if condition="$item.status eq 1">审核<else />查看</if></a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		$("#delete").click(function(){
+			$("#level-form").submit();
+		});
+
+	});
+	</script>
+	<include file="common:footer" />

@@ -1,0 +1,42 @@
+	<div class="lf">
+		{$menuHtml}
+		<!--
+		<ul>
+			<li class="title"><a href="javascript:void(0)"><img src="__RES__/images/icon_order.png" />交易</a></li>
+			<li><a target="frame_main" href="./trade_collection_list.html">收款列表</a></li>
+			<li><a target="frame_main" href="./trade_income_list.html">收益列表</a></li>
+			<li><a target="frame_main" href="./trade_collection_settle.html">收款结算<span class="badge">18</span></a></li>
+			<li><a target="frame_main" href="./trade_income_settle.html">收益结算</a></li>
+			<li><a target="frame_main" href="./trade_statement.html">对账单</a></li>
+		</ul>
+		<ul>
+			<li class="title"><a href="javascript:void(0)"><img src="__RES__/images/icon_home.png" />店铺</a></li>
+			<li><a target="frame_main" href="./store_manage.html">店铺管理</a></li>
+			<li><a target="frame_main" href="./store_goods.html">商品管理</a></li>
+			<li><a target="frame_main" href="./store_order.html">订单管理</a></li>
+			<li><a target="frame_main" href="./store_upgrade.html">升级记录</a></li>
+		</ul>
+		<ul>
+			<li class="title"><a href="javascript:void(0)"><img src="__RES__/images/icon_com.png" />级别</a></li>
+			<li><a target="frame_main" href="./grade_charge.html">费用级别</a></li>
+		</ul>
+		<ul>
+			<li class="title"><a href="javascript:void(0)"><img src="__RES__/images/icon_statistics.png" />报表</a></li>
+			<li><a target="frame_main" href="javascript:void(0)">商铺情况</a></li>
+			<li><a target="frame_main" href="javascript:void(0)">商铺统计</a></li>
+			<li><a target="frame_main" href="javascript:void(0)">财务报表</a></li>
+		</ul>
+		-->
+	</div>
+	<script type="text/javascript" src="__RES__/js/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$($(".lf ul li a[target]").get(0)).addClass("active");
+		$(document).on("click", ".lf ul li a", function(){
+			if($(this).prop("target")){
+				$(".lf ul li a").removeClass("active");
+				$(this).addClass("active");
+			}
+		});
+	});
+	</script>

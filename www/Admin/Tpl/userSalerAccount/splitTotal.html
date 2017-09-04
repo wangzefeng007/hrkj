@@ -1,0 +1,58 @@
+<include file="common:header" />
+<link rel="stylesheet" href="__RES__/css/common-list.css">
+</head>
+<body>
+	<div class="sm">
+		<div class="current">
+			当前位置：收益列表
+
+		</div>
+		<div class="search_bar">
+			<form action="{:U('userSalerAccount/splitTotal')}" id="" name="" method="get">
+				<label>商户：</label>
+				<select class="select rm" name="keytype">
+					<option value="">请选择</option>
+					<option value="user_saler.mobile" <if condition="$_params['keytype'] eq 'user_saler.mobile'">selected="selected"</if>>手机号码</option>
+					<option value="user_saler.name" <if condition="$_params['keytype'] eq 'user_saler.name'">selected="selected"</if>>姓名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params['keyword']}"/>
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<a class="button_primary right" href="{:_U(array(export=>xls))}">表格下载</a>
+		</div>
+		<div class="table">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+
+						<th>商户</th>
+						<th>账号</th>
+						<th>总额</a></th>						
+						<th><a class="table_th_a" title="点击排序" href="{:U('',array('normal_split_total'=>($sort['normal_split_total']=='desc')?'asc':'desc'))}">商户分润 {:($sort['normal_split_total']=='desc')?'↓':''}{:($sort['normal_split_total']=='asc')?'↑':''}</a></th>
+						<th><a class="table_th_a" title="点击排序" href="{:U('',array('upgrade_split_total'=>($sort['upgrade_split_total']=='desc')?'asc':'desc'))}">升级分润 {:($sort['upgrade_split_total']=='desc')?'↓':''}{:($sort['upgrade_split_total']=='asc')?'↑':''}</a></th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						
+						<td>{$item.name}</td>
+						<td>{$item.mobile}</td>
+						<td>{$item[normal_split_total] + $item[upgrade_split_total] + $item[commission_split_total]+$item[commission_total]+$item[saleback_total]}</td>
+						<td class="primary"><a class="red" href="{:U('userSalerAccount/splitList',array(usid=>$item[usid],type=>3))}">{$item.normal_split_total}</a></td>
+						<td class="primary"><a class="red" href="{:U('userSalerAccount/splitList',array(usid=>$item[usid],type=>6))}">{$item.upgrade_split_total}</a></td>
+						
+					</tr>
+					</foreach>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<include file="common:footer" />

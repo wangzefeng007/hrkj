@@ -1,0 +1,105 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+	<div class="sm">
+		<div class="current">当前位置：店铺管理</div>
+		<div class="status_bar">
+
+		</div>
+		<div class="search_bar">
+			<form action="" id="" name="" method="post">
+				<label>等级：</label>
+				<select class="select rm" name="lfid">
+					<option value="0">全部</option>
+					<foreach name="levels" item="item">
+					<option value="{$item.id}" <if condition="$_params['lfid'] eq $item['id']">selected="selected"</if>>{$item.name}</option>
+					</foreach>
+				</select>				
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}" />
+				<label>关键词：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="user_saler.mobile" <if condition="$_params['keytype'] eq 'user_saler.mobile'">selected="selected"</if>>手机号码</option>
+					<option value="user_saler.name" <if condition="$_params['keytype'] eq 'user_saler.name'">selected="selected"</if>>姓名</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button" id="close">关闭</button>
+			<button class="button" type="button" id="open">开启</button>
+		</div>
+		<div class="table">
+		<form action="{:U('shop/update')}" method="post" class="ajax-form" id="shop-form">
+			<input type="hidden" name="status" id="status">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>创建时间</th>
+						<th>姓名</th>
+						<th>账号</th>
+						<th>店名</th>
+						<th>级别</th>
+						<th>实名认证</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td><input type="checkbox" name="id[]" value="{$item.id}"/></td>
+						<td>{$item.addtime|date="Y-m-d",###}</td>
+						<td>{$item.us_name}</td>
+						<td>{$item.mobile}</td>
+						<td>{$item.name}</td>
+						<td>{$item.lf_name}</td>
+						<td>
+							<if condition="$item[status_real] eq 1">
+							<img src="__RES__/images/icon_success.png" />
+							<else />
+							<img src="__RES__/images/icon_fail.png" />
+							</if>
+						</td>
+						<if condition="$item[status] eq 1">
+						<td class="success">正常</td>
+						<else />
+						<td class="close">关闭</td>
+						</if>
+						<td>
+							<a href="{:str_replace('admin.php','wap.php',U('web/index',array(usid=>$item['usid'])))}" target="_blank">店铺预览</a> |
+							<a href="{:U('shop/detail',array(id=>$item[id]))}">详情</a> |
+							<if condition="$item[status] eq 1">
+							<a href="javascript:void(0)" onclick="confirm_url('要关闭该店铺吗','{:U('shop/update',array(id=>$item['id'],status=>0))}')">关闭</a>
+							<else />
+							<a href="javascript:void(0)" onclick="confirm_url('要开启该店铺吗','{:U('shop/update',array(id=>$item['id'],status=>1))}')">开启</a>
+							</if>
+						</td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#close").click(function(){
+				$("#status").val('0');
+				$("#shop-form").submit();
+			});
+			$("#open").click(function(){
+				$("#status").val('1');
+				$("#shop-form").submit();
+			});
+
+		});
+	</script>
+<include file="common:footer" />

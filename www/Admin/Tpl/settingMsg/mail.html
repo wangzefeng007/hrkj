@@ -1,0 +1,51 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/grade_detail.css">
+		<div class="sm">
+		<form action="{:U('board_save')}" method="post" class="ajax-form">
+		<input type="hidden" name="id" value="{$rs.id}">
+		<input type="hidden" name="send_type" value="{$send_type}">
+		<div class="current">当前位置：消息设置</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>消息类型：</label>
+				<input type="text" value="{$rs.name}" disabled="disabled"/>
+			</div>
+			<div class="group">
+				<label>发送类型：</label>
+				<input type="text" value="电子邮件" disabled="disabled"/>
+			</div>
+			<div class="group">
+				<label>邮件主题：</label>
+				<input type="text" name="data[title]" value="{$data.title}"/>
+			</div>
+			<div class="group">
+				<label>正文：</label>
+				<div style="float:left;width:65%;">
+					<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.config.js"></script>
+					<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.all.min.js"> </script>
+					<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+					 <script id="editor" name="data[content]" type="text/plain" style="height:300px;"></script>
+					 <script type="text/javascript">
+					 var ue = UE.getEditor('editor');
+					 ue.ready(function(){
+						ue.setContent('{$data.content|htmlspecialchars_decode}');
+					 });
+					 </script>
+					 <div style="clear:both"></div>
+				</div>
+			</div>
+			<div class="group">
+				<label>是否启用：</label>
+				<input type="radio" class="radio" name="data[status]" value="1" checked="checked" /><label class="tip">启用</label>
+				<input type="radio" class="radio" name="data[status]" value="0" <if condition="$data[status] eq 0">checked="checked"</if> /><label class="tip">不启用</label>
+			</div>
+		</div>
+		<div class="order_bar"></div>
+		<div class="button_bar">
+			<div>
+				<button class="primary" type="submit">保存</button>
+			</div>
+		</div>
+		</form>
+	</div>
+	<include file="common:footer" />

@@ -1,0 +1,81 @@
+	<include file="common:header" />
+	<link rel="stylesheet" href="__RES__/css/common-list.css">
+		<div class="sm">
+		<div class="current">
+			当前位置：供应商
+			<!--
+			<div class="statistic">
+				账户总余额：856952323.00
+				&emsp;&emsp;
+				分销总金额：20000000.00元
+			</div>
+			-->
+		</div>
+
+		<div class="search_bar">
+			<form action="{:U('userProvider/index')}" id="" name="" method="get">
+				<label>注册日期：</label>
+				<input onfocus="HS_setDate(this)" class="text_s rm" type="text" placeholder="开始时间" name="starttime" value="{$_params.starttime}" />
+				<label>—</label>
+				<input onfocus="HS_setDate(this)" class="text_s lfm" type="text" placeholder="结束时间" name="endtime" value="{$_params.endtime}" />
+				<label>关键词：</label>
+				<select class="select rm" name="keytype">
+					<option value="0">请选择</option>
+					<option value="shop_name" <if condition="$_params['keytype'] eq shop_name">selected="selected"</if>>店铺</option>
+					<option value="username" <if condition="$_params['keytype'] eq username">selected="selected"</if>>帐号</option>
+				</select>
+				<input class="text_l rm" type="text" name="keyword" value="{$_params.keyword}" />
+				<button class="submit" type="submit">搜索</button>
+			</form>
+		</div>
+		<div class="select_bar">
+			<input type="checkbox" name="" id="selectAll" /><label>全选</label>
+			<button class="button" type="button" onclick="$('#list-form').submit()">批量删除</button>			
+		</div>
+		<div class="table">
+			<form action="{:U('userProvider/delete')}" method="post" class="ajax-form" id="list-form">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>注册时间</th>
+						<th>店铺</th>
+						<th>账号</th>
+						<!--
+						<th>账户余额</th>
+						<th>分销余额</th>
+						-->
+						<th>最后登陆</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data.list" item="item">
+					<tr class="<if condition='$key%2 eq 0'>odd<else />even</if>">
+						<td><input type="checkbox" name="id[]" value="{$item.id}"/></td>
+						<td>{$item.addtime|date="Y-m-d",###}</td>
+						<td>{$item.shop_name}</td>
+						<td>{$item.username}</td>
+						<!--
+						<td>5000.00</td>
+						<td>100.00</td>
+						-->
+						<td>{$item.lastlogintime|date="Y-m-d",###}</td>
+						<if condition="$item.status eq 1">
+						<td class="success">已开通</td>
+						<else />
+						<td class="fail">未开通</td>
+						</if>
+						<td><a href="{:U('userProvider/edit',array(id=>$item[id]))}">编辑</a>|<a href="javascript:void(0)"onclick="confirm_url('确定要删除该用户吗？','{:U('userProvider/delete',array(id=>$item[id]))}')">删除</a></td>
+					</tr>
+					</foreach>
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div class="paging_bar">
+			{$data.count|page}
+		</div>
+	</div>
+<include file="common:footer" />

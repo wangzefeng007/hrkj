@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>订单评价</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/order.css">
+</head>
+<body>
+	<header>
+		<div class="button"></div>
+		<div class="title">订单评价</div>
+		<div class="button"></div>
+	</header>
+	<div class="order_item_bar">
+		<div class="title">
+			<a class="left" href="#">商品评价</a>
+		</div>
+		<hr class="gray_solid">
+		<div class="info_block">
+			<div class="img"><img src="__WAP__/images/img_goods.jpg" /></div>
+			<div class="info_title">
+				<div class="name">2015新款七匹狼男装，羽绒加厚，官方正品保障</div>
+				<div class="standard">颜色：墨绿色&emsp;尺寸：M</div>
+			</div>
+			<div class="info_price">
+				<div class="price">￥200.00</div>
+				<div class="num">×3</div>
+			</div>
+		</div>
+		<div class="btn_block">
+			<a class="default" href="javascript:void(0)">好评</a>
+			<a class="default" href="javascript:void(0)">中评</a>
+			<a class="default" href="javascript:void(0)">差评</a>
+		</div>
+		<div class="comment_block">
+			<textarea class="textarea"></textarea>
+		</div>
+	</div>
+	<div class="order_item_bar">
+		<div class="info_block">
+			<div class="img"><img src="__WAP__/images/img_goods.jpg" /></div>
+			<div class="info_title">
+				<div class="name">2015新款七匹狼男装，羽绒加厚，官方正品保障</div>
+				<div class="standard">颜色：墨绿色&emsp;尺寸：M</div>
+			</div>
+			<div class="info_price">
+				<div class="price">￥200.00</div>
+				<div class="num">×3</div>
+			</div>
+		</div>
+		<div class="btn_block">
+			<a class="default" href="javascript:void(0)">好评</a>
+			<a class="default" href="javascript:void(0)">中评</a>
+			<a class="default" href="javascript:void(0)">差评</a>
+		</div>
+		<div class="comment_block">
+			<textarea class="textarea"></textarea>
+		</div>
+	</div>
+	<div class="order_item_bar">
+		<div class="info_block">
+			<div class="img"><img src="__WAP__/images/img_goods.jpg" /></div>
+			<div class="info_title">
+				<div class="name">2015新款七匹狼男装，羽绒加厚，官方正品保障</div>
+				<div class="standard">颜色：墨绿色&emsp;尺寸：M</div>
+			</div>
+			<div class="info_price">
+				<div class="price">￥200.00</div>
+				<div class="num">×3</div>
+			</div>
+		</div>
+		<div class="btn_block">
+			<a class="default" href="javascript:void(0)">好评</a>
+			<a class="default" href="javascript:void(0)">中评</a>
+			<a class="default" href="javascript:void(0)">差评</a>
+		</div>
+		<div class="comment_block">
+			<textarea class="textarea"></textarea>
+		</div>
+	</div>
+	<div class="comment_btn_bar">
+		<button class="submit" type="submit">提交评价</button>
+	</div>
+</body>
+<script type="text/javascript" src="__WAP__/plugins/zepto/zepto.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	/* 评价按钮点击 */
+	$(document).on("click", ".btn_block a", function(){
+		$(this).parent().find("a").removeClass("active");
+		$(this).addClass("active");
+		alert(this.innerHTML);
+	});
+});
+</script>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>

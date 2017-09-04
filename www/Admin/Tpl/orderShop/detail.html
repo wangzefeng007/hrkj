@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!--header-->
+<include file="common:header" />
+<link rel="stylesheet" href="__RES__/css/store_order_detail.css">
+	<div class="sm">
+		<div class="current">当前位置：订单明细</div>
+		<div class="title_bar">
+			<span>物流信息</span>
+		</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>物流公司：</label>
+				<label class="tip">{$order.logistics|default='暂无信息'}</label>
+			</div>
+			<div class="group">
+				<label>运单号码：</label>
+				<label class="tip">{$order.logistics_no|default='暂无信息'}</label>
+			</div>
+			<div class="group">
+				<label>物流跟踪：</label>
+				<table>
+					<tr>
+						<td>
+						<foreach name="express" item="vo">
+							{$vo.time} {$vo.context}<br/>
+						</foreach>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="title_bar">
+			<span>订单信息</span>
+		</div>
+		<div class="base_bar">
+			<div class="group">
+				<label>收货人：</label>
+				<label class="tip">{$order.name} , {$order.mobile}</label>
+			</div>
+			<div class="group">
+				<label>收货地址：</label>
+				<label class="tip">{$order.province} {$order.city} {$order.area} {$order.address}</label>
+			</div>
+			<div class="group">
+				<label>买家留言：</label>
+				<label class="tip">{$order.message}</label>
+			</div>
+		</div>
+		<div class="order_bar">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th width="10%">订单号</th>
+						<th width="10%">买家</th>
+						<th width="10%">订单总价</th>
+						<th width="10%">运费</th>
+						<th width="10%">卖家</th>
+						<th width="10%">状态</th>
+						<th width="10%">订单时间</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="order_bar">
+			<table cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr class="small_title">
+						<td width="10%">{$order.sn}</td>
+						<td width="10%">{$order.name}</td>
+						<td width="10%">{$order.money}</td>
+						<td width="10%">{$order.logistics_fee}</td>
+						<td width="10%">{$order.us_name}</td>
+						<td width="10%">{$order.status_desc}</td>
+						<td width="10%">{$order.addtime|date='Y-m-d H:i', ###}</td>
+					</tr>
+					<foreach name="order.goods" item="goods">
+						<tr class="b_line">
+							<td align="center">
+							<img class="goods_thumb_size_img" data-echo="{$goods.thumb|default='__RES__/images/img_no.png'}" src="__RES__/images/img_no.png" /></td>
+							<td colspan="2">{$goods.name}</td>
+							<td>&nbsp;</td>
+							<td colspan="5">单价：{$goods.price}<br/>数量：{$goods.num}</td>
+						</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<script type="text/javascript">
+window.onload = function(){
+	parent.document.getElementById("frame_main").style.height = document.body.scrollHeight + "px";
+	parent.document.getElementById("frame_main").style.width = (parseInt(parent.document.body.clientWidth) - 180) + "px";
+	parent.document.body.style.width = parent.document.body.clientWidth + "px";
+};
+</script>
+<script type="text/javascript" src="./js/datetime.js"></script>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	/* 输入框 模拟placeHolder效果 */
+	$(".text_ph input").focusin(function(){
+		$(this).next("div").hide();
+	});
+	$(".text_ph input").focusout(function(){
+		if(!$(this).val()){
+			$(this).next("div").show();
+		}
+	});
+});
+</script>
+<!--footer-->
+	<script type="text/javascript" src="__RES__/js/echo.js"></script>
+	<script type="text/javascript" src="__RES__/js/common.js"></script>
+<include file="common:footer" />

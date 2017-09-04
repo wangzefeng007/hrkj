@@ -1,0 +1,412 @@
+@CHARSET "UTF-8";
+
+@media screen and (max-width: 380px) {
+	html{
+		font-size: 10px;
+	}
+}
+@media screen and (min-width: 380px) and (max-width:500px) {
+	html{
+		font-size: 12px;
+	}
+}
+@media screen and (min-width: 500px) and (max-width:650px) {
+	html{
+		font-size: 13px;
+	}
+}
+@media screen and (min-width: 650px) {
+	html{
+		font-size: 14px;
+	}
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #f3f1ef;
+	font-size: 1.2rem;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+.gray_solid{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	border-bottom: 1px solid #e1e1e1;
+	height: 0px;
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+header{
+	background: #479edf;
+	color: white;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	display: table;
+	width: 100%;
+}
+header .button, .title{
+	display: table-cell;
+	height: 50px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;
+}
+header .button{
+	width: 27%;
+	height: 50px;
+}
+header .title{
+	width: 46%;
+	font-size: 1.8rem;
+	margin-top: 0px;
+	line-height: 50px;
+}
+header .button .back{
+	overflow: hidden;
+	display: table-cell;
+	text-decoration: none;
+	color: white;
+	font-size: 1.6rem;
+	padding: 2px 0px 0px 0px;
+}
+header .button .back img{
+	border: none;
+	width: 26px;
+	height: auto;
+	padding: 0px 0px 0px 10px;
+	vertical-align: middle;
+}
+/* ------------------------------------------------ 头部 ------------------------------------ */
+
+/* ------------------------------------------------ 我的订单 ------------------------------------ */
+.order_status_bar{
+	background: white;
+	border-bottom: 1px solid #e3e3e3;
+	overflow: hidden;
+	padding: 8px 14px 0px 14px;
+	margin: 0px 0px 4px 0px;
+}
+.order_status_bar a{
+	text-decoration: none;
+	color: #7c7d7d;
+	display: block;
+	width: 25%;
+	text-align: center;
+	float: left;
+	border-bottom: 3px solid white;
+	padding: 4px 0px 8px 0px;
+}
+.order_status_bar a.active{
+	color: #3697a0;
+	border-bottom: 3px solid #3697a0;
+}
+.order_status_bar a:hover{
+	color: #3697a0;
+	border-bottom: 3px solid #3697a0;
+}
+.order_item_bar{
+	margin: 8px 0px;
+	background: white;
+	padding: 10px 12px;
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
+}
+.order_item_bar .title{
+	display: block;
+	padding: 2px 6px 10px 2px;
+	height: auto;
+	margin: 4px 0px 0px 0px;
+}
+.order_item_bar .title a{
+	text-decoration: none;
+	color: black;
+	font-size: 1.8rem;
+}
+.order_item_bar .title a.left{
+	float: left;
+}
+.order_item_bar .title a.right{
+	float: right;
+}
+.order_item_bar .info_block{
+	margin: 6px 0px;
+	overflow: hidden;
+	padding: 2px 0px 2px 0px;
+}
+.order_item_bar .info_block .img{
+	width: 24%;
+	display: block;
+	vertical-align: top;
+	float: left;
+}
+.order_item_bar .info_block .img img{
+	width: 90%;
+	margin-right: 10%;
+	
+}
+.order_item_bar .info_block .info_title{
+	width: 48%;
+	display: block;
+	float: left;
+}
+.order_item_bar .info_block .info_title .name{
+	padding: 2px 0px;
+	font-size: 1.2rem;
+	color: #333333;
+}
+.order_item_bar .info_block .info_title .standard{
+	margin: 2px 0px;
+	font-size: 1rem;
+	color: #909191;
+	display: block;
+}
+.order_item_bar .info_block .info_price{
+	width: 24%;
+	display: block;
+	float: right;
+}
+.order_item_bar .info_block .info_price .price{
+	padding: 2px 0px;
+	font-size: 1.2rem;
+	color: #333333;
+	text-align: right;
+}
+.order_item_bar .info_block .info_price .num{
+	padding: 2px 0px;
+	font-size: 1rem;
+	color: #333333;
+	text-align: right;
+}
+.order_item_bar .statistic_block{
+	padding: 0.8rem 0px 4px 0px;
+	text-align: right;
+	margin: 0px;
+}
+.order_item_bar .statistic_block span{
+	font-size: 1.4rem;
+	color: black;
+}
+.order_item_bar .statistic_block .price{
+	color: #ff0000;
+}
+.order_item_bar .btn_block{
+	padding: 10px 0px 4px 0px;
+	text-align: right;
+	margin: 0px;
+}
+.order_item_bar .btn_block .default{
+	text-decoration: none;
+	color: #333333;
+	font-size: 1.4rem;
+	border: 1px solid #cbcbcb;
+	padding: 4px 8px;
+	margin: 0px 2px;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.order_item_bar .btn_block .default:hover{
+	color: white;
+	background: #3697a0;
+	border: 1px solid #3697a0;
+}
+/* ------------------------------------------------ 我的订单 ------------------------------------ */
+
+/* ------------------------------------------------ 订单评论 ------------------------------------ */
+.order_item_bar .btn_block .active{
+	color: white;
+	background: #3697a0;
+	border: 1px solid #3697a0;
+}
+.order_item_bar .comment_block{
+	padding: 10px 0px 0px 0px;
+	margin: 0px;
+}
+.order_item_bar .comment_block .textarea{
+	border: 1px solid #e3e3e3;
+	background: #f3f1ef;
+	width: 100%;
+	height: 80px;
+	padding: 0px;
+	margin: 0px;
+	font-size: 1.2rem;
+	line-height: 1.6rem;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.comment_btn_bar{
+	margin: 0px 0px 0px 0px;
+	background: none;
+	padding: 4px 12px 10px 12px;
+}
+.comment_btn_bar .submit{
+	border: none;
+	width: 100%;
+	height: 40px;
+	background: #fa8631;
+	color: white;
+	font-size: 1.4rem;
+	line-height: 40px;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+/* ------------------------------------------------ 订单评论 ------------------------------------ */
+
+/* ------------------------------------------------ 订单详情 ------------------------------------ */
+.order_detail_status{
+	margin: 0px 0px 2px 0px;
+	background: white;
+	border-bottom: 1px solid #e3e3e3;
+}
+.order_detail_status .item{
+	margin: 0px;
+	background: white;
+	padding: 8px 12px 6px 12px
+}
+.order_detail_status .active{
+	background: #cadae0;
+}
+.order_detail_status .item .title{
+	font-size: 1.6rem;
+	display: block;
+	overflow: hidden;
+	height: auto;
+}
+.order_detail_status .item .title img{
+	width: 22px;
+	height: 22px;
+	vertical-align: text-top;
+	margin-right: 8px;
+}
+.order_detail_status .item .content{
+	font-size: 1.2rem;
+	padding: 2px 0px 2px 30px;
+}
+.order_item_bar .trade_block{
+	font-size: 1.4rem;
+	padding: 6px 0px 4px 0px;
+	display: block;
+	height: auto;
+}
+.order_item_bar .trade_block div{
+	padding: 2px 0px 2px 0px;
+}
+.detail_btn_bar{
+	margin: 0px 0px 0px 0px;
+	background: none;
+	padding: 8px 0px 12px 0px;
+	text-align: center;
+	height: auto;
+}
+.detail_btn_bar .default{
+	border: none;
+	background: white;
+	color: black;
+	font-size: 1.4rem;
+	padding: 4px 10px 4px 10px;
+	text-decoration: none;
+	margin: 0px 2px 0px 2px;
+	border: 1px solid #cbcbcb;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+/* ------------------------------------------------ 订单详情 ------------------------------------ */
+
+/* ------------------------------------------------ 物流详情 ------------------------------------ */
+.express_order_bar{
+	margin: 0px 0px 0px 0px;
+	padding: 10px 12px 10px 12px;
+	height: auto;
+	background: #fff4c9;
+	border-bottom: 1px solid #e3e3e3;
+	border-top: 1px solid #e3e3e3;
+}
+.express_order_bar .img{
+	display: table-cell;
+	vertical-align: text-top;
+}
+.express_order_bar .img img{
+	width: 70px;
+	height: 70px;
+	border: 1px solid #c7c7c7;
+	padding: 0px;
+	margin: 0px 14px 0px 0px;
+}
+.express_order_bar .info{
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 1.4rem;
+	color: #333333;
+}
+.express_order_bar .info .name{
+	font-weight: bold;
+	padding: 2px 0px 2px 0px;
+}
+.express_order_bar .info .order_info{
+	padding: 2px 0px 2px 0px;
+}
+.express_info_bar{
+	margin: 8px 0px;
+	background: white;
+	padding: 10px 12px;
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
+}
+.express_info_bar .title{
+	display: block;
+	padding: 2px 6px 10px 2px;
+	height: auto;
+	margin: 4px 0px 0px 0px;
+}
+.express_info_bar .title a{
+	text-decoration: none;
+	color: black;
+	font-size: 1.8rem;
+}
+.express_info_bar .title a.left{
+	float: left;
+}
+.express_info_bar .title a.right{
+	float: right;
+}
+.express_info_bar .info_block{
+	padding: 10px 0px 10px 24px;
+	height: auto;
+	margin: 0px;
+	font-size: 1.4rem;
+}
+.express_info_bar .info_block .item{
+	display: block;
+	padding: 2px 0px 12px 12px;
+	height: auto;
+	margin: 0px;
+	font-size: 1.4rem;
+	color: #555555;
+	position: relative;
+	border-left: 1px solid #e2e2e2;
+}
+.express_info_bar .info_block .item img{
+	border: none;
+	position: absolute;
+	width: 16px;
+	left: -9px;
+	top: 0px;
+}
+.express_info_bar .info_block .active{
+	color: #ff6600;
+}
+/* ------------------------------------------------ 物流详情 ------------------------------------ */

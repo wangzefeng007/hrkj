@@ -1,0 +1,253 @@
+@CHARSET "UTF-8";
+
+body{
+	background: white;
+	margin: 0px;
+	padding: 0px;
+	font-family:"微软雅黑", Arial, helvetica,"华文黑体", "方正黑体简体";
+}
+
+.sm{
+	padding: 0px 30px;
+	margin: 0px;
+}
+.sm .current{
+	padding: 16px 22px;
+	margin: 0px;
+	border-bottom: 1px solid #dadada;
+	font-size: 14px;
+}
+.sm .current .statistic{
+	float: right;
+	font-size: 16px;
+	font-weight: bold;
+	color: #ff331e;
+}
+.status_bar{
+	padding: 10px 0px;
+	font-size: 14px;
+	margin: 10px 22px;
+}
+.status_bar a{
+	color: black;
+	text-decoration: none;
+	padding: 6px 16px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	margin: 0px 4px;
+}
+.status_bar a.active{
+	color: white;
+	background: #f94e3d;
+	text-decoration: none;
+}
+.status_bar a:hover{
+	color: white;
+	background: #f94e3d;
+	text-decoration: none;
+}
+.status_bar span.red{
+	color: red;
+}
+.status_bar a:hover span.red{
+	color: white;
+}
+.status_bar a.active span.red{
+	color: white;
+}
+.status_bar span.split{
+	margin: 0px 12px;
+	color: #dbdbdb;
+}
+.search_bar{
+	margin: 0px;
+	padding: 16px 22px 0px 22px;
+	clear: both;
+	zoom: 1; overflow: hidden;		/* 清除浮动 */
+	font-size: 14px;
+}
+.search_bar .rm{
+	margin-right: 12px;
+}
+.search_bar .lm{
+	margin-left: 12px;
+}
+.search_bar .lfm{
+	margin: 0px 12px;
+}
+.search_bar label{
+	line-height: 28px;
+	font-size: 14px;
+}
+.search_bar .inline{
+	float: left;
+}
+.search_bar .text_s{
+	height: 28px;
+	width: 75px;
+	border: 1px solid #c6d7f1;
+	line-height: 28px;
+}
+.search_bar .text_l{
+	height: 28px;
+	width: 150px;
+	border: 1px solid #c6d7f1;
+	line-height: 28px;
+}
+.search_bar .text_ph{
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+}
+.search_bar .text_ph input{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	border: none;
+	background: none;
+	height: 28px;
+	line-height: 28px;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	z-index: 2;
+}
+.search_bar .text_ph div{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background: white;
+	color: #999999;
+	font-size: 12px;
+	line-height: 28px;
+	padding-left: 5px;
+	z-index: 1;
+}
+.search_bar .select{
+	height: 28px;
+	width: 88px;
+	border: 1px solid #c6d7f1;
+	line-height: 28px;
+}
+.search_bar .select .option{
+	line-height: 28px;
+}
+.search_bar .submit{
+	height: 28px;
+	width: 55px;
+	border: 1px solid #b1b1b1;
+	line-height: 28px;
+	text-align: center;
+	background: #f2f2f3;
+	cursor: pointer;
+	color: #666666;
+}
+.select_bar{
+	margin: 14px 22px 0px 22px;
+	padding: 12px 0px 0px 0px;
+	clear: both;
+	zoom: 1; overflow: hidden;		/* 清除浮动 */
+	font-size: 14px;
+	border-top: 1px dashed #aaaaaa;
+}
+.select_bar label{
+	vertical-align: middle;
+}
+.select_bar input{
+	vertical-align: middle;
+}
+.select_bar .button{
+	border: 1px solid #b1b1b1;
+	margin-left: 10px;
+	text-align: center;
+	background: #f2f2f3;
+	cursor: pointer;
+	color: #666666;
+	padding: 4px 12px;
+}
+.select_bar .button_primary{
+	border: 1px solid #619dc7;
+	margin-left: 12px;
+	text-align: center;
+	background: #7cbae5;
+	padding: 4px 12px;
+	cursor: pointer;
+	color: white;
+	
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.select_bar .right{
+	float: right;
+}
+.table{
+	margin: 14px 22px 0px 22px;
+}
+.table table{
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #c2d5ef;
+	width: 100%;
+}
+.table table thead tr{
+	background: #d5e4fa;
+}
+.table table thead tr th{
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	padding: 8px 0px;
+}
+.table table tbody tr.odd{
+	background: #ffffff;
+}
+.table table tbody tr.even{
+	background: #f4f4f4;
+}
+.table table tbody tr td{
+	text-align: center;
+	font-size: 14px;
+	padding: 12px 0px;
+}
+.table table tbody tr td.success{
+	color: #239c23;
+}
+.table table tbody tr td.fail{
+	color: #f94e3d;
+}
+.table table tbody tr td.close{
+	color: #999999;
+}
+.table table tbody tr td a{
+	text-decoration: none;
+	color: #3366cc;
+	font-size: 14px;
+	padding: 0px 8px;
+}
+
+.paging_bar{
+	margin: 14px 22px 0px 22px;
+	padding: 12px 0px 0px 0px;
+	clear: both;
+	font-size: 14px;
+	text-align: right;
+	color: #666666;
+}
+.paging_bar span{
+	padding: 0px 2px;
+}
+.paging_bar a{
+	color: #666666;
+	text-decoration: none;
+	border: 1px solid #d3d3d3;
+	padding: 4px 14px;
+	font-size: 14px;
+}
+.paging_bar a:hover{
+	color: white;
+	background: #d3d3d3;
+}

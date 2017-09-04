@@ -1,0 +1,525 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{:htmlspecialchars($goodsInfo['name'])}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="__WAP__/css/goods.css">
+</head>
+<body>
+	<header>
+		<div class="button"><a class="back" href="{:U('index',array('usid'=>$usid))}"><img src="__WAP__/images/btn_back.png" />返回</a></div>
+		<div class="title">商品详情</div>
+		<div class="button"></div>
+	</header>
+	<div id="marquee_bar" class="marquee_bar">
+		<div class="marquee_bar_container"></div>
+		<div class="marquee_btn"></div>
+	</div>
+	<form action="{:U('web/cart')}" method="post" class="form" data-ajax="false">
+	<div class="goods_info_bar">
+		<div class="title">{:htmlspecialchars($goodsInfo['name'])}</div>
+		<div class="sale_info">
+			<span class="price">￥{$goodsInfo.price}</span>
+			<span class="sale">销量{$goodsInfo.sale_count}笔</span>
+		</div>
+		<hr class="gray_solid">
+	</div>
+	<!-- 
+	<div class="goods_info_bar">
+		<a class="select_panel" href="javascript:void(0)">
+			<span class="left">规格</span>
+			<span class="right"><img src="__WAP__/images/icon_go.png" /></span>
+		</a>
+		<hr class="gray_solid">
+	</div>
+	 -->
+	<div class="number_bar">
+		<div class="calc">
+			<label class="tag">数量</label>
+			<span class="counter">
+				<a class="reduce" href="javascript:void(0)"><img src="__WAP__/images/icon_calc_reduce.png" /></a>
+				<input class="num" value="1" type="text" name="num" id="number"/>
+				<a class="add" href="javascript:void(0)"><img src="__WAP__/images/icon_calc_add.png" /></a>
+			</span>
+			<span class="stock">库存{$goodsInfo.stock}件</span>
+			<input type='hidden' value="{$goodsInfo.id}" name="gid" id="gid">
+			<input type='hidden' value="{$usid}" name="usid" id="usid">
+		</div>
+	</div>
+	<div class="standard_bar">
+		<div class="panel">
+			<!--<div class="standard">
+				<div class="line color">
+					<label class="tag">颜色</label>
+					<a class="item active" href="javascript:void(0)">橙色</a>
+					<a class="item" href="javascript:void(0)">棕色</a>
+					<a class="item" href="javascript:void(0)">黑色</a>
+					<a class="item" href="javascript:void(0)">白色</a>
+				</div>
+				<div class="line size">
+					<label class="tag">尺寸</label>
+					<a class="item active" href="javascript:void(0)">M</a>
+					<a class="item" href="javascript:void(0)">L</a>
+					<a class="item" href="javascript:void(0)">XL</a>
+					<a class="item" href="javascript:void(0)">XXL</a>
+				</div>
+			</div>
+			<hr class="gray_solid">-->
+			<!-- 
+			<div class="calc">
+				<label class="tag">数量</label>
+				<a class="reduce" href="javascript:void(0)"><img src="__WAP__/images/icon_calc_reduce.png" /></a>
+				<input class="num" value="1" type="text" name="num" id="number"/>
+				<a class="add" href="javascript:void(0)"><img src="__WAP__/images/icon_calc_add.png" /></a>
+				<span class="stock">库存{$goodsInfo.stock}件</span>
+				<input type='hidden' value="{$goodsInfo.id}" name="gid" id="gid">
+				<input type='hidden' value="{$usid}" name="usid" id="usid">
+			</div>
+			 -->
+		</div>
+		<div class="bg"></div>
+	</div>
+	<div class="goods_shop_bar">
+		<div class="logo left"><img src="{$shopInfo.logo|default='__WAP__/images/shop_logo.png'}" /></div>
+		<div class="info left">
+			<div class="name">{:htmlspecialchars($shopInfo['name'])}</div>
+			<a class="tel" href="tel:{$shopInfo.mobile}"><img src="__WAP__/images/icon_phone_green.png" /><span>{$shopInfo.mobile}</span></a>
+		</div>
+		<a href="{:U('index',array('usid'=>$usid))}" class="btn_block right">
+			<span class="icon"><img src="__WAP__/images/icon_shop.png" /><span>进入店铺</span></span>
+			<span class="btn"><img src="__WAP__/images/icon_go.png" /></span>
+		</a>
+	</div>
+	<div class="goods_detail_bar">
+		<div class="tab">
+			<a class="item_full" data-target="detail_block" href="javascript:void(0)">图文详情</a>
+			<!-- 
+			<a class="item rborder active" data-target="detail_block" href="javascript:void(0)">图文详情</a>
+			<a class="item" data-target="comment_block" href="javascript:void(0)">用户评价<span class="danger">（88）</span></a>
+			-->
+		</div>
+		<div class="detail_block">
+			<div class="detail_content">
+				{$goodsInfo.desc}
+			</div>
+			<div class="img_block">
+				<foreach name="images" item="vo">
+					<img src="{$vo|default='__WAP__/images/img_goods.jpg'}" />
+				</foreach>
+			</div>
+		</div>
+		<div class="comment_block">
+			<div class="status">
+				<a class="btn active" href="javascript:void(0)"><span>全部</span></a>
+				<a class="btn" href="javascript:void(0)"><img src="__WAP__/images/icon_comment_good.png" /><span>好评（30）</span></a>
+				<a class="btn" href="javascript:void(0)"><img src="__WAP__/images/icon_comment_normal.png" /><span>中评（30）</span></a>
+				<a class="btn" href="javascript:void(0)"><img src="__WAP__/images/icon_comment_bad.png" /><span>差评（30）</span></a>
+			</div>
+			<div class="comment">
+				<div class="info">
+					<img src="__WAP__/images/icon_receiver.png" />
+					<a class="user" href="#">蝴蝶喝咖啡</a>
+					<span class="time">2011-12-10 10:00:00</span>
+				</div>
+				<div class="content">你家的衣服很好看！</div>
+				<hr class="gray_solid">
+			</div>
+			<div class="comment">
+				<div class="info">
+					<img src="__WAP__/images/icon_receiver.png" />
+					<a class="user" href="#">蝴蝶喝咖啡</a>
+					<span class="time">2011-12-10 10:00:00</span>
+				</div>
+				<div class="content">你家的衣服很好看！你家的衣服很好看！你家的衣服很好看！你家的衣服很好看！你家的衣服很好看！你家的衣服很好看！</div>
+				<hr class="gray_solid">
+			</div>
+			<div class="comment">
+				<div class="info">
+					<img src="__WAP__/images/icon_receiver.png" />
+					<a class="user" href="#">蝴蝶喝咖啡</a>
+					<span class="time">2011-12-10 10:00:00</span>
+				</div>
+				<div class="content">你家的衣服很好看！</div>
+				<hr class="gray_solid">
+			</div>
+		</div>
+	</div>
+	<div class="open_bar">
+		<!-- 
+		<div class="content">0库存、免发货，还可以发展连锁分店，收益多多，赶快来开免费微店吧！</div>
+		 -->
+		<a href="/wap.php/reg/index/invite_mobile/{$shopInfo.mobile}">我也要免费开店赚钱</a>
+	</div>
+	<div id="img_view_bar" class="img_view_bar">
+		<div class="img_view_bar_bg"></div>
+		<div class="img_view_bar_container"></div>
+		<!-- 
+		<div class="img_view_bar_btn_left"><a href="javascript:void(0)"><img src="__WAP__/images/btn_left.png" /></a></div>
+		<div class="img_view_bar_btn_right"><a href="javascript:void(0)"><img src="__WAP__/images/btn_right.png" /></a></div>
+		 -->
+	</div>
+	<div class="goods_btn_placeholder_bar"></div>
+	<div class="goods_btn_bar">
+		<a class="cart_button" href="{:U('cart',array('usid'=>$usid))}"><img src="__WAP__/images/icon_cart.png" /></a>
+		<a class="add_cart_button" href="javascript:void(0)">加入购物车</a>
+		<a class="buy_button" href="javascript:void(0)">立即购买</a>
+	</div>
+	</form>
+</body>
+<!-- 
+<script type="text/javascript" src="__WAP__/plugins/zepto/zepto.min.js"></script>
+<script type="text/javascript" src="__WAP__/plugins/zepto/zepto.animate.min.js"></script>
+<script type="text/javascript" src="__WAP__/plugins/zepto/zepto.touch.min.js"></script>
+ -->
+<include file="public:js" />
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+var baseurl = "http://new.weishanghui.me/";
+var wxData = {
+	"imgUrl": baseurl + "{$shopInfo.background|default='__WAP__/images/shop_pic.jpg'}",
+	"link": baseurl + "{:U('goods', array('gid'=>$goodsInfo['id'], 'usid'=>$usid))}",
+	"desc":"{:htmlspecialchars($shopInfo['name'])} - {:htmlspecialchars($goodsInfo['name'])}",
+	"title":"微商部落-手机开店很简单，分享就能赚大钱"
+};
+wx.config({
+	debug: false,
+	appId: '{$signPackage["appId"]}',
+	timestamp: '{$signPackage["timestamp"]}',
+	nonceStr: '{$signPackage["nonceStr"]}',
+	signature: '{$signPackage["signature"]}',
+    jsApiList: [
+		'onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ'
+	]
+});
+</script>
+<script type="text/javascript" src="http://www.boruicx.com/weixin/js/weixin.js"></script>
+<script type="text/javascript">
+// 初始化图片居中
+function fitHeight(e)
+{
+	var $item = $(e).parent();
+	var h = $item.height();
+	var $img = $(e);
+	var img_h = $img.height();
+	$img.css("margin-top", ((h - img_h) / 2) + "px")
+}
+
+$(function(){
+	//商品数量检测
+	function numSubmitChk(){
+		num=parseInt($("#number").val());
+		if(num < 1) {
+			jError('无库存,无法购买');
+			/*$.dialog({
+				content : msg.info,
+				title: "alert",
+				lock: false,
+				time : 2000
+			});*/
+			return true;
+		}
+	}
+	//加入购物车
+	$('.add_cart_button').click(function(){
+		if (numSubmitChk()) return;
+		var gid=$('#gid').val();
+		var usid=$('#usid').val();
+		var num=$('#number').val();
+		var price=$('#price').text();
+		var data = "gid="+gid+"&usid="+usid+"&num="+num+"&price="+price;
+		//alert(data);
+	
+		$.ajax({
+			type:'post',//可选get
+			url:"{:U('web/addCart')}",//这里是接收数据的PHP程序
+			data:data,//传给PHP的数据，多个参数用&连接
+			dataType:'Json',//服务器返回的数据类型 可选XML ,Json jsonp script html text等
+			success:function(msg){
+				if (typeof(msg) == 'string') msg = eval("("+msg+")");
+				ajaxReply(msg);
+			}
+		});
+	});
+	//立即购买
+	$('.buy_button').click(function(){
+		if (numSubmitChk()) return;
+		$('.form').submit();
+	});
+
+	// 规格选择
+	$(document).on("click", ".standard_bar .bg", function(e){
+		$(".standard_bar").hide();
+	});
+	$(document).on("click", ".select_panel", function(e){
+		$(".standard_bar").show();
+	});
+	
+	// 详情页tab按钮
+	$(document).on("click", ".tab .item", function(e){
+		$(".tab .item").removeClass("active");
+		var target = $(this).addClass("active").data("target");
+		$(".detail_block").hide();
+		$(".comment_block").hide();
+		$("." + target).show();
+	});
+	
+	// 颜色规格按钮点击
+	$(document).on("click", ".color .item", function(e){
+		$(".color .item").removeClass("active");
+		$(this).addClass("active");
+		alert(this.innerHTML);
+	});
+	
+	// 尺寸规格按钮点击
+	$(document).on("click", ".size .item", function(e){
+		$(".size .item").removeClass("active");
+		$(this).addClass("active");
+		alert(this.innerHTML);
+	});
+
+	
+	// 增加按钮
+	$(document).on("click", ".calc .add", function(){
+		var limit = parseInt({$goodsInfo.stock}) || 999;
+		var num = parseInt($(".calc .num").val()) + 1;
+		num = num>=limit?limit:num;
+		$(".calc .num").val(num);
+	});
+	
+	// 减少按钮
+	$(document).on("click", ".calc .reduce", function(){
+		var num = parseInt($(".calc .num").val());
+		if(num>=2)$(".calc .num").val(num - 1);
+	});
+	
+	// 数量输入框
+	$(".calc .num").on("keyup", "", function(){
+		var limit = parseInt({$goodsInfo.stock}) || 999;
+		var num = parseInt(this.value);
+		if(num<=0)
+		{
+			this.value = 1;
+		}
+		else if(isNaN(num))
+		{
+			this.value = 1;
+		}
+		else if(num>=limit)
+		{
+			this.value = limit;
+		}
+	});
+	
+	// 初始化容器、图片高度
+	$(".marquee_bar_container").height(($(".marquee_bar_container").width() * 0.84));
+	
+	// 幻灯片
+	$(".img_block img").each(function(e){
+		$(".marquee_bar_container").append('<div class="item"><img onload="javascript:fitHeight(this);" src="' + $(this).attr("src") + '" /></div>');
+		$(".marquee_bar .marquee_btn").append('<span>●</span>');
+	});
+	$(".marquee_bar_container").data("current", 0).data("count", $(".marquee_bar_container img").size());
+	$($(".marquee_bar .marquee_btn span").get(0)).css("color", "white");
+	// 触发图片浏览器
+	$(document).on("click", ".marquee_bar_container img", function(){
+		$("#img_view_bar").css("display", "block");
+	});
+	
+	// 幻灯片焦点变换
+	function changeFocus(i)
+	{
+		$(".marquee_bar .marquee_btn span").each(function(){
+			$(this).css("color", "#838383");
+		});
+		$($(".marquee_bar .marquee_btn span").get(i)).css("color", "white");
+	}
+	
+	// 定时轮播
+	var loopMarqueeControl = null;
+	function loopMarquee(time)
+	{
+		loopMarqueeControl = setInterval(function()
+		{
+			var current = parseInt($(".marquee_bar_container").data("current")) - 1;
+			if(Math.abs(current) >= parseInt($(".marquee_bar_container").data("count")))current = 0;
+			$($(".marquee_bar_container .item").get(0)).animate({
+				"margin-left": current + "00%"
+			}, 500, "swing");
+			$(".marquee_bar_container").data("current", current);
+			changeFocus(Math.abs(current));
+		}, time);
+	};
+	loopMarquee(4000);
+	
+	var startX = 0;
+	var endX = 0;
+
+	// 判断触摸方向
+	function judgeMarqueeDirection()
+	{
+		var point = parseInt(endX) - parseInt(startX);
+		if(endX == 0)
+		{
+			
+		}
+		else if(point > 10)
+		{
+			$(".marquee_bar_container").trigger("swipeRight");
+		} 
+		else if(point < -10)
+		{
+			$(".marquee_bar_container").trigger("swipeLeft");
+		}
+		startX = 0;
+		endX = 0;
+	}
+	function handleMarqueeTouchEvent(e)
+	{
+		// 只跟踪一次触摸
+		//if (e.touches.length == 1) {
+			switch (e.type) {
+			case "touchstart":
+				startX = parseInt(e.touches[0].pageX);
+				break;
+			case "touchend":
+				judgeMarqueeDirection();
+				break;
+			case "touchmove":
+				endX = parseInt(e.touches[0].pageX);
+				// 判断用户滑动意向
+			    if (Math.abs(endX - startX)>=10) {
+			    	e.preventDefault();// 阻止浏览器默认事件，重要 
+				}
+				break;
+			}
+		//}
+	}
+	document.getElementById("marquee_bar").addEventListener("touchstart", handleMarqueeTouchEvent, false);
+	document.getElementById("marquee_bar").addEventListener("touchend", handleMarqueeTouchEvent, false);
+	document.getElementById("marquee_bar").addEventListener("touchmove", handleMarqueeTouchEvent, false);
+	
+	// 幻灯片 - 左滑动
+	$(document).on("swipeLeft", ".marquee_bar_container", function(e){
+		clearInterval(loopMarqueeControl);		// 清除轮播计划
+		var current = parseInt($(".marquee_bar_container").data("current")) - 1;
+		if(Math.abs(current) >= parseInt($(".marquee_bar_container").data("count")))current = 0;
+		$($(".marquee_bar_container .item").get(0)).animate({
+			"margin-left": current + "00%"
+		}, 500, "swing");
+		$(".marquee_bar_container").data("current", current);
+		changeFocus(Math.abs(current));
+		loopMarquee(4000);		// 启动轮播计划
+	});
+	// 幻灯片 - 右滑动
+	$(document).on("swipeRight", ".marquee_bar_container", function(){
+		clearInterval(loopMarqueeControl);		// 清除轮播计划
+		var current = parseInt($(".marquee_bar_container").data("current")) + 1;
+		if(current >= 1)current = - parseInt($(".marquee_bar_container").data("count")) + 1;
+		$($(".marquee_bar_container .item").get(0)).animate({
+			"margin-left":  current + "00%"
+		}, 500, "swing");
+		$(".marquee_bar_container").data("current", current);
+		changeFocus(Math.abs(current));
+		loopMarquee(4000);		// 启动轮播计划
+	});
+	
+	// 图片浏览器
+	$(".img_block img").each(function(e){
+		$(".img_view_bar_container").append('<img class="item" src="' + $(this).attr("src") + '" />');
+	});
+	$(".img_view_bar_container").data("current", 0).data("count", $(".img_view_bar_container img").size());
+	var obj = document.getElementById('img_view_bar');
+	
+	// 判断触摸方向
+	function judgeViewDirection(e)
+	{
+		var point = parseInt(endX) - parseInt(startX);
+		if(endX <= 0)
+		{
+			// 关闭图片浏览器
+			if($(e["srcElement"]).hasClass("img_view_bar_container") || $(e["srcElement"]).hasClass("item"))
+			{
+				// 关闭图片浏览器
+				$("#img_view_bar").css("display", "none");
+			}
+		} 
+		else if(point > 10)
+		{
+			$("#img_view_bar").trigger("swipeRight");
+		} 
+		else if(point < -10)
+		{
+			$("#img_view_bar").trigger("swipeLeft");
+		}
+		startX = 0;
+		endX = 0;
+	}
+	function handleViewTouchEvent(e)
+	{
+		// 只跟踪一次触摸
+		//if (e.touches.length == 1) {
+			switch (e.type) {
+			case "touchstart":
+				startX = parseInt(e.touches[0].pageX);
+				break;
+			case "touchend":
+				judgeViewDirection(e);
+				break;
+			case "touchmove":
+				endX = parseInt(e.touches[0].pageX);
+			    e.preventDefault();// 阻止浏览器默认事件，重要 
+				break;
+			}
+			e.preventDefault();
+		//}
+	}
+	document.getElementById("img_view_bar").addEventListener("touchstart", handleViewTouchEvent, false);
+	document.getElementById("img_view_bar").addEventListener("touchend", handleViewTouchEvent, false);
+	document.getElementById("img_view_bar").addEventListener("touchmove", handleViewTouchEvent, false);
+
+	// 图片浏览器 - 左按钮
+	$(document).on("click", ".img_view_bar_btn_left", function(e){
+		var current = parseInt($(".img_view_bar_container").data("current")) - 1;
+		if(Math.abs(current) >= parseInt($(".img_view_bar_container").data("count")))current = 0;
+		$($(".img_view_bar_container img").get(0)).animate({
+			"margin-left": current + "00%"
+		}, 500, "swing");
+		$(".img_view_bar_container").data("current", current);
+	});
+	// 图片浏览器 - 右按钮
+	$(document).on("click", ".img_view_bar_btn_right", function(e){
+		var current = parseInt($(".img_view_bar_container").data("current")) + 1;
+		if(current >= 1)current = - parseInt($(".img_view_bar_container").data("count")) + 1;
+		$($(".img_view_bar_container img").get(0)).animate({
+			"margin-left":  current + "00%"
+		}, 500, "swing");
+		$(".img_view_bar_container").data("current", current);
+	});
+	
+	// 幻灯片 - 左滑动
+	$(document).on("swipeLeft", "#img_view_bar", function(){
+		var current = parseInt($(".img_view_bar_container").data("current")) - 1;
+		if(Math.abs(current) >= parseInt($(".img_view_bar_container").data("count")))current = 0;
+		$($(".img_view_bar_container img").get(0)).animate({
+			"margin-left": current + "00%"
+		}, 500, "swing");
+		$(".img_view_bar_container").data("current", current);
+	});
+	// 幻灯片 - 右滑动
+	$(document).on("swipeRight", "#img_view_bar", function(e){
+		var current = parseInt($(".img_view_bar_container").data("current")) + 1;
+		if(current >= 1)current = - parseInt($(".img_view_bar_container").data("count")) + 1;
+		$($(".img_view_bar_container img").get(0)).animate({
+			"margin-left":  current + "00%"
+		}, 500, "swing");
+		$(".img_view_bar_container").data("current", current);
+	});
+});
+</script>
+<script type="text/javascript" src="__WAP__/js/common.js"></script>
+</html>
